@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 480px)":{
       width: '48%',
       margin: '0 0 10px 1%',
+    },
+    "@media (max-width: 380px)":{
+      width: '92%',
+      margin: '0 auto 10px',
     }
   },
   media: {
