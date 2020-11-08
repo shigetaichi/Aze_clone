@@ -240,3 +240,39 @@ ul.pagination li:nth-of-type(2n + 1).active a{
 ul.pagination li.disabled a, ul.pagination li.active a{
   cursor: default;
 }
+
+
+
+/*********** Utilities ***********/
+.on480{
+  display: none;
+}
+@media screen and (max-width: 480px){
+  .on480{
+    display: block;
+  }
+}
+.off480{
+  display: block;
+}
+@media screen and (max-width: 480px){
+  .off480{
+    display: none;
+  }
+}
+.on768{
+  display: none;
+}
+@media screen and (max-width: 768px){
+  .on768{
+    display: block;
+  }
+}
+.off768{
+  display: block;
+}
+@media screen and (max-width: 768px){
+  .off768{
+    display: none;
+  }
+}

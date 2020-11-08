@@ -42,11 +42,10 @@ const Hamburger = () => {
                 backdropFilter: 'blur(3px)',
                 backgroundColor: 'rgba(255, 255, 255, 0.5)',
               } : {}}>
-              <div
-                className={styles.drawer_inner}
-                style={randomBg}>
-                <p>{state}+ entered</p>
-                <Toggler/>
+              <div className={styles.drawer_inner} style={randomBg}>
+                {/* <Toggler/> */}
+                <p>Under Construction! Coming Soon, This area will be the select color theme box. </p>
+                <p>現在開発中です。カラーテーマを選べるようになる予定です。</p>
               </div>
             </div>
           )}

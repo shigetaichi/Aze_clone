@@ -32,7 +32,7 @@ const Header = () => {
     <header className={styles.header}>
       <h1 className={styles.site_title}>
         <Link href="/">
-          <a id="header-logo" style={scrollStyle} href="/"><img src="/azerbaijapan.svg" alt=""/></a>
+          <a id="header-logo" style={scrollStyle} href="/"><img src="/azerbaijapan.png" alt=""/></a>
         </Link>
       </h1>
       <Hamburger/>
