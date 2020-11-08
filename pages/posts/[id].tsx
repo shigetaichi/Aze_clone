@@ -86,7 +86,7 @@ const Post = ({postData, categories}) => {
     }
   }, []);
   return(
-    <Layout title={postData.title}>
+    <Layout title={postData.title} image={postData.eyecatch.url.toString()}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title}</h1>

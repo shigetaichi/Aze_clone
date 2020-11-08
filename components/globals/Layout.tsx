@@ -24,6 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const Layout = (props) => {
   const {title, children } = props;
+  const image = props.image ? props.image : "/azerbaijapan.jpg";
   const siteTitle = "Azerbaijapan";
   const classes = useStyles();
 
@@ -31,7 +32,13 @@ const Layout = (props) => {
     <ColorProvider>
       <Head>
         <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Azerbaijapanは日本とアゼルバイジャンの架け橋的なwebサイトになればいいと思っています。語学はもちろんのこと、様々なジャンルの記事を集積していきます。アゼルバイジャンに関わる全ての日本人の助けになれれば幸いです。"></meta>
+        <link rel="icon" href="/azerbaijapan-favicon.png" />
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"></link>
+        <meta name="twitter:card" content="summary_large_image" />
+        {/* <meta name="twitter:site" content="@ユーザー名" /> */}
+        <meta name="twitter:description" content="Azerbaijapanは日本とアゼルバイジャンの架け橋的なwebサイトになればいいと思っています。語学はもちろんのこと、様々なジャンルの記事を集積していきます。アゼルバイジャンに関わる全ての日本人の助けになれれば幸いです。" />
+        <meta name="twitter:image:src" content={image} />
       </Head>
       <Header/>
       <div className={classes.layout}>
