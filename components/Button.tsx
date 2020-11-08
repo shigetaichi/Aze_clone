@@ -16,13 +16,13 @@ const Button = (props: Props) => {
             <linearGradient id="grad1">
                 {/* <stop offset="0%" stop-color="#FF8282"/>
                 <stop offset="100%" stop-color="#E178ED" /> */}
-                <stop offset="0%" stopColor="#03ae65"/>
-                <stop offset="25%" stopColor="#03ae65"/>
+                <stop offset="0%" stopColor="#0398c3"/>
+                <stop offset="25%" stopColor="#0398c3"/>
                 <stop offset="25%" stopColor="#ff0202"/>
                 <stop offset="50%" stopColor="#ff0202"/>
                 <stop offset="75%" stopColor="#ff0202"/>
-                <stop offset="75%" stopColor="#0398c3" />
-                <stop offset="100%" stopColor="#0398c3" />
+                <stop offset="75%" stopColor="#03ae65" />
+                <stop offset="100%" stopColor="#03ae65" />
             </linearGradient>
         </defs>
         <rect x="5" y="5" rx="25" fill="none" stroke="url(#grad1)" width="266" height="50"></rect>
