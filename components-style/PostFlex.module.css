@@ -1,0 +1,6 @@
+.post_flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: flex-start;
+}
