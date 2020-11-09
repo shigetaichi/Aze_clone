@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../components/globals';
-import { getAllPostIds, getPostData } from '../../lib/post';
+import { getAllPostIds, getPostData, getRandomPostData } from '../../lib/post';
 import { getAllCategoryData } from '../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, CategoryArea, Title, Button} from '../../components';
+import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail} from '../../components';
 
 // postの中のcssはglobal.cssに記載
 
@@ -23,15 +23,17 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({params}) => {
   const postData = await getPostData(params.id.toString());
   const categories = await getAllCategoryData();
+  const randomPostData = await getRandomPostData();
   return {
     props: {
       postData,
-      categories
+      categories,
+      randomPostData,
     }
   }
 }
 
-const Post = ({postData, categories}) => {
+const Post = ({postData, categories, randomPostData}) => {
   const [indexList, setIndexList] = useState([]);
   useEffect(() => {
     hljs.initHighlighting();
@@ -85,11 +87,30 @@ const Post = ({postData, categories}) => {
       newActiveIndex.classList.add("active");
     }
   }, []);
+
+  const formatDate = (data) => {
+    const beforeFormatDate = new Date(data);
+    const year = beforeFormatDate.getFullYear();
+    const month = beforeFormatDate.getMonth() + 1;
+    const date = beforeFormatDate.getDate();
+    return `${year} / ${month} / ${date}`;
+  }
   return(
     <Layout title={postData.title} image={postData.eyecatch.url.toString()}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title}</h1>
+        <span className="post-publishedAt">公開日{formatDate(postData.publishedAt)}
+          <br className="on480"></br>
+          <span className="off480inline">　</span>
+          {(() => {
+            if(formatDate(postData.publishedAt) === formatDate(postData.updatedAt)){
+              return;
+            }else{
+              return (`更新日${formatDate(postData.updatedAt)}`);
+            }
+          })()}
+        </span>
         <div className="post-eyecatch">
           <img src={postData.eyecatch.url.toString()} alt=""/>
         </div>
@@ -108,6 +129,13 @@ const Post = ({postData, categories}) => {
         </div>
       </div>
       <div className="module-spacer--medium"></div>
+      <Title title={"前の記事・次の記事"} subtitle={"続けてどうぞ"}/>
+      <div className="module-spacer--medium"></div>
+      <div className="module-spacer--medium"></div>
+      <Title title={"Recommendation"} subtitle={"ランダムな選択は時に人生を変えてしまいます。"}/>
+      <div style={{display: 'flex', justifyContent: 'center',}}>
+        <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} />
+      </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <Button text={"投稿一覧へ"} path="/allposts" />
@@ -117,6 +145,10 @@ const Post = ({postData, categories}) => {
       <Container maxWidth="lg">
         <Title title={"CATEGORIES"} subtitle={"他のカテゴリーも探索してみて下さい"}/>
         <CategoryArea categories={categories} />
+        <div className="module-spacer--medium"></div>
+        <Button text={"Topへ"} path="/" />
+        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"></div>
       </Container>
     </Layout>
   )

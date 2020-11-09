@@ -36,8 +36,8 @@
 }
 @media screen and (max-width: 480px){
   .category{
-    width: 48%;
-    height: 120px;
+    width: 90%;
+    height: auto;
     margin: 0 auto 10px;
   }
 }
@@ -70,6 +70,7 @@
   font-family: tryst, serif;
   /* background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%); */
   backdrop-filter: blur(4px);
+  background-color: rgba(0,0,0,0.3);
 }
 @media screen and (max-width: 768px){
   .category_title{
@@ -80,7 +81,7 @@
 }
 @media screen and (max-width: 480px){
   .category_title{
-    font-size: 14px;
+    font-size: 18px;
     width: 100%;
     padding: 0 5px;
   }

@@ -9,6 +9,7 @@
   max-width: 280px;
   max-height: 55vh;
   font-family: tryst, serif;
+  font-size: 14px;
   transition: .5s;
   /* background: #EEF0F4; */
   color: rgb(160, 161, 163);
@@ -28,6 +29,9 @@
   padding: 5px;
   width: 100%;
   list-style: none;
+}
+.content_index_aside ul li{
+  padding: 5px;
 }
 .content_index_span{
   display: inline-block;
