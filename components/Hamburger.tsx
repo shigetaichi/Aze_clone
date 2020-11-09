@@ -43,9 +43,20 @@ const Hamburger = () => {
                 backgroundColor: 'rgba(255, 255, 255, 0.5)',
               } : {}}>
               <div className={styles.drawer_inner} style={randomBg}>
-                {/* <Toggler/> */}
+                <Toggler/>
                 <p>Under Construction! Coming Soon, This area will be the select color theme box. </p>
                 <p>現在開発中です。カラーテーマを選べるようになる予定です。</p>
+                <p>開発予定表</p>
+                <ul>
+                  <li>サイト内検索</li>
+                  <li>パンクズリストを表示</li>
+                  <li>SNSのシェアボタンの作成</li>
+                  <li>各投稿ページに前回の記事と次の記事へのリンク</li>
+                  <li>投稿サムネイルにタグを表示</li>
+                  <li>タグ一覧を作る</li>
+                  <li>カラーテーマを作る</li>
+                  <li>Google Analytics設定</li>
+                </ul>
               </div>
             </div>
           )}

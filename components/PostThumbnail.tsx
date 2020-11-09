@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '24%',
     margin: 5,
+    alignItems: 'stretch',
     "@media (max-width: 1024px)":{
       margin: '0 0 10px 0.5%',
     },
@@ -34,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
   },
   content: {
-    "@media (max-width: 1024px)":{
-      padding: '10px',
-    },
+    padding: '10px',
+    minHeight: '70px',
     "@media (max-width: 480px)":{
       padding: '5px',
+      minHeight: '50px',
     }
   }
 }));
