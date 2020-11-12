@@ -55,7 +55,6 @@ const Hamburger = () => {
                   <li>投稿サムネイルにタグを表示</li>
                   <li>タグ一覧を作る</li>
                   <li>カラーテーマを作る</li>
-                  <li>Google Analytics設定</li>
                 </ul>
               </div>
             </div>
