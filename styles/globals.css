@@ -2,6 +2,10 @@
   src: url(../public/fonts/tryst.otf);
   font-family: tryst;
 }
+@font-face {
+  src: url(../public/fonts/times.ttf);
+  font-family: Times;
+}
 html,
 body {
   padding: 0;
@@ -22,7 +26,7 @@ code{
   font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont, "Segoe UI", Meiryo, monospace;
 }
 #post-content{
-  font-family: tryst, serif;
+  font-family: Times, tryst, serif;
 }
 .post-container{
   width: 50%;
