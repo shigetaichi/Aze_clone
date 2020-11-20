@@ -5,6 +5,7 @@ import * as gtag from '../lib/gtag';
 import React, {useEffect} from 'react';
 import { ColorProvider } from "../context/context";
 import { LangProvider } from "../context/langContext";
+import {Hamburger} from '../components';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     <ColorProvider>
       <LangProvider>
+        <Hamburger/>
         <Component {...pageProps} />
       </LangProvider>
     </ColorProvider>
