@@ -1,0 +1,41 @@
+{
+  "layout": {
+    "home": "üst səhifə",
+    "archives": "Arxiv"
+  },
+  "top":{
+    "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.","Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.","Buna görə də,AZERİBAİJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm."]
+  },
+  "selectedEight": {
+    "title": "Səkkiz seçildi",
+    "subtitle": "Azərbaycanda ən yaxşı 8 məqaləni yoxlayaq"
+  },
+  "posts": {
+    "title": "Məqalələr",
+    "subtitle": "Təzə hazırlanmış bir yazı necə?"
+  },
+  "categories": {
+    "title": "Kateqoriyalar",
+    "subtitle": "Sizinlə məqalə arasındakı vasitəçi"
+  },
+  "allposts": {
+    "title": "Arxiv",
+    "subtitle": "Azerbaijapan haqqında hər şey burada."
+  },
+  "post": {
+    "publishedAt": "buraxılış tarixi",
+    "thanks": "Oxuduğunuz üçün təşəkkür edirik !! Xoş gün arzu edirəm!"
+  },
+  "buttonText": {
+    "toTop": "Yuxarıya gedin",
+    "toArchive": "Arxivə gedin"
+  },
+  "nextPrev": {
+    "title": "Növbəti və əvvəlki",
+    "subtitle": "Niyə başqa bir məqalə oxumursan?"
+  },
+  "recommendation": {
+    "title": "Recommendation",
+    "subtitle": "Təsadüfi seçimlər bəzən həyatı dəyişdirə bilər."
+  }
+}

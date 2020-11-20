@@ -7,6 +7,7 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
 import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail} from '../../components';
+import {useLangContext, lang} from '../../context/langContext';
 
 // postの中のcssはglobal.cssに記載
 
@@ -34,6 +35,7 @@ export const getStaticProps = async ({params}) => {
 }
 
 const Post = ({postData, categories, randomPostData}) => {
+  const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
   useEffect(() => {
     hljs.initHighlighting();
@@ -100,7 +102,7 @@ const Post = ({postData, categories, randomPostData}) => {
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title}</h1>
-        <span className="post-publishedAt">公開日{formatDate(postData.publishedAt)}
+        <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt}{formatDate(postData.publishedAt)}
           <br className="on480"></br>
           <span className="off480inline">　</span>
           {(() => {
@@ -124,29 +126,32 @@ const Post = ({postData, categories, randomPostData}) => {
           }}
           ></div>
           <div className="thanks-reading">
-            <p>お読みいただきありがとうございます。</p>
+            <p>{lang(langTheme.langName).post.thanks}</p>
           </div>
         </div>
       </div>
       <div className="module-spacer--medium"></div>
-      <Title title={"前の記事・次の記事"} subtitle={"続けてどうぞ"}/>
+      <Title title={lang(langTheme.langName).nextPrev.title} subtitle={lang(langTheme.langName).nextPrev.subtitle}/>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
-      <Title title={"Recommendation"} subtitle={"ランダムな選択は時に人生を変えてしまいます。"}/>
+      <Title title={lang(langTheme.langName).recommendation.title} subtitle={lang(langTheme.langName).recommendation.subtitle}/>
       <div style={{display: 'flex', justifyContent: 'center',}}>
         <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} />
       </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
-      <Button text={"投稿一覧へ"} path="/allposts" />
+      <Button text={lang(langTheme.langName).buttonText.toArchive} path="/allposts" />
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <Container maxWidth="lg">
-        <Title title={"CATEGORIES"} subtitle={"他のカテゴリーも探索してみて下さい"}/>
+        <Title
+          title={lang(langTheme.langName).categories.title}
+          subtitle={lang(langTheme.langName).categories.subtitle}
+        />
         <CategoryArea categories={categories} />
         <div className="module-spacer--medium"></div>
-        <Button text={"Topへ"} path="/" />
+        <Button text={lang(langTheme.langName).buttonText.toTop} path="/" />
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
       </Container>

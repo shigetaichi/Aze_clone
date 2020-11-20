@@ -2,9 +2,10 @@ import React from 'react'
 import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, CategoryArea, Button } from '../components';
+import { Title, PostFlex, CategoryArea, Button, LangToggler } from '../components';
 import { getAllCategoryData } from '../lib/category';
 import { getSortedPostData } from '../lib/post';
+import {useLangContext, lang} from '../context/langContext';
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -20,6 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 
 const allposts = ({allPostData, categories}) => {
+  const langTheme = useLangContext();
   const thumbnailDataArray = allPostData.map(post => {
     const id = post.id;
     const title = post.title;
@@ -35,18 +37,25 @@ const allposts = ({allPostData, categories}) => {
     }
   });
   return (
-  <Layout title="全投稿一覧">
+  <Layout title={lang(langTheme.langName).layout.archives}>
     <Container maxWidth="lg">
-      <Title title={"全投稿一覧"} subtitle={"Azerbaijapanの全てがここにあります。"} />
+      <LangToggler/>
+      <Title
+        title={lang(langTheme.langName).allposts.title}
+        subtitle={lang(langTheme.langName).allposts.subtitle}
+      />
       <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
     </Container>
-    <Button text={"Topへ"} path={"/"}/>
+    <Button text={lang(langTheme.langName).buttonText.toTop} path={"/"}/>
     <div className="module-spacer--medium"></div>
     <div className="module-spacer--medium"></div>
     <Container maxWidth="lg">
-      <Title title={"CATEGORIES"} subtitle={"他のカテゴリーも探索してみて下さい"}/>
+      <Title
+        title={lang(langTheme.langName).categories.title}
+        subtitle={lang(langTheme.langName).categories.subtitle}
+      />
       <CategoryArea categories={categories} />
     </Container>
   </Layout>

@@ -5,6 +5,7 @@ import { Header, Footer } from ".";
 import styles from '../../components-style/globals/Layout.module.css';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../../context/context';
+import { LangToggler } from '..';
 
 const Layout = (props) => {
   const {title, children } = props;
@@ -30,6 +31,7 @@ const Layout = (props) => {
       </Head>
       <Header/>
       <div className={LayoutStyle}>
+        <LangToggler/>
         <main>
           <div className="page-main">
             {children}
