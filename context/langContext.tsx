@@ -35,4 +35,9 @@ const LangProvider: FC = (props: {
   )
 }
 
-export { LangProvider, langNames, useLangContext, useSetLangContext };
+const lang = (lang) => {
+  const langJsonData = require(`../lang/${lang}/common.json`);
+  return langJsonData;
+}
+
+export { LangProvider, langNames, useLangContext, useSetLangContext, lang };

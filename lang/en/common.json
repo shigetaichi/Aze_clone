@@ -1,0 +1,41 @@
+{
+  "layout": {
+    "home": "Home",
+    "archives": "Archives"
+  },
+  "top":{
+    "description": ["This website is a blog to connect Azerbaijan and Japan.","I am the administrator of this website and I am Japanese.", "At the time of setting up this website","there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan."]
+  },
+  "selectedEight": {
+    "title": "SELECTED EIGHYT",
+    "subtitle": "Let's check the best 8 articles in Azerbaijapan"
+  },
+  "posts": {
+    "title": "Articles",
+    "subtitle": "How about a freshly made post?"
+  },
+  "categories": {
+    "title": "Categories",
+    "subtitle": "The middleman between you and the article"
+  },
+  "allposts": {
+    "title": "All POST",
+    "subtitle": "Everything about Azerbaijapan is here."
+  },
+  "post": {
+    "publishedAt": "Published At",
+    "thanks": "Thank you for reading!! Have a nice day!!"
+  },
+  "buttonText": {
+    "toTop": "Go to Top",
+    "toArchive": "Go to Archive"
+  },
+  "nextPrev": {
+    "title": "Next and Previous",
+    "subtitle": "Why don't you read another article?"
+  },
+  "recommendation": {
+    "title": "Recommendation",
+    "subtitle": "Random choices can sometimes be life-changing."
+  }
+}
