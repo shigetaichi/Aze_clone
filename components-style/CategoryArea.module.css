@@ -1,7 +1,8 @@
 .category_wrapper{
   display: flex;
   width: 50%;
-  margin: 0 auto 40px;
+  margin: 0 auto;
+  padding-bottom: 40px;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -67,7 +68,7 @@
   align-items: center;
   user-select: none;
   color: white;
-  font-family: tryst, serif;
+  font-family: Times, tryst, serif;
   /* background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%); */
   backdrop-filter: blur(4px);
   background-color: rgba(0,0,0,0.3);

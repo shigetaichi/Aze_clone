@@ -1,35 +1,23 @@
+import React from 'react'
 import Head from "next/head"
-import Link from "next/link"
-import { ColorProvider } from "../../context/context";
+import Link from "next/link";
 import { Header, Footer } from ".";
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles(() => ({
-  layout: {
-    margin: '220px 0 0',
-    "@media (max-width: 1024px)": {
-      margin: '180px 0 0',
-    },
-    "@media (max-width: 900px)": {
-      margin: '140px 0 0',
-    },
-    "@media (max-width: 768px)": {
-      margin: '120px 0 0',
-    },
-    "@media (max-width: 480px)": {
-      margin: '100px 0 0',
-    },
-  }
-}));
+import styles from '../../components-style/globals/Layout.module.css';
+import ClassNames from 'classnames';
+import { useThemeContext } from '../../context/context';
 
 const Layout = (props) => {
   const {title, children } = props;
   const image = props.image ? props.image : "/azerbaijapan.jpg";
   const siteTitle = "Azerbaijapan";
-  const classes = useStyles();
+  const themeNames = useThemeContext();
+
+  const LayoutStyle = ClassNames(styles.layout,{
+    [styles.dark]: themeNames.themeName === 'dark'
+  });
 
   return (
-    <ColorProvider>
+    <React.Fragment>
       <Head>
         <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
         <meta name="description" content="Azerbaijapanは日本とアゼルバイジャンの架け橋的なwebサイトになればいいと思っています。語学はもちろんのこと、様々なジャンルの記事を集積していきます。アゼルバイジャンに関わる全ての日本人の助けになれれば幸いです。"></meta>
@@ -41,7 +29,7 @@ const Layout = (props) => {
         <meta name="twitter:image:src" content={image} />
       </Head>
       <Header/>
-      <div className={classes.layout}>
+      <div className={LayoutStyle}>
         <main>
           <div className="page-main">
             {children}
@@ -49,7 +37,7 @@ const Layout = (props) => {
         </main>
       </div>
       <Footer/>
-    </ColorProvider>
+    </React.Fragment>
   )
 }
 

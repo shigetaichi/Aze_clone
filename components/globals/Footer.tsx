@@ -1,15 +1,20 @@
 import React from 'react'
-import styles from '../../styles/Home.module.css'
+import styles from '../../components-style/globals/Footer.module.css';
+import ClassNames from 'classnames';
+import { useThemeContext } from '../../context/context';
 
 const Footer = () => {
+  const themeNames = useThemeContext();
+  const FooterStyle = ClassNames(styles.footer, {
+    [styles.dark]: themeNames.themeName === 'dark'
+  })
   return (
-    <footer className={styles.footer}>
+    <footer className={FooterStyle}>
       <div className="module-spacer--medium"></div>
       <a
         href="/"
         target="_blank"
         rel="noopener noreferrer"
-        className={styles.copyright}
       >
         © 2020 AZERBAIJAPAN
       </a>

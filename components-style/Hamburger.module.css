@@ -32,6 +32,9 @@
     border-bottom: 1px solid black;
   }
 }
+.hamburger_letter_dark{
+  color: #f2f2f2;
+}
 
 .drawer{
   transition: .5s;
