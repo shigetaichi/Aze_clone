@@ -48,7 +48,6 @@ const Home = ({allPostData, categories}) => {
     <Layout home title={lang(langTheme.langName).layout.home}>
       <Container maxWidth="lg">
         <Container maxWidth="sm">
-          <LangToggler/>
           <div style={indexStyle}>
             <p style={{display: "none",}}>Dear S.K.</p>
             {lang(langTheme.langName).top.description.map((p, i) => {

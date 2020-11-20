@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from '../../components-style/globals/Header.module.css';
-import Hamburger from '../Hamburger';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../../context/context';
 
