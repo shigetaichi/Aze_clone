@@ -44,7 +44,6 @@ const Home = ({allPostData, categories}) => {
 
   return(
     <Layout home title="ホーム">
-    <Hamburger/>
       <Container maxWidth="lg">
         <Container maxWidth="sm">
           <div style={indexStyle}>
