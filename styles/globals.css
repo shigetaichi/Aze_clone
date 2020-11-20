@@ -99,6 +99,7 @@ code{
 #content h2{
   padding-top: 130px;
   margin-top: -130px;
+  font-size: 20px;
 }
 #content h3{
   padding-top: 130px;
@@ -107,6 +108,12 @@ code{
 #content p{
   width: 100%;
   word-wrap: break-word;
+  font-size: 18px;
+}
+@media screen and (max-width: 480px){
+  #content p{
+    font-size: 16px;
+  }
 }
 
 #header-logo{

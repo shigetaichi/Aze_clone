@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import styles from '../components-style/Hamburger.module.css';
 import Toggler from './Toggler';
 import {Transition} from 'react-transition-group';
+import ClassNames from 'classnames';
+import { useThemeContext } from '../context/context';
 
 const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [randomBg, setRandomBg] = useState({backgroundColor: '#0097C4',});
+  const themeNames = useThemeContext();
+  const hamburgerLetter = ClassNames(styles.hamburger_letter,{
+    [styles.hamburger_letter_dark]: themeNames.themeName === 'dark'
+  })
 
   const handleChange = () => {
     setIsOpen(!isOpen);
@@ -27,7 +33,7 @@ const Hamburger = () => {
   return (
     <React.Fragment>
       <div className={styles.hamburger_wrapper}>
-        <a id="hamburger" className={styles.hamburger_letter} onClick={handleChange}>
+        <a id="hamburger" className={hamburgerLetter} onClick={handleChange}>
           {isOpen ? 'CLOSE' : 'MENU'}
         </a>
         <Transition

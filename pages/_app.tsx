@@ -2,7 +2,9 @@ import '../styles/globals.css';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router'
 import * as gtag from '../lib/gtag';
-import React, {useEffect} from 'react'
+import React, {useEffect} from 'react';
+import { ColorProvider } from "../context/context";
+import { LangProvider } from "../context/langContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -20,7 +22,14 @@ function MyApp({ Component, pageProps }: AppProps) {
       router.events.off('routeChangeComplete', handleRouteChange)
     }
   }, [router.events])
-  return <Component {...pageProps} />
+  return (
+
+    <ColorProvider>
+      <LangProvider>
+        <Component {...pageProps} />
+      </LangProvider>
+    </ColorProvider>
+  )
 }
 
 export default MyApp

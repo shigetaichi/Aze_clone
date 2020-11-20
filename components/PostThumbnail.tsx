@@ -9,54 +9,25 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styles from '../components-style/PostThumbnail.module.css';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '24%',
-    margin: 5,
-    alignItems: 'stretch',
-    "@media (max-width: 1024px)":{
-      margin: '0 0 10px 0.5%',
-    },
-    "@media (max-width: 900px)":{
-      width: '31%',
-      margin: '0 0 10px 2%',
-    },
-    "@media (max-width: 480px)":{
-      width: '48%',
-      margin: '0 0 10px 1%',
-    },
-    "@media (max-width: 380px)":{
-      width: '92%',
-      margin: '0 auto 10px',
-    }
-  },
-  media: {
-    height: 140,
-  },
-  content: {
-    padding: '10px',
-    minHeight: '70px',
-    "@media (max-width: 480px)":{
-      padding: '5px',
-      minHeight: '50px',
-    }
-  }
-}));
+import ClassNames from 'classnames';
+import { useThemeContext } from '../context/context';
 
 const PostThumbnail = (props) => {
-  const classes = useStyles();
+  const themeNames = useThemeContext();
+  const PostThumbnailStyle = ClassNames(styles.content, {
+    [styles.contentDark]: themeNames.themeName === 'dark'
+  });
   
   return (
     <Link href="/posts/[id]" as={`/posts/${props.id}`}>
-      <Card className={classes.root}>
+      <Card className={styles.root}>
         <CardActionArea>
           <CardMedia
-            className={classes.media}
+            className={styles.media}
             image={props.image}
             title="Contemplative Reptile"
           />
-          <CardContent className={classes.content}>
+          <CardContent className={PostThumbnailStyle}>
             <Typography gutterBottom variant="h6" component="h6" className={styles.postThumbnail_title}>
               {props.title}
             </Typography>

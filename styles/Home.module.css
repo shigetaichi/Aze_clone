@@ -16,24 +16,6 @@
   align-items: center;
 }
 
-.footer {
-  width: 100%;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 40px;
-}
-
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: serif;
-}
-
 .title a {
   color: #0070f3;
   text-decoration: none;
