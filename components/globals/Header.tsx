@@ -46,7 +46,6 @@ const Header = () => {
           </a>
         </Link>
       </h1>
-      <Hamburger/>
     </header>
   )
 }

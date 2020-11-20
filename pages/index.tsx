@@ -5,7 +5,7 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, Slick, PostFlex, Button, CategoryArea } from '../components';
+import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger } from '../components';
 import { getSortedPostData } from '../lib/post';
 import { getAllCategoryData } from '../lib/category';
 
@@ -44,6 +44,7 @@ const Home = ({allPostData, categories}) => {
 
   return(
     <Layout home title="ホーム">
+    <Hamburger/>
       <Container maxWidth="lg">
         <Container maxWidth="sm">
           <div style={indexStyle}>
