@@ -4,7 +4,7 @@ import Toggler from './Toggler';
 import {Transition} from 'react-transition-group';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../context/context';
-import {LangToggler} from './index';
+import { LangToggler2 } from '.';
 
 const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +51,7 @@ const Hamburger = () => {
               } : {}}>
               <div className={styles.drawer_inner} style={randomBg}>
                 <Toggler/>
-                <LangToggler/>
+                <LangToggler2/>
                 <p>Under Construction! Coming Soon, This area will be the select color theme box. </p>
                 <p>現在開発中です。カラーテーマを選べるようになる予定です。</p>
                 <p>開発予定表</p>

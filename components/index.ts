@@ -9,3 +9,4 @@ export {default as PostFlex} from './PostFlex';
 export {default as Button} from './Button';
 export {default as CategoryArea} from './CategoryArea';
 export {default as LangToggler} from './LangToggler';
+export {default as LangToggler2} from './LangToggler2';

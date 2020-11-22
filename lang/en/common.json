@@ -1,4 +1,6 @@
 {
+  "close": "close",
+  "language": "Language",
   "layout": {
     "home": "Home",
     "archives": "Archives"
@@ -7,7 +9,7 @@
     "description": ["This website is a blog to connect Azerbaijan and Japan.","I am the administrator of this website and I am Japanese.", "At the time of setting up this website","there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan."]
   },
   "selectedEight": {
-    "title": "SELECTED EIGHYT",
+    "title": "SELECTED EIGHT",
     "subtitle": "Let's check the best 8 articles in Azerbaijapan"
   },
   "posts": {

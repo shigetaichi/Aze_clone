@@ -5,7 +5,7 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler } from '../components';
+import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2 } from '../components';
 import { getSortedPostData } from '../lib/post';
 import { getAllCategoryData } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
@@ -53,6 +53,8 @@ const Home = ({allPostData, categories}) => {
             {lang(langTheme.langName).top.description.map((p, i) => {
               return (<p key={i}>{p}</p>)
             })}
+            <LangToggler2/>
+            <p>You can choose your language from here. And This select menu is also in "MENU" at the top-right corner!</p>
           </div>
         </Container>
         <Title
