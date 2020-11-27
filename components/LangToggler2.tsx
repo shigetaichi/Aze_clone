@@ -1,10 +1,7 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import { useLangContext, useSetLangContext, lang } from '../context/langContext';
 import ClassNames from 'classnames';
 import styles from '../components-style/LangToggler.module.css';
@@ -12,7 +9,6 @@ import styles from '../components-style/LangToggler.module.css';
 const LangToggler2 = () => {
   const langTheme = useLangContext();
   const setLangTheme = useSetLangContext();
-  const [state, setState] = React.useState<string>("ja");
   
   const LangInputLabel = ClassNames(styles.langInputLabel, {
     [styles.langInputLabelDark]: langTheme.langName === "dark"
@@ -22,7 +18,6 @@ const LangToggler2 = () => {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState(event.target.value);
     setLangTheme(() => ({ langName: event.target.value }));
   };
   return (
