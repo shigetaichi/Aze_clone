@@ -26,6 +26,7 @@
   },
   "post": {
     "publishedAt": "公開日",
+    "updatedAt": "更新日",
     "thanks": "お読みいただきありがとうございます"
   },
   "buttonText": {

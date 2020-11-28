@@ -67,3 +67,33 @@ export const getPostsFilteredByCategory = async (id) => {
   });
   return postData;
 }
+
+export const getAllCategoryWp = async (lang: string) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/categories`);
+  const categories = await res.json();
+  return categories;
+}
+
+export const getAllCategoryIdWp = async () => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories`);
+  const data = await res.json();
+  return data.map(content => {
+    return {
+      params: {
+        category: content.id.toString()
+      }
+    }
+  });
+}
+
+export const getCatNameWp = async (id) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?id=${id}`);
+  const data = await res.json();
+  return data;
+}
+
+export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: number) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?categories=${id}`);
+  const data = await res.json();
+  return data;
+}

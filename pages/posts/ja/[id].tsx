@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
-import { getAllPostIds, getPostData, getRandomPostData } from '../../../lib/post';
+import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById } from '../../../lib/post';
 import { getAllCategoryData } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
@@ -14,7 +14,8 @@ import {useLangContext, lang} from '../../../context/langContext';
 hljs.registerLanguage('javascript', javascript);
 
 export const getStaticPaths = async () => {
-  const paths = await getAllPostIds();
+  // const paths = await getAllPostIds();
+  const paths = await wpGetAllPostIds();
   return {
     paths,
     fallback: false,
@@ -22,7 +23,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await getPostData(params.id.toString());
+  const postData = await wpGetPostDataById('ja', params.id);
   const categories = await getAllCategoryData();
   const randomPostData = await getRandomPostData();
   return {
@@ -35,6 +36,8 @@ export const getStaticProps = async ({params}) => {
 }
 
 const Post = ({postData, categories, randomPostData}) => {
+  console.log(postData);
+  
   const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
   useEffect(() => {
@@ -98,23 +101,23 @@ const Post = ({postData, categories, randomPostData}) => {
     return `${year} / ${month} / ${date}`;
   }
   return(
-    <Layout title={postData.title} image={postData.eyecatch.url.toString()}>
+    <Layout title={postData.title.rendered} image={postData.acf.eyecatch}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
-        <h1 className="post-title">{postData.title}</h1>
-        <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt}{formatDate(postData.publishedAt)}
+        <h1 className="post-title">{postData.title.rendered}</h1>
+        <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt} {formatDate(postData.date)}
           <br className="on480"></br>
           <span className="off480inline">　</span>
           {(() => {
-            if(formatDate(postData.publishedAt) === formatDate(postData.updatedAt)){
+            if(formatDate(postData.date) === formatDate(postData.modified)){
               return;
             }else{
-              return (`更新日${formatDate(postData.updatedAt)}`);
+              return (`${lang(langTheme.langName).post.updatedAt} ${formatDate(postData.modified)}`);
             }
           })()}
         </span>
         <div className="post-eyecatch">
-          <img src={postData.eyecatch.url.toString()} alt=""/>
+          <img src={postData.acf.eyecatch} alt=""/>
         </div>
       </Container>
       <div id="post-content">
@@ -122,7 +125,7 @@ const Post = ({postData, categories, randomPostData}) => {
           <div
           id="content"
           dangerouslySetInnerHTML={{
-            __html: postData.content
+            __html: postData.content.rendered
           }}
           ></div>
           <div className="thanks-reading">
@@ -136,7 +139,7 @@ const Post = ({postData, categories, randomPostData}) => {
       <div className="module-spacer--medium"></div>
       <Title title={lang(langTheme.langName).recommendation.title} subtitle={lang(langTheme.langName).recommendation.subtitle}/>
       <div style={{display: 'flex', justifyContent: 'center',}}>
-        <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} />
+        {/* <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} /> */}
       </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>

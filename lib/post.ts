@@ -107,7 +107,7 @@ export const getRandomPostData =  async () => {
   return randomPostData;
 }
 
-export const wpGetPostsSortedByLang = async(lang) => {
+export const wpGetPostsSortedByLang = async(lang: string) => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags`);
   const data = await res.json();
   const postData = data.map(eachData => {
@@ -131,6 +131,24 @@ export const wpGetAllPosts = async () => {
   const postArrayAz = await wpGetPostsSortedByLang('az');
   const postArrayEn = await wpGetPostsSortedByLang('en');
   const postArrayRu = await wpGetPostsSortedByLang('ru');
-  console.log([...postArrayAz, ...postArrayEn, ...postArrayJp, ...postArrayRu]);
-  
+  return [...postArrayAz, ...postArrayEn, ...postArrayJp, ...postArrayRu];
+}
+
+export const wpGetAllPostIds = async () => {
+  const allPostsArray = await wpGetAllPosts();
+  const allPostIds = allPostsArray.map(post => {
+    const id: string = post.id.toString();
+    return {
+      params: {
+        id: id,
+      }
+    };
+  });
+  return allPostIds;
+}
+
+export const wpGetPostDataById = async(lang, id) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
+  const data = await res.json();
+  return data;
 }

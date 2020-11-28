@@ -75,7 +75,7 @@ const PostFlex = (props: Props) => {
                   key={i}
                   id={thumbnailData.id}
                   title={thumbnailData.title}
-                  image={thumbnailData.eyecatch.url}
+                  image={thumbnailData.eyecatch}
                   description={thumbnailData.description}
                 />
               ))}
@@ -89,7 +89,7 @@ const PostFlex = (props: Props) => {
                   key={i}
                   id={thumbnailData.id}
                   title={thumbnailData.title}
-                  image={thumbnailData.eyecatch.url}
+                  image={thumbnailData.eyecatch}
                   description={thumbnailData.description}
                 />
               ))}

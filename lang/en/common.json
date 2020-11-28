@@ -26,6 +26,7 @@
   },
   "post": {
     "publishedAt": "Published At",
+    "updatedAt": "Updated At",
     "thanks": "Thank you for reading!! Have a nice day!!"
   },
   "buttonText": {
