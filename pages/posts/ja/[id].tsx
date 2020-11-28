@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
 import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById } from '../../../lib/post';
-import { getAllCategoryData } from '../../../lib/category';
+import { getAllCategoryData, getAllCategoryWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail} from '../../../components';
+import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
 
 // postの中のcssはglobal.cssに記載
@@ -23,8 +23,18 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await wpGetPostDataById('ja', params.id);
-  const categories = await getAllCategoryData();
+  const postData = await wpGetPostDataById('az', params.id);
+  // const categories = await getAllCategoryData();
+  const categoriesJp = await getAllCategoryWp('ja');
+  const categoriesAze = await getAllCategoryWp('az');
+  const categoriesEn = await getAllCategoryWp('en');
+  const categoriesRu = await getAllCategoryWp('ru');
+  const categories = {
+    'ja': categoriesJp,
+    'aze': categoriesAze,
+    'en': categoriesEn,
+    'ru': categoriesRu,
+  }
   const randomPostData = await getRandomPostData();
   return {
     props: {
@@ -36,10 +46,9 @@ export const getStaticProps = async ({params}) => {
 }
 
 const Post = ({postData, categories, randomPostData}) => {
-  console.log(postData);
-  
   const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
+  const categoriesArray = categories[langTheme.langName];
   useEffect(() => {
     hljs.initHighlighting();
 
@@ -100,6 +109,8 @@ const Post = ({postData, categories, randomPostData}) => {
     const date = beforeFormatDate.getDate();
     return `${year} / ${month} / ${date}`;
   }
+
+
   return(
     <Layout title={postData.title.rendered} image={postData.acf.eyecatch}>
       <ContentIndex indexList={indexList}/>
@@ -116,6 +127,7 @@ const Post = ({postData, categories, randomPostData}) => {
             }
           })()}
         </span>
+        <PostTranslationMenu translate_group={postData.translate_group}/>
         <div className="post-eyecatch">
           <img src={postData.acf.eyecatch} alt=""/>
         </div>
@@ -152,7 +164,8 @@ const Post = ({postData, categories, randomPostData}) => {
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        <CategoryArea categories={categories} />
+        {/* <CategoryArea categories={categories} /> */}
+        <CategoryAreaWp categories={categoriesArray} />
         <div className="module-spacer--medium"></div>
         <Button text={lang(langTheme.langName).buttonText.toTop} path="/" />
         <div className="module-spacer--medium"></div>
