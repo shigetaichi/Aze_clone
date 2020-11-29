@@ -5,9 +5,9 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2 } from '../components';
-import { getSortedPostData } from '../lib/post';
-import { getAllCategoryData } from '../lib/category';
+import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2, CategoryAreaWp } from '../components';
+import { wpGetPostsSortedByLang } from '../lib/post';
+import { getCategoriesWp } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
 
 const indexStyle = {
@@ -17,8 +17,17 @@ const indexStyle = {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostData = await getSortedPostData();
-  const categories = await getAllCategoryData();
+  const allPostDataJp = await wpGetPostsSortedByLang('ja');
+  const allPostDataAze = await wpGetPostsSortedByLang('az');
+  const allPostDataEn = await wpGetPostsSortedByLang('en');
+  const allPostDataRu = await wpGetPostsSortedByLang('ru');
+  const allPostData = {
+    'ja': allPostDataJp,
+    'aze': allPostDataAze,
+    'en': allPostDataEn,
+    'ru': allPostDataRu,
+  }
+  const categories = await getCategoriesWp();
   return {
     props: {
       allPostData,
@@ -29,12 +38,15 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home = ({allPostData, categories}) => {
   const langTheme = useLangContext();
-  const thumbnailDataArray = allPostData.map(post => {
+  const categoriesArray = categories[langTheme.langName];
+  const allPostDataArray = allPostData[langTheme.langName];
+  
+  const thumbnailDataArray = allPostDataArray.map(post => {
     const id = post.id;
     const title = post.title;
     const eyecatch = post.eyecatch;
-    const description = post.description;
-    const tag = post.tag;
+    const description = post.content;
+    const tag = post.tags;
     return {
       id: id,
       title: title,
@@ -54,7 +66,6 @@ const Home = ({allPostData, categories}) => {
               return (<p key={i}>{p}</p>)
             })}
             <LangToggler2/>
-            <p>You can choose your language from here. And This select menu is also in "MENU" at the top-right corner!</p>
           </div>
         </Container>
         <Title
@@ -79,7 +90,7 @@ const Home = ({allPostData, categories}) => {
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        <CategoryArea categories={categories} />
+        <CategoryAreaWp categories={categoriesArray} />
       </Container>
     </Layout>
   )

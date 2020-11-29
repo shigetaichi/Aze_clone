@@ -11,15 +11,17 @@ import Typography from '@material-ui/core/Typography';
 import styles from '../components-style/PostThumbnail.module.css';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../context/context';
+import { useLangContext } from '../context/langContext';
 
 const PostThumbnail = (props) => {
   const themeNames = useThemeContext();
+  const langTheme = useLangContext();
   const PostThumbnailStyle = ClassNames(styles.content, {
     [styles.contentDark]: themeNames.themeName === 'dark'
   });
   
   return (
-    <Link href="/posts/[id]" as={`/posts/${props.id}`}>
+    <Link href={`/posts/${langTheme.langName}/[id]`} as={`/posts/${langTheme.langName}/${props.id}`}>
       <Card className={styles.root}>
         <CardActionArea>
           <CardMedia

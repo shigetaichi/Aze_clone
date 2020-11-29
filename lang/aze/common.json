@@ -6,7 +6,7 @@
     "archives": "Arxiv"
   },
   "top":{
-    "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.","Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.","Buna görə də,AZERBAIJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm."]
+    "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.","Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.","Buna görə də,AZERBAIJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm.", "Dilinizi buradan seçə bilərsiniz. Və bu seçilmiş menyu yuxarı sağ küncdəki 'MENU' dadır!"]
   },
   "selectedEight": {
     "title": "Səkkiz seçildi",
@@ -20,12 +20,17 @@
     "title": "Kateqoriyalar",
     "subtitle": "Sizinlə məqalə arasındakı vasitəçi"
   },
+  "categoryArchive": {
+    "title": "Kateqoriyalar",
+    "subtitle": "Sizə və oxumaq istədiyiniz məqaləyə uyğunlaşmaq üçün dua edin ..."
+  },
   "allposts": {
     "title": "Arxiv",
     "subtitle": "Azerbaijapan haqqında hər şey burada."
   },
   "post": {
     "publishedAt": "buraxılış tarixi",
+    "updatedAt": "yeniləndi",
     "thanks": "Oxuduğunuz üçün təşəkkür edirik !! Xoş gün arzu edirəm!"
   },
   "buttonText": {
@@ -39,5 +44,8 @@
   "recommendation": {
     "title": "Recommendation",
     "subtitle": "Təsadüfi seçimlər bəzən həyatı dəyişdirə bilər."
+  },
+  "nopost": {
+    "now": "Hələ ismarıc yoxdur"
   }
 }
