@@ -3,12 +3,10 @@ import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategor
 import { Layout } from '../../components/globals';
 import Container from '@material-ui/core/Container';
 import { Title, PostFlex, CategoryArea, Button, CategoryAreaWp } from '../../components';
-import { useSetLangContext, useLangContext, lang } from '../../context/langContext';
-import { wpGetAllPostIds } from '../../lib/post';
+import { useLangContext, lang } from '../../context/langContext';
 
 export const getStaticPaths = async () => {
   const paths = await getAllCategoryIdWp();
-  // const paths = await getAllCategoryId();
   return {
     paths,
     fallback: false,
@@ -57,18 +55,6 @@ export const getStaticProps = async ({params}) => {
   }
 }
 
-// const test = async() => {
-//   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
-//   console.log(res);
-//   const data = await res.text();
-//   console.log(data);
-//   const data2 = await JSON.parse(data);
-//   console.log(data2);
-//   const a = await wpGetAllPostIds();
-//   console.log(a);
-// }
-// test();
-
 const Category = ({postsFilteredByCategory, catNameArray, categories}) => {
   const langTheme = useLangContext();
   const thumbnailDataArray = postsFilteredByCategory[langTheme.langName].map(postData => {
@@ -81,19 +67,17 @@ const Category = ({postsFilteredByCategory, catNameArray, categories}) => {
   const catName = catNameArray[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
   
-  
-  
   return (
-    <Layout title="カテゴリー別一覧">
+    <Layout title={catName.name + lang(langTheme.langName).categories.title}>
       <Container maxWidth="lg">
-        <Title title={catName.name} subtitle={`お求めの投稿はありましたか？`} />
+        <Title title={catName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle} />
         <PostFlex thumbnailDataArray={thumbnailDataArray}/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
       </Container>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
-      <Button text={"投稿一覧へ"} path={"/allposts"}/>
+      <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"}/>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <Container maxWidth="lg">

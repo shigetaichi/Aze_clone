@@ -2,16 +2,23 @@ import React from 'react'
 import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, CategoryArea, Button, LangToggler, CategoryAreaWp } from '../components';
-import { getAllCategoryData, getAllCategoryWp } from '../lib/category';
-import { getSortedPostData } from '../lib/post';
+import { Title, PostFlex, Button, LangToggler, CategoryAreaWp } from '../components';
+import { getAllCategoryWp } from '../lib/category';
+import { wpGetPostsSortedByLang } from '../lib/post';
 import {useLangContext, lang} from '../context/langContext';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-
-  const allPostData = await getSortedPostData();
-  // const categories = await getAllCategoryData();
+  const allPostDataJp = await wpGetPostsSortedByLang('ja');
+  const allPostDataAze = await wpGetPostsSortedByLang('az');
+  const allPostDataEn = await wpGetPostsSortedByLang('en');
+  const allPostDataRu = await wpGetPostsSortedByLang('ru');
+  const allPostData = {
+    'ja': allPostDataJp,
+    'aze': allPostDataAze,
+    'en': allPostDataEn,
+    'ru': allPostDataRu,
+  }
   const categoriesJp = await getAllCategoryWp('ja');
   const categoriesAze = await getAllCategoryWp('az');
   const categoriesEn = await getAllCategoryWp('en');
@@ -32,19 +39,16 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const allposts = ({allPostData, categories}) => {
   const langTheme = useLangContext();
+
+  const allPostDataArray = allPostData[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
-  const thumbnailDataArray = allPostData.map(post => {
-    const id = post.id;
-    const title = post.title;
-    const eyecatch = post.eyecatch;
-    const description = post.description;
-    const tag = post.tag;
+  const thumbnailDataArray = allPostDataArray.map(post => {
     return {
-      id: id,
-      title: title,
-      eyecatch: eyecatch,
-      description: description,
-      tag: tag,
+      id: post.id,
+      title: post.title,
+      eyecatch: post.eyecatch,
+      description: post.description,
+      tag: post.tags,
     }
   });
   return (
@@ -67,7 +71,6 @@ const allposts = ({allPostData, categories}) => {
         title={lang(langTheme.langName).categories.title}
         subtitle={lang(langTheme.langName).categories.subtitle}
       />
-      {/* <CategoryArea categories={categories} /> */}
       <CategoryAreaWp categories={categoriesArray} />
     </Container>
   </Layout>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
-import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById } from '../../../lib/post';
+import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, sha256 } from '../../../lib/post';
 import { getAllCategoryData, getAllCategoryWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await wpGetPostDataById('az', params.id);
+  const postData = await wpGetPostDataById('ja', params.id);
   // const categories = await getAllCategoryData();
   const categoriesJp = await getAllCategoryWp('ja');
   const categoriesAze = await getAllCategoryWp('az');
@@ -55,7 +55,13 @@ const Post = ({postData, categories, randomPostData}) => {
     const content = document.getElementById('content');
     const contentNodeList = content.querySelectorAll('h2, h3');
     let indexListArray = [];
+    
     Array.from(contentNodeList, node => indexListArray.push(node));
+    contentNodeList.forEach(node => {
+      sha256(node.innerHTML).then(res => {
+        node.id = res.toString();
+      });
+    });
     setIndexList(indexListArray);
 
     // 今回の交差を監視する要素contentNodeList
@@ -96,9 +102,11 @@ const Post = ({postData, categories, randomPostData}) => {
       }
       // 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
       const newActiveIndex = document.querySelector(
-        `a[href='#${element.id}']`
+        `a[href="#${element.id}"]`
       );
-      newActiveIndex.classList.add("active");
+      if(newActiveIndex){
+        newActiveIndex.classList.add("active");
+      }
     }
   }, []);
 

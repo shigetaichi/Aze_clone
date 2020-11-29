@@ -6,7 +6,7 @@
     "archives": "Archives"
   },
   "top":{
-    "description": ["This website is a blog to connect Azerbaijan and Japan.","I am the administrator of this website and I am Japanese.", "At the time of setting up this website","there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan."]
+    "description": ["This website is a blog to connect Azerbaijan and Japan.","I am the administrator of this website and I am Japanese.", "At the time of setting up this website","there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan.", "You can choose your language from here. And This select menu is also in 'MENU' at the top-right corner!"]
   },
   "selectedEight": {
     "title": "SELECTED EIGHT",
@@ -19,6 +19,10 @@
   "categories": {
     "title": "Categories",
     "subtitle": "The middleman between you and the article"
+  },
+  "categoryArchive": {
+    "title": "Categories",
+    "subtitle": "Pray for matching you and article which you wanna read..."
   },
   "allposts": {
     "title": "All POST",

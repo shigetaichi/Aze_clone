@@ -77,7 +77,6 @@ const Home = ({allPostData, categories}) => {
               return (<p key={i}>{p}</p>)
             })}
             <LangToggler2/>
-            <p>You can choose your language from here. And This select menu is also in "MENU" at the top-right corner!</p>
           </div>
         </Container>
         <Title
