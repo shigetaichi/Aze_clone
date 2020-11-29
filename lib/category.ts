@@ -98,3 +98,17 @@ export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: numbe
   const data = await res.json();
   return data;
 }
+
+export const getCategoriesWp = async () => {
+  const categoriesJp = await getAllCategoryWp('ja');
+  const categoriesAze = await getAllCategoryWp('az');
+  const categoriesEn = await getAllCategoryWp('en');
+  const categoriesRu = await getAllCategoryWp('ru');
+  const categories = {
+    'ja': categoriesJp,
+    'aze': categoriesAze,
+    'en': categoriesEn,
+    'ru': categoriesRu,
+  }
+  return categories;
+}

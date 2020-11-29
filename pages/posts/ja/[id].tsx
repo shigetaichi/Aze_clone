@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
 import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, sha256 } from '../../../lib/post';
-import { getAllCategoryData, getAllCategoryWp } from '../../../lib/category';
+import { getAllCategoryData, getAllCategoryWp, getCategoriesWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -24,17 +24,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({params}) => {
   const postData = await wpGetPostDataById('ja', params.id);
-  // const categories = await getAllCategoryData();
-  const categoriesJp = await getAllCategoryWp('ja');
-  const categoriesAze = await getAllCategoryWp('az');
-  const categoriesEn = await getAllCategoryWp('en');
-  const categoriesRu = await getAllCategoryWp('ru');
-  const categories = {
-    'ja': categoriesJp,
-    'aze': categoriesAze,
-    'en': categoriesEn,
-    'ru': categoriesRu,
-  }
+  const categories = await getCategoriesWp();
   const randomPostData = await getRandomPostData();
   return {
     props: {
