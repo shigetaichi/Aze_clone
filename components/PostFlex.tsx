@@ -35,7 +35,6 @@ const PostFlex = (props: Props) => {
   if(isPaginate){
     slicedThumbnailDataArray = sliceByNumber(thumbnailDataArray, props.perPage);
   }
-  
 
   useEffect(() => { //After the component is mounted set router event handlers
     Router.events.on('routeChangeStart', startLoading); 
@@ -63,59 +62,72 @@ const PostFlex = (props: Props) => {
   return (
     <React.Fragment>
     {(() => {
-      if (isLoading)
-        return <div className="loader">Loading...</div>;
-      else {
-        //Generating posts list
-        if(isPaginate){
-          return(
-            <div className={styles.post_flex}>
-              {slicedThumbnailDataArray[nowPath].map((thumbnailData, i) => (
-                <PostThumbnail
-                  key={i}
-                  id={thumbnailData.id}
-                  title={thumbnailData.title}
-                  image={thumbnailData.eyecatch}
-                  description={thumbnailData.description}
-                />
-              ))}
-            </div>
-          )
-        }else{
-          return(
-            <div className={styles.post_flex}>
-              {thumbnailDataArray.map((thumbnailData, i) => (
-                <PostThumbnail
-                  key={i}
-                  id={thumbnailData.id}
-                  title={thumbnailData.title}
-                  image={thumbnailData.eyecatch}
-                  description={thumbnailData.description}
-                />
-              ))}
-            </div>
-          )
+        if (isLoading)
+          return <div className="loader">Loading...</div>;
+        else {
+          //Generating posts list
+          if(isPaginate){
+            if(slicedThumbnailDataArray.length === 0){
+              return <p className={styles.post_flex_no_posts}>現在投稿がありません</p>
+            }else{
+              return(
+                <div className={styles.post_flex}>
+                  {slicedThumbnailDataArray[nowPath].map((thumbnailData, i) => (
+                    <PostThumbnail
+                      key={i}
+                      id={thumbnailData.id}
+                      title={thumbnailData.title}
+                      image={thumbnailData.eyecatch}
+                      description={thumbnailData.description}
+                    />
+                  ))}
+                </div>
+              )
+            }
+          }else{
+            console.log(thumbnailDataArray.length);
+            if(thumbnailDataArray.length === 0){
+              return <p className={styles.post_flex_no_posts}>現在投稿がありません</p>
+            }else{
+              return(
+                <div className={styles.post_flex}>
+                  {thumbnailDataArray.map((thumbnailData, i) => (
+                    <PostThumbnail
+                      key={i}
+                      id={thumbnailData.id}
+                      title={thumbnailData.title}
+                      image={thumbnailData.eyecatch}
+                      description={thumbnailData.description}
+                    />
+                  ))}
+                </div>
+              )
+            }
+          }
         }
-      }})()
+      }
+      )()
     }
-    <div className="module-spacer--medium"></div>
-    <div className="module-spacer--medium"></div>
     {isPaginate && (
-      <ReactPaginate
-        previousLabel={'<'}
-        nextLabel={'>'}
-        breakLabel={'...'}
-        breakClassName={'break-me'}
-        activeClassName={'active'}
-        containerClassName={'pagination'}
-        subContainerClassName={'pages pagination'}
-  
-        initialPage={0}
-        pageCount={postDataCount / props.perPage}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={paginationHandler}
-      />
+      <>
+        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"></div>
+        <ReactPaginate
+          previousLabel={'<'}
+          nextLabel={'>'}
+          breakLabel={'...'}
+          breakClassName={'break-me'}
+          activeClassName={'active'}
+          containerClassName={'pagination'}
+          subContainerClassName={'pages pagination'}
+    
+          initialPage={0}
+          pageCount={postDataCount / props.perPage}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={paginationHandler}
+        />
+      </>
     )}
     </React.Fragment>
   )

@@ -2,8 +2,8 @@ import React from 'react'
 import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, CategoryArea, Button, LangToggler } from '../components';
-import { getAllCategoryData } from '../lib/category';
+import { Title, PostFlex, CategoryArea, Button, LangToggler, CategoryAreaWp } from '../components';
+import { getAllCategoryData, getAllCategoryWp } from '../lib/category';
 import { getSortedPostData } from '../lib/post';
 import {useLangContext, lang} from '../context/langContext';
 
@@ -11,7 +11,17 @@ import {useLangContext, lang} from '../context/langContext';
 export const getStaticProps: GetStaticProps = async () => {
 
   const allPostData = await getSortedPostData();
-  const categories = await getAllCategoryData();
+  // const categories = await getAllCategoryData();
+  const categoriesJp = await getAllCategoryWp('ja');
+  const categoriesAze = await getAllCategoryWp('az');
+  const categoriesEn = await getAllCategoryWp('en');
+  const categoriesRu = await getAllCategoryWp('ru');
+  const categories = {
+    'ja': categoriesJp,
+    'aze': categoriesAze,
+    'en': categoriesEn,
+    'ru': categoriesRu,
+  }
   return {
     props: {
       allPostData,
@@ -22,6 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const allposts = ({allPostData, categories}) => {
   const langTheme = useLangContext();
+  const categoriesArray = categories[langTheme.langName];
   const thumbnailDataArray = allPostData.map(post => {
     const id = post.id;
     const title = post.title;
@@ -56,7 +67,8 @@ const allposts = ({allPostData, categories}) => {
         title={lang(langTheme.langName).categories.title}
         subtitle={lang(langTheme.langName).categories.subtitle}
       />
-      <CategoryArea categories={categories} />
+      {/* <CategoryArea categories={categories} /> */}
+      <CategoryAreaWp categories={categoriesArray} />
     </Container>
   </Layout>
   )

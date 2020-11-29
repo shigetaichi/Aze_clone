@@ -4,3 +4,12 @@
   justify-content: left;
   align-items: flex-start;
 }
+
+.post_flex_no_posts{
+  text-align: center;
+  font-family: tryst, serif;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

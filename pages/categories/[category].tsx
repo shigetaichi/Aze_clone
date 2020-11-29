@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategoryData, getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getCatNameWp, getAllCategoryWp } from '../../lib/category';
+import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategoryData, getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getCatNameWp, getAllCategoryWp, getCatNameByLangAndId } from '../../lib/category';
 import { Layout } from '../../components/globals';
 import Container from '@material-ui/core/Container';
 import { Title, PostFlex, CategoryArea, Button, CategoryAreaWp } from '../../components';
@@ -25,6 +25,17 @@ export const getStaticProps = async ({params}) => {
     'en': postsFilteredByCategoryEn,
     'ru': postsFilteredByCategoryRu,
   }
+
+  const catNameJp = await getCatNameByLangAndId('ja', params.category);
+  const catNameAze = await getCatNameByLangAndId('az', params.category);
+  const catNameEn = await getCatNameByLangAndId('en', params.category);
+  const catNameRu = await getCatNameByLangAndId('ru', params.category);
+  const catNameArray = {
+    'ja': catNameJp,
+    'aze': catNameAze,
+    'en': catNameEn,
+    'ru': catNameRu,
+  }
   // const categories = await getAllCategoryData();
   const categoriesJp = await getAllCategoryWp('ja');
   const categoriesAze = await getAllCategoryWp('az');
@@ -39,30 +50,37 @@ export const getStaticProps = async ({params}) => {
   return {
     props: {
       postsFilteredByCategory,
+      catNameArray,
       categories
     }
   }
 }
 
-const Category = ({postsFilteredByCategory, categories}) => {
-  let catName;
+// const test = async() => {
+//   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/ru/wp-json/wp/v2/categories/1`);
+//   const categories = await res.json();
+//   console.log(categories);
+// }
+// test();
+
+const Category = ({postsFilteredByCategory, catNameArray, categories}) => {
   const langTheme = useLangContext();
-  const postsFilteredByCategoryAndLang = postsFilteredByCategory[langTheme.langName];
-  const thumbnailDataArray = postsFilteredByCategoryAndLang.map(postData => {
-    catName = postData.category_name[0];
+  const thumbnailDataArray = postsFilteredByCategory[langTheme.langName].map(postData => {
     const id = postData.id;
     const title = postData.title.rendered;
     const eyecatch = postData.acf.eyecatch;
     const description = postData.content.rendered;
     return {id, title, eyecatch, description};
   });
+  const catName = catNameArray[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
+  
   
   
   return (
     <Layout title="カテゴリー別一覧">
       <Container maxWidth="lg">
-        <Title title={catName} subtitle={`お求めの投稿はありましたか？`} />
+        <Title title={catName.name} subtitle={`お求めの投稿はありましたか？`} />
         <PostFlex thumbnailDataArray={thumbnailDataArray}/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>

@@ -92,6 +92,12 @@ export const getCatNameWp = async (id) => {
   return data;
 }
 
+export const getCatNameByLangAndId = async (lang, id) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/categories/${id}`);
+  const data = await res.json();
+  return data;
+}
+
 export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: number) => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?categories=${id}`);
   const data = await res.json();
