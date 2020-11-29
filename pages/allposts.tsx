@@ -3,7 +3,7 @@ import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
 import { Title, PostFlex, Button, LangToggler, CategoryAreaWp } from '../components';
-import { getAllCategoryWp } from '../lib/category';
+import { getAllCategoryWp, getCategoriesWp } from '../lib/category';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import {useLangContext, lang} from '../context/langContext';
 
@@ -19,16 +19,7 @@ export const getStaticProps: GetStaticProps = async () => {
     'en': allPostDataEn,
     'ru': allPostDataRu,
   }
-  const categoriesJp = await getAllCategoryWp('ja');
-  const categoriesAze = await getAllCategoryWp('az');
-  const categoriesEn = await getAllCategoryWp('en');
-  const categoriesRu = await getAllCategoryWp('ru');
-  const categories = {
-    'ja': categoriesJp,
-    'aze': categoriesAze,
-    'en': categoriesEn,
-    'ru': categoriesRu,
-  }
+  const categories = await getCategoriesWp();
   return {
     props: {
       allPostData,
