@@ -1,5 +1,5 @@
 import React from 'react'
-import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategoryData, getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getCatNameWp, getAllCategoryWp, getCatNameByLangAndId } from '../../lib/category';
+import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategoryData, getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getAllCategoryWp, getCatNameByLangAndId } from '../../lib/category';
 import { Layout } from '../../components/globals';
 import Container from '@material-ui/core/Container';
 import { Title, PostFlex, CategoryArea, Button, CategoryAreaWp } from '../../components';
@@ -57,13 +57,9 @@ export const getStaticProps = async ({params}) => {
 }
 
 const test = async() => {
-  // const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/ru/wp-json/wp/v2/categories/1`);
-  // const categories = await res.json();
-  // console.log(categories);
-  const res = await getAllCategoryIdWp();
-  console.log(res);
-  
-  
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
+  const data = await res.json();
+  console.log(data);
 }
 test();
 

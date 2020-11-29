@@ -75,7 +75,7 @@ export const getAllCategoryWp = async (lang: string) => {
 }
 
 export const getAllCategoryIdWp = async () => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories`);
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
   const data = await res.json();
   const categoryIds = data.map(content => {
     return {
@@ -87,11 +87,11 @@ export const getAllCategoryIdWp = async () => {
   return categoryIds;
 }
 
-export const getCatNameWp = async (id) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?id=${id}`);
-  const data = await res.json();
-  return data;
-}
+// export const getCatNameWp = async (id) => {
+//   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?id=${id}`);
+//   const data = await res.json();
+//   return data;
+// }
 
 export const getCatNameByLangAndId = async (lang, id) => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/categories/${id}`);
