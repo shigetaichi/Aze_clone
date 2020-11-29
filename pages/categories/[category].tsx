@@ -56,12 +56,16 @@ export const getStaticProps = async ({params}) => {
   }
 }
 
-// const test = async() => {
-//   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/ru/wp-json/wp/v2/categories/1`);
-//   const categories = await res.json();
-//   console.log(categories);
-// }
-// test();
+const test = async() => {
+  // const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/ru/wp-json/wp/v2/categories/1`);
+  // const categories = await res.json();
+  // console.log(categories);
+  const res = await getAllCategoryIdWp();
+  console.log(res);
+  
+  
+}
+test();
 
 const Category = ({postsFilteredByCategory, catNameArray, categories}) => {
   const langTheme = useLangContext();

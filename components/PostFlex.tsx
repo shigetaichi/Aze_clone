@@ -85,7 +85,6 @@ const PostFlex = (props: Props) => {
               )
             }
           }else{
-            console.log(thumbnailDataArray.length);
             if(thumbnailDataArray.length === 0){
               return <p className={styles.post_flex_no_posts}>現在投稿がありません</p>
             }else{
