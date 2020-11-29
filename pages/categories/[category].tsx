@@ -58,8 +58,12 @@ export const getStaticProps = async ({params}) => {
 
 const test = async() => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
-  const data = await res.json();
+  console.log(res);
+  const data = await res.text();
   console.log(data);
+  const data2 = await JSON.parse(data);
+  console.log(data2);
+  
 }
 test();
 

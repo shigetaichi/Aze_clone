@@ -76,8 +76,10 @@ export const getAllCategoryWp = async (lang: string) => {
 
 export const getAllCategoryIdWp = async () => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
-  const data = await res.json();
-  const categoryIds = data.map(content => {
+  // const data = await res.json();
+  const data = await res.text();
+  const data2 = await JSON.parse(data);
+  const categoryIds = data2.map(content => {
     return {
       params: {
         category: content.id.toString()
