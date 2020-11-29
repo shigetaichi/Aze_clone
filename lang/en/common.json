@@ -44,5 +44,8 @@
   "recommendation": {
     "title": "Recommendation",
     "subtitle": "Random choices can sometimes be life-changing."
+  },
+  "nopost": {
+    "now": "We don't have any articles in this area... Coming Soon.."
   }
 }

@@ -14,7 +14,6 @@ import {useLangContext, lang} from '../../../context/langContext';
 hljs.registerLanguage('javascript', javascript);
 
 export const getStaticPaths = async () => {
-  // const paths = await getAllPostIds();
   const paths = await wpGetAllPostIds();
   return {
     paths,

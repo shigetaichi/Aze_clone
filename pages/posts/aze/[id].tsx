@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
-import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, sha256 } from '../../../lib/post';
-import { getAllCategoryData, getAllCategoryWp, getCategoriesWp } from '../../../lib/category';
+import { getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, sha256 } from '../../../lib/post';
+import { getCategoriesWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp} from '../../../components';
+import {ContentIndex, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
 
 // postの中のcssはglobal.cssに記載
@@ -14,7 +14,6 @@ import {useLangContext, lang} from '../../../context/langContext';
 hljs.registerLanguage('javascript', javascript);
 
 export const getStaticPaths = async () => {
-  // const paths = await getAllPostIds();
   const paths = await wpGetAllPostIds();
   return {
     paths,
@@ -24,7 +23,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({params}) => {
   const postData = await wpGetPostDataById('az', params.id);
-  // const categories = await getAllCategoryData();
   const categories = await getCategoriesWp();
   const randomPostData = await getRandomPostData();
   return {

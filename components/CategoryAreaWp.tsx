@@ -1,5 +1,4 @@
 import React from 'react'
-import { getAllCategoryWp, getPostsFilteredByCategoryAndLangWp } from '../lib/category';
 import Link from 'next/link';
 import styles from '../components-style/CategoryArea.module.css';
 

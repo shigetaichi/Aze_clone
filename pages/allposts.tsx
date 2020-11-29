@@ -3,7 +3,7 @@ import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
 import { Title, PostFlex, Button, LangToggler, CategoryAreaWp } from '../components';
-import { getAllCategoryWp, getCategoriesWp } from '../lib/category';
+import { getCategoriesWp } from '../lib/category';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import {useLangContext, lang} from '../context/langContext';
 

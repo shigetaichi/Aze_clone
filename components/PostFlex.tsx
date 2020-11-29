@@ -3,6 +3,7 @@ import styles from '../components-style/PostFlex.module.css';
 import {PostThumbnail} from '../components';
 import ReactPaginate from 'react-paginate';
 import Router, { withRouter, useRouter } from 'next/router';
+import {lang, useLangContext} from '../context/langContext';
 
 const sliceByNumber = (array, number) => {
   const length = Math.ceil(array.length / number)
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const PostFlex = (props: Props) => {
+  const langTheme = useLangContext();
   const router = useRouter();
   let thumbnailDataArray = props.thumbnailDataArray;
   const postDataCount = thumbnailDataArray.length;
@@ -57,8 +59,6 @@ const PostFlex = (props: Props) => {
     });
   };
 
-  // let content = null;
-  
   return (
     <React.Fragment>
     {(() => {
@@ -86,7 +86,7 @@ const PostFlex = (props: Props) => {
             }
           }else{
             if(thumbnailDataArray.length === 0){
-              return <p className={styles.post_flex_no_posts}>現在投稿がありません</p>
+              return <p className={styles.post_flex_no_posts}>{lang(langTheme.langName).nopost.now}</p>
             }else{
               return(
                 <div className={styles.post_flex}>

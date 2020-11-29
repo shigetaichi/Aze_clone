@@ -6,8 +6,8 @@ import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
 import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2, CategoryAreaWp } from '../components';
-import { getSortedPostData, wpGetPostsSortedByLang } from '../lib/post';
-import { getAllCategoryData, getAllCategoryWp } from '../lib/category';
+import { wpGetPostsSortedByLang } from '../lib/post';
+import { getCategoriesWp } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
 
 const indexStyle = {
@@ -27,18 +27,7 @@ export const getStaticProps: GetStaticProps = async () => {
     'en': allPostDataEn,
     'ru': allPostDataRu,
   }
-  // const allPostData = await getSortedPostData();
-  // const categories = await getAllCategoryData();
-  const categoriesJp = await getAllCategoryWp('ja');
-  const categoriesAze = await getAllCategoryWp('az');
-  const categoriesEn = await getAllCategoryWp('en');
-  const categoriesRu = await getAllCategoryWp('ru');
-  const categories = {
-    'ja': categoriesJp,
-    'aze': categoriesAze,
-    'en': categoriesEn,
-    'ru': categoriesRu,
-  }
+  const categories = await getCategoriesWp();
   return {
     props: {
       allPostData,
@@ -101,7 +90,6 @@ const Home = ({allPostData, categories}) => {
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        {/* <CategoryArea categories={categories} /> */}
         <CategoryAreaWp categories={categoriesArray} />
       </Container>
     </Layout>

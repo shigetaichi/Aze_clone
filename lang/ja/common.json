@@ -44,5 +44,8 @@
   "recommendation": {
     "title": "おすすめ",
     "subtitle": "ランダムな選択は時に人生を変えてしまいます。"
+  },
+  "nopost": {
+    "now": "現在投稿がありません"
   }
 }

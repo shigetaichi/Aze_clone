@@ -81,12 +81,10 @@ const Category = ({postsFilteredByCategory, catNameArray, categories}) => {
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <Container maxWidth="lg">
-        {/* <Title title={"CATEGORIES"} subtitle={"他のカテゴリーも探索してみて下さい"}/> */}
         <Title
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        {/* <CategoryArea categories={categories} /> */}
         <CategoryAreaWp categories={categoriesArray} />
       </Container>
     </Layout>

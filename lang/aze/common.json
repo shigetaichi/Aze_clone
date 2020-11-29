@@ -44,5 +44,8 @@
   "recommendation": {
     "title": "Recommendation",
     "subtitle": "Təsadüfi seçimlər bəzən həyatı dəyişdirə bilər."
+  },
+  "nopost": {
+    "now": "Hələ ismarıc yoxdur"
   }
 }
