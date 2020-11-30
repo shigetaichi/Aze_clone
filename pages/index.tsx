@@ -58,6 +58,9 @@ const Home = ({allPostData, categories}) => {
 
   return(
     <Layout home title={lang(langTheme.langName).layout.home}>
+      <Head>
+        <meta property="og:type" content="website"/>
+      </Head>
       <Container maxWidth="lg">
         <Container maxWidth="sm">
           <div style={indexStyle}>

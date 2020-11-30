@@ -8,6 +8,7 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
 import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
+import { useRouter } from 'next/router';
 
 // postの中のcssはglobal.cssに記載
 
@@ -35,16 +36,15 @@ export const getStaticProps = async ({params}) => {
 }
 
 const Post = ({postData, categories, randomPostData}) => {
+  const router = useRouter();
   const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
   const categoriesArray = categories[langTheme.langName];
   useEffect(() => {
     hljs.initHighlighting();
-
     const content = document.getElementById('content');
     const contentNodeList = content.querySelectorAll('h2, h3');
     let indexListArray = [];
-    
     Array.from(contentNodeList, node => indexListArray.push(node));
     contentNodeList.forEach(node => {
       sha256(node.innerHTML).then(res => {
@@ -109,7 +109,7 @@ const Post = ({postData, categories, randomPostData}) => {
 
 
   return(
-    <Layout title={postData.title.rendered} image={postData.acf.eyecatch}>
+    <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title.rendered}</h1>
@@ -129,7 +129,7 @@ const Post = ({postData, categories, randomPostData}) => {
           <img src={postData.acf.eyecatch} alt=""/>
         </div>
       </Container>
-      <div id="post-content">
+      <div id="post-content" lang="ja">
         <div className="post-container">
           <div
           id="content"
