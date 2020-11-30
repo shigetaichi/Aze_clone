@@ -3,7 +3,6 @@ import styles from '../components-style/TagArea.module.css';
 import Link from 'next/link';
 
 const TagArea = ({tags}) => {
-  // const tags = props.tags;
   return (
     <div className={styles.tags_wrapper}>
       {tags.map((tag, i) => (
