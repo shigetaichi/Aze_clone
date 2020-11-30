@@ -12,6 +12,7 @@ import styles from '../components-style/PostThumbnail.module.css';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../context/context';
 import { useLangContext } from '../context/langContext';
+import { getTagNameByLangAndId, getTagsWp } from '../lib/tags';
 
 const PostThumbnail = (props) => {
   const themeNames = useThemeContext();
@@ -19,6 +20,15 @@ const PostThumbnail = (props) => {
   const PostThumbnailStyle = ClassNames(styles.content, {
     [styles.contentDark]: themeNames.themeName === 'dark'
   });
+
+  // const getTagsArrayForThumbnail = async () => {
+  //   const res = await getTagsWp();
+  //   return res;
+  // }
+  // const tagsArray = getTagsArrayForThumbnail().then(data => {
+  //   console.log(data);
+  //   return data;
+  // });
   
   return (
     <Link href={`/posts/${langTheme.langName}/[id]`} as={`/posts/${langTheme.langName}/${props.id}`}>
@@ -33,6 +43,16 @@ const PostThumbnail = (props) => {
             <Typography gutterBottom variant="h6" component="h6" className={styles.postThumbnail_title}>
               {props.title}
             </Typography>
+            <div className={styles.tagArea}>
+              {props.tags && props.tags.map(tag => {
+                for (const [key, value] of Object.entries(tag)) {
+                  return (
+                  <Link href={`/tags/${key}`}>
+                    <div className={styles.eachTag}>{value}</div>
+                  </Link>)
+                }
+              })}
+            </div>
           </CardContent>
         </CardActionArea>
       </Card>

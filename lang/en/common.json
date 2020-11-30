@@ -26,6 +26,14 @@
     "title": "Categories",
     "subtitle": "Pray for matching you and article which you wanna read..."
   },
+  "tags": {
+    "title": "Tags",
+    "subtitle": "Let's narrow it down by relevant keywords!!"
+  },
+  "tagArchive": {
+    "title": "Tags",
+    "subtitle": "Pray for matching you and article which you wanna read..."
+  },
   "allposts": {
     "title": "All POST",
     "subtitle": "Everything about Azerbaijapan is here."

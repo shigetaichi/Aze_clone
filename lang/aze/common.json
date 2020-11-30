@@ -26,6 +26,14 @@
     "title": "Kateqoriyalar",
     "subtitle": "Sizə və oxumaq istədiyiniz məqaləyə uyğunlaşmaq üçün dua edin ..."
   },
+  "tags": {
+    "title": "Tag",
+    "subtitle": "Müvafiq açar sözlər ilə daraldıraq"
+  },
+  "tagArchive": {
+    "title": "Tag",
+    "subtitle": "Sizə və oxumaq istədiyiniz məqaləyə uyğunlaşmaq üçün dua edin ..."
+  },
   "allposts": {
     "title": "Arxiv",
     "subtitle": "Azerbaijapan haqqında hər şey burada."

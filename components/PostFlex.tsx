@@ -79,6 +79,7 @@ const PostFlex = (props: Props) => {
                       title={thumbnailData.title}
                       image={thumbnailData.eyecatch}
                       description={thumbnailData.description}
+                      tags={thumbnailData.tags}
                     />
                   ))}
                 </div>
@@ -97,6 +98,7 @@ const PostFlex = (props: Props) => {
                       title={thumbnailData.title}
                       image={thumbnailData.eyecatch}
                       description={thumbnailData.description}
+                      tags={thumbnailData.tags}
                     />
                   ))}
                 </div>

@@ -12,3 +12,4 @@ export {default as LangToggler} from './LangToggler';
 export {default as LangToggler2} from './LangToggler2';
 export {default as PostTranslationMenu} from './PostTranslationMenu';
 export {default as CategoryAreaWp} from './CategoryAreaWp';
+export {default as TagArea} from './TagArea';

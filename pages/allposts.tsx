@@ -39,7 +39,7 @@ const allposts = ({allPostData, categories}) => {
       title: post.title,
       eyecatch: post.eyecatch,
       description: post.description,
-      tag: post.tags,
+      tags: post.tags,
     }
   });
   return (

@@ -5,10 +5,11 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2, CategoryAreaWp } from '../components';
+import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2, CategoryAreaWp, TagArea } from '../components';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import { getCategoriesWp } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
+import { getTagsWp } from '../lib/tags';
 
 const indexStyle = {
   fontFamily: 'serif',
@@ -28,31 +29,34 @@ export const getStaticProps: GetStaticProps = async () => {
     'ru': allPostDataRu,
   }
   const categories = await getCategoriesWp();
+  const tags = await getTagsWp();
   return {
     props: {
       allPostData,
-      categories
+      categories,
+      tags
     }
   }
 }
 
-const Home = ({allPostData, categories}) => {
+const Home = ({allPostData, categories, tags}) => {
   const langTheme = useLangContext();
   const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
+  const tagsArray = tags[langTheme.langName];
   
   const thumbnailDataArray = allPostDataArray.map(post => {
     const id = post.id;
     const title = post.title;
     const eyecatch = post.eyecatch;
     const description = post.content;
-    const tag = post.tags;
+    const tags = post.tag_name;
     return {
       id: id,
       title: title,
       eyecatch: eyecatch,
       description: description,
-      tag: tag,
+      tags: tags,
     }
   });
 
@@ -94,6 +98,11 @@ const Home = ({allPostData, categories}) => {
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
         <CategoryAreaWp categories={categoriesArray} />
+        <Title
+          title={lang(langTheme.langName).tags.title}
+          subtitle={lang(langTheme.langName).tags.subtitle}
+        />
+        <TagArea tags={tagsArray} />
       </Container>
     </Layout>
   )
