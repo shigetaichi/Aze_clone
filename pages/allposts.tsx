@@ -2,10 +2,11 @@ import React from 'react'
 import {GetStaticProps} from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, Button, LangToggler, CategoryAreaWp } from '../components';
+import { Title, PostFlex, Button, LangToggler, CategoryAreaWp, TagArea } from '../components';
 import { getCategoriesWp } from '../lib/category';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import {useLangContext, lang} from '../context/langContext';
+import { getTagsWp } from '../lib/tags';
 
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -20,26 +21,29 @@ export const getStaticProps: GetStaticProps = async () => {
     'ru': allPostDataRu,
   }
   const categories = await getCategoriesWp();
+  const tags = await getTagsWp();
   return {
     props: {
       allPostData,
       categories,
+      tags
     }
   }
 }
 
-const allposts = ({allPostData, categories}) => {
+const allposts = ({allPostData, categories, tags}) => {
   const langTheme = useLangContext();
 
   const allPostDataArray = allPostData[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
+  const tagsArray = tags[langTheme.langName];
   const thumbnailDataArray = allPostDataArray.map(post => {
     return {
       id: post.id,
       title: post.title,
       eyecatch: post.eyecatch,
       description: post.description,
-      tag: post.tags,
+      tags: post.tag_name,
     }
   });
   return (
@@ -50,7 +54,7 @@ const allposts = ({allPostData, categories}) => {
         title={lang(langTheme.langName).allposts.title}
         subtitle={lang(langTheme.langName).allposts.subtitle}
       />
-      <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
+      <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={12} isPaginate={true}/>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
     </Container>
@@ -63,6 +67,11 @@ const allposts = ({allPostData, categories}) => {
         subtitle={lang(langTheme.langName).categories.subtitle}
       />
       <CategoryAreaWp categories={categoriesArray} />
+      <Title
+        title={lang(langTheme.langName).tags.title}
+        subtitle={lang(langTheme.langName).tags.subtitle}
+      />
+      <TagArea tags={tagsArray} />
     </Container>
   </Layout>
   )

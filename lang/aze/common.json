@@ -1,4 +1,6 @@
 {
+  "locale": "az",
+  "description": "Ümid edirik ki, Azərbaycan Yaponiya ilə Azərbaycan arasında körpü rolunu oynayacaqdır. Dildən əlavə, müxtəlif janrlarda məqalələr toplayacağıq. Ümid edirik ki, bu sayt Azərbaycan haqqında məlumatı olan hər kəsə kömək edəcəkdir.",
   "close": "yaxın",
   "language": "Dil",
   "layout": {
@@ -22,6 +24,14 @@
   },
   "categoryArchive": {
     "title": "Kateqoriyalar",
+    "subtitle": "Sizə və oxumaq istədiyiniz məqaləyə uyğunlaşmaq üçün dua edin ..."
+  },
+  "tags": {
+    "title": "Tag",
+    "subtitle": "Müvafiq açar sözlər ilə daraldıraq"
+  },
+  "tagArchive": {
+    "title": "Tag",
     "subtitle": "Sizə və oxumaq istədiyiniz məqaləyə uyğunlaşmaq üçün dua edin ..."
   },
   "allposts": {

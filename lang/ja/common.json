@@ -1,4 +1,6 @@
 {
+  "locale": "ja_JP",
+  "description": "Azerbaijapanは日本とアゼルバイジャンの架け橋的なwebサイトになればいいと思っています。語学はもちろんのこと、様々なジャンルの記事を集積していきます。アゼルバイジャンについて学ぶ全ての人の助けになれれば幸いです。",
   "close": "閉じる",
   "language": "言語選択",
   "layout": {
@@ -22,6 +24,14 @@
   },
   "categoryArchive": {
     "title": "カテゴリー",
+    "subtitle": "お求めの投稿が見つかりますように"
+  },
+  "tags": {
+    "title": "タグ",
+    "subtitle": "関連するキーワードで絞り込みましょう"
+  },
+  "tagArchive": {
+    "title": "タグ",
     "subtitle": "お求めの投稿が見つかりますように"
   },
   "allposts": {

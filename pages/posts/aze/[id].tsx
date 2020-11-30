@@ -6,8 +6,10 @@ import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp} from '../../../components';
+import {ContentIndex, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp, TagArea} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
+import { useRouter } from 'next/router';
+import { getTagsWp } from '../../../lib/tags';
 
 // postの中のcssはglobal.cssに記載
 
@@ -25,19 +27,23 @@ export const getStaticProps = async ({params}) => {
   const postData = await wpGetPostDataById('az', params.id);
   const categories = await getCategoriesWp();
   const randomPostData = await getRandomPostData();
+  const tags = await getTagsWp();
   return {
     props: {
       postData,
       categories,
       randomPostData,
+      tags
     }
   }
 }
 
-const Post = ({postData, categories, randomPostData}) => {
+const Post = ({postData, categories, randomPostData, tags}) => {
+  const router = useRouter();
   const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
   const categoriesArray = categories[langTheme.langName];
+  const tagsArray = tags[langTheme.langName];
   useEffect(() => {
     hljs.initHighlighting();
 
@@ -108,7 +114,6 @@ const Post = ({postData, categories, randomPostData}) => {
 
 
   return(
-    <Layout title={postData.title.rendered} image={postData.acf.eyecatch}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title.rendered}</h1>
@@ -128,7 +133,7 @@ const Post = ({postData, categories, randomPostData}) => {
           <img src={postData.acf.eyecatch} alt=""/>
         </div>
       </Container>
-      <div id="post-content">
+      <div id="post-content" lang="az">
         <div className="post-container">
           <div
           id="content"
@@ -161,6 +166,11 @@ const Post = ({postData, categories, randomPostData}) => {
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
         <CategoryAreaWp categories={categoriesArray} />
+        <Title
+          title={lang(langTheme.langName).categories.title}
+          subtitle={lang(langTheme.langName).categories.subtitle}
+        />
+        <TagArea tags={tagsArray} />
         <div className="module-spacer--medium"></div>
         <Button text={lang(langTheme.langName).buttonText.toTop} path="/" />
         <div className="module-spacer--medium"></div>

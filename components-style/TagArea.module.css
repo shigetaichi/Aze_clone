@@ -1,0 +1,28 @@
+.tags_wrapper{
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+@media screen and (max-width: 1024px){
+  .tags_wrapper{
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px){
+  .tags_wrapper{
+    width: 92%;
+  }
+}
+.eachTag {
+  display: inline-block;
+  font-family: serif;
+  padding: 5px 10px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  cursor: pointer;
+}
