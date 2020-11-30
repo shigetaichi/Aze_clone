@@ -114,7 +114,6 @@ const Post = ({postData, categories, randomPostData, tags}) => {
 
 
   return(
-    <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
         <h1 className="post-title">{postData.title.rendered}</h1>
