@@ -54,7 +54,7 @@ const Tag = ({postsFilteredByTag, tagNameArray, categories, tags}) => {
     const title = postData.title.rendered;
     const eyecatch = postData.acf.eyecatch;
     const description = postData.content.rendered;
-    const tags = postData.tags;
+    const tags = postData.tag_name;
     return {id, title, eyecatch, description, tags};
   });
   const tagName = tagNameArray[langTheme.langName];
