@@ -108,7 +108,7 @@ export const getRandomPostData =  async () => {
 }
 
 export const wpGetPostsSortedByLang = async(lang: string) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
   const data = await res.json();
   const postData = data.map(eachData => {
     const id = eachData.id;
