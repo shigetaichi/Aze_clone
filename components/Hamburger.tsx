@@ -61,6 +61,8 @@ const Hamburger = () => {
                   <li>SNSのシェアボタンの作成</li>
                   <li>各投稿ページに前回の記事と次の記事へのリンク</li>
                   <li>投稿サムネイルにタグを表示</li>
+				  <li>contactページの作成</li>
+				  <li>言語選択部分のdark mode時のstyle調整</li>
                 </ul>
               </div>
             </div>
