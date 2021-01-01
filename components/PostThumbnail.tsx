@@ -44,8 +44,8 @@ const PostThumbnail = (props) => {
               {props.title}
             </Typography>
             <div className={styles.tagArea}>
-              {tagsArray && tagsArray.map((tag) => (
-                <Link href={`/tags/${tag.id}`}>
+              {tagsArray && tagsArray.map((tag, i) => (
+                <Link key={i} href={`/tags/${tag.id}`}>
                   <div className={styles.eachTag}>{tag.value}</div>
                 </Link>
               ))}
