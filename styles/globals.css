@@ -159,6 +159,35 @@ code{
   }
 }
 
+.prev-and-next{
+  display: flex;
+  justify-content: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1024px){
+  .prev-and-next{
+    width: 92%;
+    max-width: unset;
+  }
+}
+@media screen and (max-width: 480px){
+  .prev-and-next{
+    flex-direction: column;
+  }
+}
+.prev-flag, .next-flag{
+  display: none;
+  font-family: tryst, serif;
+  text-align: center;
+  font-size: 14px;
+}
+@media screen and (max-width: 480px){
+  .prev-flag, .next-flag{
+    display: block;
+  }
+}
+
 #header-logo{
   display: block;
   width: 50%;

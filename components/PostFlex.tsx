@@ -68,7 +68,7 @@ const PostFlex = (props: Props) => {
           //Generating posts list
           if(isPaginate){
             if(slicedThumbnailDataArray.length === 0){
-              return <p className={styles.post_flex_no_posts}>現在投稿がありません</p>
+              return <p className={styles.post_flex_no_posts}>{lang(langTheme.langName).nopost.now}</p>
             }else{
               return(
                 <div className={styles.post_flex}>

@@ -148,10 +148,39 @@ export const wpGetAllPostIds = async () => {
   return allPostIds;
 }
 
-export const wpGetPostDataById = async(lang, id) => {
+export const wpGetPostDataById = async(lang: string, id: number) => {
   const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
   const data = await res.json();
   return data;
+}
+
+export const wpNextAndPrevious = async(lang: string, id: number) => {
+  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
+  const data = await res.json();
+  return data;
+}
+
+function necessaryDataSelect(data: any){
+  return {
+    id: data.id,
+    title: data.title.rendered,
+    eyecatch: data.acf.eyecatch,
+    description: data.content,
+    tags: data.tags,
+  }
+}
+export const wpGenerateNextAndPrevArray = async(lang: string, id: number) => {
+  const thisPost = await wpNextAndPrevious(lang, id);
+  let nextAndPrevArray: Array<any> = [];
+  if(thisPost.prev){
+    const data1 = await wpGetPostDataById(lang, thisPost.prev.id);
+    nextAndPrevArray.push(necessaryDataSelect(data1));
+  }
+  if(thisPost.next){
+    const data2 = await wpGetPostDataById(lang, thisPost.next.id);
+    nextAndPrevArray.push(necessaryDataSelect(data2));
+  }
+  return nextAndPrevArray;
 }
 
 export const sha256 = async(text) => {

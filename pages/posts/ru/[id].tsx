@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
-import { getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, sha256 } from '../../../lib/post';
+import { getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, wpGenerateNextAndPrevArray, sha256 } from '../../../lib/post';
 import { getCategoriesWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
@@ -25,21 +25,21 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await wpGetPostDataById('az', params.id);
+  const postData = await wpGetPostDataById('ru', params.id);
   const categories = await getCategoriesWp();
-  const randomPostData = await getRandomPostData();
+  const nextAndPrev = await wpGenerateNextAndPrevArray('ru', params.id);
   const tags = await getTagsWp();
   return {
     props: {
       postData,
       categories,
-      randomPostData,
+      nextAndPrev,
       tags
     }
   }
 }
 
-const Post = ({postData, categories, randomPostData, tags}) => {
+const Post = ({postData, categories, nextAndPrev, tags}) => {
   const router = useRouter();
   const langTheme = useLangContext();
   const [indexList, setIndexList] = useState([]);
@@ -150,6 +150,28 @@ const Post = ({postData, categories, randomPostData, tags}) => {
       </div>
       <div className="module-spacer--medium"></div>
       <Title title={lang(langTheme.langName).nextPrev.title} subtitle={lang(langTheme.langName).nextPrev.subtitle}/>
+      <div className="prev-and-next">
+        <p className="prev-flag">前の記事</p>
+        {nextAndPrev[0] && (
+          <PostThumbnail
+            id={nextAndPrev[0].id}
+            title={nextAndPrev[0].title}
+            image={nextAndPrev[0].eyecatch}
+            description={nextAndPrev[0].description}
+            tags={nextAndPrev[0].tags}
+          />
+        )}
+        <p className="next-flag">次の記事</p>
+        {nextAndPrev[1] && (
+          <PostThumbnail
+            id={nextAndPrev[1].id}
+            title={nextAndPrev[1].title}
+            image={nextAndPrev[1].eyecatch}
+            description={nextAndPrev[1].description}
+            tags={nextAndPrev[1].tags}
+          />
+        )}
+      </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <Title title={lang(langTheme.langName).recommendation.title} subtitle={lang(langTheme.langName).recommendation.subtitle}/>
