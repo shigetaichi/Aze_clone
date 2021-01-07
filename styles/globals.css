@@ -55,6 +55,7 @@ code{
   width: 92%;
   max-width: 600px;
   margin: 0 auto;
+  height: auto;
 }
 #post-content a{
   color: #2200c1;
@@ -132,7 +133,6 @@ code{
 }
 .post-eyecatch img{
   width: 100%;
-  max-height: 400px;
   display: block;
   margin: 0 auto;
   max-width: 800px;
