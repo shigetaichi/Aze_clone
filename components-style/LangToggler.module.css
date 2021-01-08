@@ -89,11 +89,22 @@
 }
 
 .langInputOptions{
+  display: block;
   font-family: Times, tryst, serif !important;
   font-size: 20px !important;
-  margin-top: 20px !important;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 0px;
+  border-left: 1px solid #FF0202;
+  border-top: 1px solid #0097C4;
+  border-right: 1px solid #FF0202;
+  border-bottom: 1px solid #03AE66;
+  background-color: rgba(255,255,255, 0.3);
 }
 .langInputOptionsDark{
+  color: white;
+}
+.langInputOptionsDark option{
   color: white;
 }
 

@@ -5,7 +5,7 @@ import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, Slick, PostFlex, Button, CategoryArea, Hamburger, LangToggler, LangToggler2, CategoryAreaWp, TagArea } from '../components';
+import { Title, PostFlex, Button, LangToggler3, CategoryAreaWp, TagArea } from '../components';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import { getCategoriesWp } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
@@ -72,7 +72,7 @@ const Home = ({allPostData, categories, tags}) => {
             {lang(langTheme.langName).top.description.map((p, i) => {
               return (<p key={i}>{p}</p>)
             })}
-            <LangToggler2/>
+            <LangToggler3/>
           </div>
         </Container>
         <Title
