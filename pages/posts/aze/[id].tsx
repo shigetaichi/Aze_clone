@@ -190,8 +190,8 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
         />
         <CategoryAreaWp categories={categoriesArray} />
         <Title
-          title={lang(langTheme.langName).categories.title}
-          subtitle={lang(langTheme.langName).categories.subtitle}
+          title={lang(langTheme.langName).tags.title}
+          subtitle={lang(langTheme.langName).tags.subtitle}
         />
         <TagArea tags={tagsArray} />
         <div className="module-spacer--medium"></div>
