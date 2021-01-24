@@ -1,3 +1,9 @@
+import { wpGetTagNamesById } from "./tags";
+import { wpGetCatNamesById } from "./category";
+
+export const microcmsBaseUrl: string = 'https://azerbaijapan.microcms.io';
+export const wpBaseUrl: string = 'https://azerbaijapan.taichi-sigma2.com';
+
 export const getSortedPostData =  async () => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
@@ -108,7 +114,7 @@ export const getRandomPostData =  async () => {
 }
 
 export const wpGetPostsSortedByLang = async(lang: string) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
   const data = await res.json();
   const postData = data.map(eachData => {
     const id = eachData.id;
@@ -149,13 +155,19 @@ export const wpGetAllPostIds = async () => {
 }
 
 export const wpGetPostDataById = async(lang: string, id: number) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
   const data = await res.json();
+  data['cat_obj'] = await Promise.all(data.categories.map(each => (
+    wpGetCatNamesById(each)
+  )))
+  data['tags_obj'] = await Promise.all(data.tags.map(each => (
+    wpGetTagNamesById(each)
+  )))
   return data;
 }
 
 export const wpNextAndPrevious = async(lang: string, id: number) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
   const data = await res.json();
   return data;
 }

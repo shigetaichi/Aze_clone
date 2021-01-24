@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
-import { getAllPostIds, getPostData, getRandomPostData, wpGetAllPostIds, wpGetAllPosts, wpGetPostsSortedByLang, wpGetPostDataById, wpGenerateNextAndPrevArray ,sha256 } from '../../../lib/post';
-import { getAllCategoryData, getAllCategoryWp, getCategoriesWp } from '../../../lib/category';
+import { wpGetAllPostIds, wpGetPostDataById, wpGenerateNextAndPrevArray ,sha256 } from '../../../lib/post';
+import { getCategoriesWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, CategoryArea, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp, TagArea} from '../../../components';
+import {ContentIndex, Title, Button, PostThumbnail, PostTranslationMenu, PostCategoryAndTags, CategoryAreaWp, TagArea} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
 import { useRouter } from 'next/router';
 import { getTagsWp } from '../../../lib/tags';
@@ -111,7 +111,6 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
     return `${year} / ${month} / ${date}`;
   }
 
-
   return(
     <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
       <ContentIndex indexList={indexList}/>
@@ -129,6 +128,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
           })()}
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
+        <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
         <div className="post-eyecatch">
           <img src={postData.acf.eyecatch} alt=""/>
         </div>

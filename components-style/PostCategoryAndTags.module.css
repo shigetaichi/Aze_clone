@@ -1,0 +1,23 @@
+.cat, .tags {
+  text-align: center;
+  margin-bottom: .4rem;
+  font-family: tryst, serif;
+}
+
+@media screen and (max-width: 480px){
+  .cat, .tags{
+    text-align: left;
+  }
+}
+
+.cat .each_cat, .tags .each_tag {
+  cursor: pointer;
+  padding: 0 1rem;
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 480px){
+  .cat .each_cat, .tags .each_tag {
+    padding: 0 .2rem;
+  }
+}
