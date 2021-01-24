@@ -9,13 +9,11 @@ export const getPostsFilteredByTagAndLangWp = async(lang: string, id: number) =>
 export const getAllTagIdWp = async () => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags?_fields=id`);
   const data = await res.json();
-  const tagIds = data.map(content => {
-    return {
-      params: {
-        tag: content.id.toString()
-      }
+  const tagIds = data.map(content => ({
+    params: {
+      tag: content.id.toString()
     }
-  });
+  }));
   return tagIds;
 }
 

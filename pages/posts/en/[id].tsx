@@ -131,10 +131,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
           })()}
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
-        <PostCategoryAndTags
-          category={{id: postData.categories[0], name: postData.category_name[0]}}
-          tags={postData.tags}
-        />
+        <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
         <div className="post-eyecatch">
           <img src={postData.acf.eyecatch} alt=""/>
         </div>

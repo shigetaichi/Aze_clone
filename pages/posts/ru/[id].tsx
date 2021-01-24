@@ -6,7 +6,7 @@ import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp, TagArea} from '../../../components';
+import {ContentIndex, Title, Button, PostFlex, PostThumbnail, PostTranslationMenu, CategoryAreaWp, TagArea, PostCategoryAndTags} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
 import { useRouter } from 'next/router';
 import { getTagsWp } from '../../../lib/tags';
@@ -131,6 +131,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
           })()}
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
+        <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
         <div className="post-eyecatch">
           <img src={postData.acf.eyecatch} alt=""/>
         </div>
