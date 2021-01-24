@@ -1,3 +1,5 @@
+import { wpBaseUrl } from "./post";
+
 export const getAllCategoryData = async () => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
@@ -69,13 +71,13 @@ export const getPostsFilteredByCategory = async (id) => {
 }
 
 export const getAllCategoryWp = async (lang: string) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/categories`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories`);
   const categories = await res.json();
   return categories;
 }
 
 export const getAllCategoryIdWp = async () => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/categories?_fields=id`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories?_fields=id`);
   const data = await res.json();
   const categoryIds = data.map(content => {
     return {
@@ -88,13 +90,13 @@ export const getAllCategoryIdWp = async () => {
 }
 
 export const getCatNameByLangAndId = async (lang: string, id: number | string) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/categories/${id}`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories/${id}`);
   const data = await res.json();
   return data;
 }
 
 export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: number) => {
-  const res = await fetch(`https://azerbaijapan.taichi-sigma2.com/${lang}/wp-json/wp/v2/posts?categories=${id}`);
+  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?categories=${id}`);
   const data = await res.json();
   return data;
 }
@@ -111,4 +113,21 @@ export const getCategoriesWp = async () => {
     'ru': categoriesRu,
   }
   return categories;
+}
+
+export const wpGetCatNamesById = async(id: number) => {
+  const res = await fetch(`${wpBaseUrl}/ja/wp-json/wp/v2/categories/${id}?_fields=name`);
+  const res2 = await fetch(`${wpBaseUrl}/az/wp-json/wp/v2/categories/${id}?_fields=name`);
+  const res3 = await fetch(`${wpBaseUrl}/ru/wp-json/wp/v2/categories/${id}?_fields=name`);
+  const res4 = await fetch(`${wpBaseUrl}/en/wp-json/wp/v2/categories/${id}?_fields=name`);
+  const data = await res.json();
+  const data2 = await res2.json();
+  const data3 = await res3.json();
+  const data4 = await res4.json();
+  let cat: {[key: string]: string} = {};
+  cat['ja'] = data.name;
+  cat['aze'] = data2.name;
+  cat['ru'] = data3.name;
+  cat['en'] = data4.name;
+  return {[id]: cat};
 }

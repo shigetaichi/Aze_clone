@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Layout } from '../../../components/globals';
 import { wpGetAllPostIds, wpGetPostDataById, wpGenerateNextAndPrevArray ,sha256 } from '../../../lib/post';
-import { getCategoriesWp } from '../../../lib/category';
+import { getCategoriesWp, wpGetCatNamesById } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -9,7 +9,7 @@ import 'highlight.js/styles/atom-one-dark.css';
 import {ContentIndex, Title, Button, PostThumbnail, PostTranslationMenu, PostCategoryAndTags, CategoryAreaWp, TagArea} from '../../../components';
 import {useLangContext, lang} from '../../../context/langContext';
 import { useRouter } from 'next/router';
-import { getTagsWp } from '../../../lib/tags';
+import { getTagsWp, wpGetTagNamesById } from '../../../lib/tags';
 
 // postの中のcssはglobal.cssに記載
 
@@ -110,9 +110,6 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
     const date = beforeFormatDate.getDate();
     return `${year} / ${month} / ${date}`;
   }
-  console.log(postData);
-  
-
 
   return(
     <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
@@ -132,8 +129,9 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
         <PostCategoryAndTags
-          category={{id: postData.categories[0], name: postData.category_name[0]}}
-          tags={postData.tags}
+          // category={{id: postData.categories[0], name: postData.category_name[0]}}
+          category={postData.cat_obj}
+          tags={postData.tags_obj}
         />
         <div className="post-eyecatch">
           <img src={postData.acf.eyecatch} alt=""/>
