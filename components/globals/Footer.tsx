@@ -11,6 +11,8 @@ const Footer = () => {
   return (
     <footer className={FooterStyle}>
       <div className="module-spacer--medium"></div>
+      <a className={styles.instagram_icon} href="https://www.instagram.com/azerbaijapan/"><img src="/instagram.svg" alt="instagram icon"/></a>
+      <div className="module-spacer--extra-extra-small"></div>
       <a
         href="/"
         target="_blank"

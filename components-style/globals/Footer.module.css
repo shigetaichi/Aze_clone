@@ -15,6 +15,11 @@
   font-family: serif;
 }
 
+.footer .instagram_icon img{
+  display: block;
+  width: 2rem;
+}
+
 .dark{
   background-color: #3d3d3d;
   color: #f2f2f2;

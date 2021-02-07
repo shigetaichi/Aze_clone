@@ -44,7 +44,7 @@ const Home = ({allPostData, categories, tags}) => {
   const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
   const tagsArray = tags[langTheme.langName];
-  
+
   const thumbnailDataArray = allPostDataArray.map(post => {
     const id = post.id;
     const title = post.title;
