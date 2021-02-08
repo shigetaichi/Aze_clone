@@ -10,15 +10,11 @@ import { getTagsWp } from '../lib/tags';
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostDataJp = await wpGetPostsSortedByLang('ja');
-  const allPostDataAze = await wpGetPostsSortedByLang('az');
-  const allPostDataEn = await wpGetPostsSortedByLang('en');
-  const allPostDataRu = await wpGetPostsSortedByLang('ru');
   const allPostData = {
-    'ja': allPostDataJp,
-    'aze': allPostDataAze,
-    'en': allPostDataEn,
-    'ru': allPostDataRu,
+    'ja': await wpGetPostsSortedByLang('ja'),
+    'aze': await wpGetPostsSortedByLang('az'),
+    'en': await wpGetPostsSortedByLang('en'),
+    'ru': await wpGetPostsSortedByLang('ru'),
   }
   const categories = await getCategoriesWp();
   const tags = await getTagsWp();
@@ -37,15 +33,13 @@ const allposts = ({allPostData, categories, tags}) => {
   const allPostDataArray = allPostData[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
   const tagsArray = tags[langTheme.langName];
-  const thumbnailDataArray = allPostDataArray.map(post => {
-    return {
-      id: post.id,
-      title: post.title,
-      eyecatch: post.eyecatch,
-      description: post.description,
-      tags: post.tag_name,
-    }
-  });
+  const thumbnailDataArray = allPostDataArray.map(post => ({
+    id: post.id,
+    title: post.title,
+    eyecatch: post.eyecatch,
+    description: post.description,
+    tags: post.tag_name,
+  }));
   return (
   <Layout title={lang(langTheme.langName).layout.archives}>
     <Container maxWidth="lg">

@@ -41,14 +41,13 @@ export const getStaticProps = async ({params}) => {
 
 const Category = ({postsFilteredByCategory, catNameArray, categories, tags}) => {
   const langTheme = useLangContext();
-  const thumbnailDataArray = postsFilteredByCategory[langTheme.langName].map(postData => {
-    const id = postData.id;
-    const title = postData.title.rendered;
-    const eyecatch = postData.acf.eyecatch;
-    const description = postData.content.rendered;
-    const tags = postData.tag_name;
-    return {id, title, eyecatch, description, tags};
-  });
+  const thumbnailDataArray = postsFilteredByCategory[langTheme.langName].map(postData => ({
+    id: postData.id,
+    title: postData.title.rendered,
+    eyecatch: postData.acf.eyecatch,
+    description: postData.content.rendered,
+    tags: postData.tag_name,
+  }));
   const catName = catNameArray[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
   const tagsArray = tags[langTheme.langName];
