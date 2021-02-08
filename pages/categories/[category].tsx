@@ -1,8 +1,8 @@
 import React from 'react'
-import { getAllCategoryId, getPostsFilteredByCategory, getCatName, getAllCategoryData, getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getAllCategoryWp, getCatNameByLangAndId, getCategoriesWp } from '../../lib/category';
+import { getAllCategoryIdWp, getPostsFilteredByCategoryAndLangWp, getCatNameByLangAndId, getCategoriesWp } from '../../lib/category';
 import { Layout } from '../../components/globals';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, CategoryArea, Button, CategoryAreaWp, TagArea } from '../../components';
+import { Title, PostFlex, Button, CategoryAreaWp, TagArea } from '../../components';
 import { useLangContext, lang } from '../../context/langContext';
 import { getTagsWp } from '../../lib/tags';
 
@@ -15,26 +15,17 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postsFilteredByCategoryJp = await getPostsFilteredByCategoryAndLangWp('ja',params.category);
-  const postsFilteredByCategoryAze = await getPostsFilteredByCategoryAndLangWp('az',params.category);
-  const postsFilteredByCategoryEn = await getPostsFilteredByCategoryAndLangWp('en',params.category);
-  const postsFilteredByCategoryRu = await getPostsFilteredByCategoryAndLangWp('ru',params.category);
   const postsFilteredByCategory = {
-    'ja': postsFilteredByCategoryJp,
-    'aze': postsFilteredByCategoryAze,
-    'en': postsFilteredByCategoryEn,
-    'ru': postsFilteredByCategoryRu,
+    'ja': await getPostsFilteredByCategoryAndLangWp('ja',params.category),
+    'aze': await getPostsFilteredByCategoryAndLangWp('az',params.category),
+    'en': await getPostsFilteredByCategoryAndLangWp('en',params.category),
+    'ru': await getPostsFilteredByCategoryAndLangWp('ru',params.category),
   }
-
-  const catNameJp = await getCatNameByLangAndId('ja', params.category);
-  const catNameAze = await getCatNameByLangAndId('az', params.category);
-  const catNameEn = await getCatNameByLangAndId('en', params.category);
-  const catNameRu = await getCatNameByLangAndId('ru', params.category);
   const catNameArray = {
-    'ja': catNameJp,
-    'aze': catNameAze,
-    'en': catNameEn,
-    'ru': catNameRu,
+    'ja': await getCatNameByLangAndId('ja', params.category),
+    'aze': await getCatNameByLangAndId('az', params.category),
+    'en': await getCatNameByLangAndId('en', params.category),
+    'ru': await getCatNameByLangAndId('ru', params.category),
   }
   const categories = await getCategoriesWp();
   const tags = await getTagsWp();

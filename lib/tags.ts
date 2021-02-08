@@ -2,45 +2,37 @@ import { wpBaseUrl } from "./post";
 
 export const getPostsFilteredByTagAndLangWp = async(lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?tags=${id}`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 export const getAllTagIdWp = async () => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags?_fields=id`);
   const data = await res.json();
-  const tagIds = data.map(content => ({
+  return data.map(content => ({
     params: {
       tag: content.id.toString()
     }
   }));
-  return tagIds;
 }
 
 export const getTagNameByLangAndId = async (lang: string, id: number | string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/tags/${id}`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 export const getAllTagsWp = async (lang: string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/tags`);
-  const tags = await res.json();
-  return tags;
+  return await res.json();
 }
 
-export const getTagsWp = async () => {
-  const TagsJp = await getAllTagsWp('ja');
-  const TagsAze = await getAllTagsWp('az');
-  const TagsEn = await getAllTagsWp('en');
-  const TagsRu = await getAllTagsWp('ru');
-  return {
+export const getTagsWp = async () => (
+  {
     'ja': await getAllTagsWp('ja'),
     'aze': await getAllTagsWp('az'),
     'en': await getAllTagsWp('en'),
     'ru': await getAllTagsWp('ru'),
   }
-}
+);
 
 export const wpGetTagNamesById = async(id: number) => {
   const res = await fetch(`${wpBaseUrl}/ja/wp-json/wp/v2/tags/${id}?_fields=name`);

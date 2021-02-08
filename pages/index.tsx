@@ -16,28 +16,19 @@ const indexStyle = {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostDataJp = await wpGetPostsSortedByLang('ja');
-  const allPostDataAze = await wpGetPostsSortedByLang('az');
-  const allPostDataEn = await wpGetPostsSortedByLang('en');
-  const allPostDataRu = await wpGetPostsSortedByLang('ru');
   const allPostData = {
-    'ja': allPostDataJp,
-    'aze': allPostDataAze,
-    'en': allPostDataEn,
-    'ru': allPostDataRu,
+    'ja': await wpGetPostsSortedByLang('ja'),
+    'aze': await wpGetPostsSortedByLang('az'),
+    'en': await wpGetPostsSortedByLang('en'),
+    'ru': await wpGetPostsSortedByLang('ru'),
   }
   const categories = await getCategoriesWp();
   const tags = await getTagsWp();
-
-  const postsFilteredByTagJp = await getPostsFilteredByTagAndLangWp('ja',8);
-  const postsFilteredByTagAze = await getPostsFilteredByTagAndLangWp('az',8);
-  const postsFilteredByTagEn = await getPostsFilteredByTagAndLangWp('en',8);
-  const postsFilteredByTagRu = await getPostsFilteredByTagAndLangWp('ru',8);
   const postsFilteredByTag = {
-    'ja': postsFilteredByTagJp,
-    'aze': postsFilteredByTagAze,
-    'en': postsFilteredByTagEn,
-    'ru': postsFilteredByTagRu,
+    'ja': await getPostsFilteredByTagAndLangWp('ja',8),
+    'aze': await getPostsFilteredByTagAndLangWp('az',8),
+    'en': await getPostsFilteredByTagAndLangWp('en',8),
+    'ru': await getPostsFilteredByTagAndLangWp('ru',8),
   }
   return {
     props: {

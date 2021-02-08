@@ -59,58 +59,48 @@ export const getPostsFilteredByCategory = async (id) => {
   );
   const data = await res.json();
   const contents = data.contents;
-  const postData = contents.map(content => {
-    const id = content.id;
-    const title = content.title;
-    const eyecatch = content.eyecatch;
-    const description = content.body;
-    const tag = content.tag;
-    return {id, title, eyecatch, description, tag};
-  });
-  return postData;
+  return contents.map(content => ({
+    id: content.id,
+    title: content.title,
+    eyecatch: content.eyecatch,
+    description: content.body,
+    tag: content.tag
+  }));
 }
 
 export const getAllCategoryWp = async (lang: string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories`);
-  const categories = await res.json();
-  return categories;
+  return await res.json();
 }
 
 export const getAllCategoryIdWp = async () => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories?_fields=id`);
   const data = await res.json();
-  const categoryIds = data.map(content => {
+  return data.map(content => {
     return {
       params: {
         category: content.id.toString()
       }
     }
   });
-  return categoryIds;
 }
 
 export const getCatNameByLangAndId = async (lang: string, id: number | string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories/${id}`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?categories=${id}`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 export const getCategoriesWp = async () => {
-  const categoriesJp = await getAllCategoryWp('ja');
-  const categoriesAze = await getAllCategoryWp('az');
-  const categoriesEn = await getAllCategoryWp('en');
-  const categoriesRu = await getAllCategoryWp('ru');
   return {
-    'ja': categoriesJp,
-    'aze': categoriesAze,
-    'en': categoriesEn,
-    'ru': categoriesRu,
+    'ja': await getAllCategoryWp('ja'),
+    'aze': await getAllCategoryWp('az'),
+    'en': await getAllCategoryWp('en'),
+    'ru': await getAllCategoryWp('ru'),
   }
 }
 

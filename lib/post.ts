@@ -116,34 +116,28 @@ export const getRandomPostData =  async () => {
 export const wpGetPostsSortedByLang = async(lang: string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
   const data = await res.json();
-  const postData = data.map(eachData => {
-    const id = eachData.id;
-    const eyecatch = eachData.acf.eyecatch;
-    const title = eachData.title.rendered;
-    const publishedAt = eachData.date;
-    const updatedAt = eachData.modified;
-    const tags = eachData.tags;
-    const tag_name = eachData.tag_name;
-    const lang = eachData.meta['_locale'];
-    const content = eachData.content.rendered;
-    const category_name = eachData.category_name;
-    const category_id = eachData.categories;
-    return {id, eyecatch, title, publishedAt, updatedAt, tags, tag_name, lang, content, category_name, category_id}
-  });
-  return postData;
+  return data.map(eachData => ({
+    id: eachData.id,
+    eyecatch: eachData.acf.eyecatch,
+    title: eachData.title.rendered,
+    publishedAt: eachData.date,
+    updatedAt: eachData.modified,
+    tags: eachData.tags,
+    tag_name: eachData.tag_name,
+    lang: eachData.meta['_locale'],
+    content: eachData.content.rendered,
+    category_name: eachData.category_name,
+    category_id: eachData.categories,
+  }));
 }
 
 export const wpGetAllPosts = async () => {
-  const postArrayJp = await wpGetPostsSortedByLang('ja');
-  const postArrayAz = await wpGetPostsSortedByLang('az');
-  const postArrayEn = await wpGetPostsSortedByLang('en');
-  const postArrayRu = await wpGetPostsSortedByLang('ru');
-  return [...postArrayAz, ...postArrayEn, ...postArrayJp, ...postArrayRu];
+  return [...await wpGetPostsSortedByLang('az'), ...await wpGetPostsSortedByLang('en'), ...await wpGetPostsSortedByLang('ja'), ...await wpGetPostsSortedByLang('ru')];
 }
 
 export const wpGetAllPostIds = async () => {
   const allPostsArray = await wpGetAllPosts();
-  const allPostIds = allPostsArray.map(post => {
+  return allPostsArray.map(post => {
     const id: string = post.id.toString();
     return {
       params: {
@@ -151,7 +145,6 @@ export const wpGetAllPostIds = async () => {
       }
     };
   });
-  return allPostIds;
 }
 
 export const wpGetPostDataById = async(lang: string, id: number) => {
@@ -168,8 +161,7 @@ export const wpGetPostDataById = async(lang: string, id: number) => {
 
 export const wpNextAndPrevious = async(lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
-  const data = await res.json();
-  return data;
+  return await res.json();
 }
 
 function necessaryDataSelect(data: any){
