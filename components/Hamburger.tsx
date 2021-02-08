@@ -59,7 +59,6 @@ const Hamburger = () => {
                   <li>サイト内検索</li>
                   <li>パンクズリストを表示</li>
                   <li>SNSのシェアボタンの作成</li>
-                  <li>Headタグの言語に応じた設定変更</li>
                 </ul>
               </div>
             </div>
