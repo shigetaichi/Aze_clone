@@ -1,7 +1,7 @@
 import React from 'react'
 import {Layout} from '../../components/globals/index';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, CategoryArea, Button, CategoryAreaWp, TagArea } from '../../components';
+import { Title, PostFlex, Button, CategoryAreaWp, TagArea } from '../../components';
 import { useLangContext, lang } from '../../context/langContext';
 import { getCategoriesWp } from '../../lib/category';
 import { getPostsFilteredByTagAndLangWp, getAllTagIdWp, getTagNameByLangAndId, getTagsWp } from '../../lib/tags';
@@ -15,25 +15,17 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postsFilteredByTagJp = await getPostsFilteredByTagAndLangWp('ja',params.tag);
-  const postsFilteredByTagAze = await getPostsFilteredByTagAndLangWp('az',params.tag);
-  const postsFilteredByTagEn = await getPostsFilteredByTagAndLangWp('en',params.tag);
-  const postsFilteredByTagRu = await getPostsFilteredByTagAndLangWp('ru',params.tag);
   const postsFilteredByTag = {
-    'ja': postsFilteredByTagJp,
-    'aze': postsFilteredByTagAze,
-    'en': postsFilteredByTagEn,
-    'ru': postsFilteredByTagRu,
+    'ja': await getPostsFilteredByTagAndLangWp('ja',params.tag),
+    'aze': await getPostsFilteredByTagAndLangWp('az',params.tag),
+    'en': await getPostsFilteredByTagAndLangWp('en',params.tag),
+    'ru': await getPostsFilteredByTagAndLangWp('ru',params.tag),
   }
-  const tagNameJp = await getTagNameByLangAndId('ja', params.tag);
-  const tagNameAze = await getTagNameByLangAndId('az', params.tag);
-  const tagNameEn = await getTagNameByLangAndId('en', params.tag);
-  const tagNameRu = await getTagNameByLangAndId('ru', params.tag);
   const tagNameArray = {
-    'ja': tagNameJp,
-    'aze': tagNameAze,
-    'en': tagNameEn,
-    'ru': tagNameRu,
+    'ja': await getTagNameByLangAndId('ja', params.tag),
+    'aze': await getTagNameByLangAndId('az', params.tag),
+    'en': await getTagNameByLangAndId('en', params.tag),
+    'ru': await getTagNameByLangAndId('ru', params.tag),
   }
   const categories = await getCategoriesWp();
   const tags = await getTagsWp();
@@ -49,14 +41,13 @@ export const getStaticProps = async ({params}) => {
 
 const Tag = ({postsFilteredByTag, tagNameArray, categories, tags}) => {
   const langTheme = useLangContext();
-  const thumbnailDataArray = postsFilteredByTag[langTheme.langName].map(postData => {
-    const id = postData.id;
-    const title = postData.title.rendered;
-    const eyecatch = postData.acf.eyecatch;
-    const description = postData.content.rendered;
-    const tags = postData.tag_name;
-    return {id, title, eyecatch, description, tags};
-  });
+  const thumbnailDataArray = postsFilteredByTag[langTheme.langName].map(postData => ({
+    id: postData.id,
+    title: postData.title.rendered,
+    eyecatch: postData.acf.eyecatch,
+    description: postData.content.rendered,
+    tags: postData.tag_name
+  }));
   const tagName = tagNameArray[langTheme.langName];
   const categoriesArray = categories[langTheme.langName];
   const tagsArray = tags[langTheme.langName];

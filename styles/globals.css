@@ -57,10 +57,15 @@ code{
     width: 92%;
   }
 }
+@media screen and (max-width: 480px){
+  #post-content figure {
+    margin: 1rem 0;
+  }
+}
 
 #post-content img{
   display: block;
-  width: 92%;
+  width: 94%;
   max-width: 600px;
   margin: 0 auto;
   height: auto;

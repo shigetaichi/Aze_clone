@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import styles from '../components-style/ContentIndex.module.css';
+import { useThemeContext } from "../context/context";
+import ClassNames from 'classnames';
 
 const scrollTop = (): number => {
   return Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
 };
 
 const ContentIndex = (props) => {
+  const themeNames = useThemeContext();
   const [isTop, setIsTop] = useState<boolean>(true);
 
   const onScroll = (): void => {
@@ -50,10 +53,14 @@ const ContentIndex = (props) => {
     const coordinate = getCoords(element);
     scrollTo(coordinate.left, coordinate.top);
   }
-  
+
+  const contentIndexStyle = ClassNames(styles.content_index_aside, {
+    [styles.content_index_aside_dark]: themeNames.themeName === "dark",
+  })
+
   return (
     <React.Fragment>
-      <aside className={styles.content_index_aside} style={scrollStyle}>
+      <aside className={contentIndexStyle} style={scrollStyle}>
         <ul id="content-index-wrapper">
           <span className={styles.content_index_span}>目次 - index -</span>
           {indexList.map((index, i) => (
