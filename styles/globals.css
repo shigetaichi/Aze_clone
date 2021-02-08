@@ -57,8 +57,10 @@ code{
     width: 92%;
   }
 }
-#post-content figure {
-  margin: 1rem 0;
+@media screen and (max-width: 480px){
+  #post-content figure {
+    margin: 1rem 0;
+  }
 }
 
 #post-content img{
