@@ -88,7 +88,6 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
           title={lang(langTheme.langName).posts.title}
           subtitle={lang(langTheme.langName).posts.subtitle}
         />
-        {/* <Slick thumbnailDataArray={thumbnailDataArray} /> */}
         <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
         <div className="module-spacer--medium"></div>
         <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"} />
