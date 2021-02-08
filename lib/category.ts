@@ -106,13 +106,12 @@ export const getCategoriesWp = async () => {
   const categoriesAze = await getAllCategoryWp('az');
   const categoriesEn = await getAllCategoryWp('en');
   const categoriesRu = await getAllCategoryWp('ru');
-  const categories = {
+  return {
     'ja': categoriesJp,
     'aze': categoriesAze,
     'en': categoriesEn,
     'ru': categoriesRu,
   }
-  return categories;
 }
 
 export const wpGetCatNamesById = async(id: number) => {

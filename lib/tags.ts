@@ -34,13 +34,12 @@ export const getTagsWp = async () => {
   const TagsAze = await getAllTagsWp('az');
   const TagsEn = await getAllTagsWp('en');
   const TagsRu = await getAllTagsWp('ru');
-  const Tags = {
-    'ja': TagsJp,
-    'aze': TagsAze,
-    'en': TagsEn,
-    'ru': TagsRu,
+  return {
+    'ja': await getAllTagsWp('ja'),
+    'aze': await getAllTagsWp('az'),
+    'en': await getAllTagsWp('en'),
+    'ru': await getAllTagsWp('ru'),
   }
-  return Tags;
 }
 
 export const wpGetTagNamesById = async(id: number) => {

@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Link from 'next/link';
 import React from 'react';
 import {GetStaticProps} from 'next';
 import Container from '@material-ui/core/Container';
@@ -9,7 +7,7 @@ import { Title, PostFlex, Button, LangToggler3, CategoryAreaWp, TagArea } from '
 import { wpGetPostsSortedByLang } from '../lib/post';
 import { getCategoriesWp } from '../lib/category';
 import {useLangContext, lang} from '../context/langContext';
-import { getTagsWp } from '../lib/tags';
+import { getTagsWp, getPostsFilteredByTagAndLangWp } from '../lib/tags';
 
 const indexStyle = {
   fontFamily: 'serif',
@@ -30,35 +28,48 @@ export const getStaticProps: GetStaticProps = async () => {
   }
   const categories = await getCategoriesWp();
   const tags = await getTagsWp();
+
+  const postsFilteredByTagJp = await getPostsFilteredByTagAndLangWp('ja',8);
+  const postsFilteredByTagAze = await getPostsFilteredByTagAndLangWp('az',8);
+  const postsFilteredByTagEn = await getPostsFilteredByTagAndLangWp('en',8);
+  const postsFilteredByTagRu = await getPostsFilteredByTagAndLangWp('ru',8);
+  const postsFilteredByTag = {
+    'ja': postsFilteredByTagJp,
+    'aze': postsFilteredByTagAze,
+    'en': postsFilteredByTagEn,
+    'ru': postsFilteredByTagRu,
+  }
   return {
     props: {
       allPostData,
       categories,
-      tags
+      tags,
+      postsFilteredByTag,
     }
   }
 }
 
-const Home = ({allPostData, categories, tags}) => {
+const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
   const langTheme = useLangContext();
   const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
   const tagsArray = tags[langTheme.langName];
 
-  const thumbnailDataArray = allPostDataArray.map(post => {
-    const id = post.id;
-    const title = post.title;
-    const eyecatch = post.eyecatch;
-    const description = post.content;
-    const tags = post.tag_name;
-    return {
-      id: id,
-      title: title,
-      eyecatch: eyecatch,
-      description: description,
-      tags: tags,
-    }
-  });
+  const thumbnailDataArray = allPostDataArray.map(post => ({
+    id: post.id,
+    title: post.title,
+    eyecatch: post.eyecatch,
+    description: post.content,
+    tags: post.tag_name,
+  }));
+
+  const thumbnailDataArraySelected = postsFilteredByTag[langTheme.langName].map(postData => ({
+    id: postData.id,
+    title: postData.title.rendered,
+    eyecatch: postData.acf.eyecatch,
+    description: postData.content.rendered,
+    tags: postData.tag_name
+  }));
 
   return(
     <Layout home title={lang(langTheme.langName).layout.home}>
@@ -79,7 +90,7 @@ const Home = ({allPostData, categories, tags}) => {
           title={lang(langTheme.langName).selectedEight.title}
           subtitle={lang(langTheme.langName).selectedEight.subtitle}
         />
-        <PostFlex thumbnailDataArray={thumbnailDataArray} isPaginate={false}/>
+        <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
         <Title
@@ -87,7 +98,7 @@ const Home = ({allPostData, categories, tags}) => {
           subtitle={lang(langTheme.langName).posts.subtitle}
         />
         {/* <Slick thumbnailDataArray={thumbnailDataArray} /> */}
-        <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={false}/>
+        <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
         <div className="module-spacer--medium"></div>
         <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"} />
         <div className="module-spacer--medium"></div>
