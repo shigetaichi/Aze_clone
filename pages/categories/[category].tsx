@@ -15,20 +15,51 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postsFilteredByCategory = {
-    'ja': await getPostsFilteredByCategoryAndLangWp('ja',params.category),
-    'aze': await getPostsFilteredByCategoryAndLangWp('az',params.category),
-    'en': await getPostsFilteredByCategoryAndLangWp('en',params.category),
-    'ru': await getPostsFilteredByCategoryAndLangWp('ru',params.category),
-  }
-  const catNameArray = {
-    'ja': await getCatNameByLangAndId('ja', params.category),
-    'aze': await getCatNameByLangAndId('az', params.category),
-    'en': await getCatNameByLangAndId('en', params.category),
-    'ru': await getCatNameByLangAndId('ru', params.category),
-  }
-  const categories = await getCategoriesWp();
-  const tags = await getTagsWp();
+  let postsFilteredByCategory: {[key: string]: Array<any>}, catNameArray: {[key: string]: any}, categories, tags;
+  postsFilteredByCategory = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  };
+  catNameArray = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  };
+  await Promise.all([
+    (async () => {
+      postsFilteredByCategory.ja = await getPostsFilteredByCategoryAndLangWp('ja',params.category);
+    })(),
+    (async () => {
+      postsFilteredByCategory.aze = await getPostsFilteredByCategoryAndLangWp('az',params.category);
+    })(),
+    (async () => {
+      postsFilteredByCategory.en = await getPostsFilteredByCategoryAndLangWp('en',params.category);
+    })(),
+    (async () => {
+      postsFilteredByCategory.ru = await getPostsFilteredByCategoryAndLangWp('ru',params.category);
+    })(),
+    (async () => {
+      catNameArray.ja = await getCatNameByLangAndId('ja',params.category);
+    })(),
+    (async () => {
+      catNameArray.aze = await getCatNameByLangAndId('az',params.category);
+    })(),
+    (async () => {
+      catNameArray.en = await getCatNameByLangAndId('en',params.category);
+    })(),
+    (async () => {
+      catNameArray.ru = await getCatNameByLangAndId('ru',params.category);
+    })(),
+    (async () => {
+      categories = await getCategoriesWp();
+    })(),
+    (async () => {
+      tags = await getTagsWp();
+    })(),
+  ]);
   return {
     props: {
       postsFilteredByCategory,

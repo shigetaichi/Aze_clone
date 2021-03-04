@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import React from 'react';
-import {GetStaticProps} from 'next';
+import { GetStaticProps } from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from '../components/globals/Layout';
-import { Title, PostFlex, Button, LangToggler3, CategoryAreaWp, TagArea } from '../components';
+import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from '../components';
 import { wpGetPostsSortedByLang } from '../lib/post';
 import { getCategoriesWp } from '../lib/category';
-import {useLangContext, lang} from '../context/langContext';
-import { getTagsWp, getPostsFilteredByTagAndLangWp } from '../lib/tags';
+import { lang, useLangContext } from '../context/langContext';
+import { getPostsFilteredByTagAndLangWp, getTagsWp } from '../lib/tags';
 
 const indexStyle = {
   fontFamily: 'serif',
@@ -16,20 +16,51 @@ const indexStyle = {
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  const allPostData = {
-    'ja': await wpGetPostsSortedByLang('ja'),
-    'aze': await wpGetPostsSortedByLang('az'),
-    'en': await wpGetPostsSortedByLang('en'),
-    'ru': await wpGetPostsSortedByLang('ru'),
+  let allPostData: { [key: string]: Array<any> }, categories, tags, postsFilteredByTag;
+  allPostData = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
   }
-  const categories = await getCategoriesWp();
-  const tags = await getTagsWp();
-  const postsFilteredByTag = {
-    'ja': await getPostsFilteredByTagAndLangWp('ja',8),
-    'aze': await getPostsFilteredByTagAndLangWp('az',8),
-    'en': await getPostsFilteredByTagAndLangWp('en',8),
-    'ru': await getPostsFilteredByTagAndLangWp('ru',8),
+  postsFilteredByTag = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
   }
+  await Promise.all([
+    (async () => {
+      allPostData.ja = await wpGetPostsSortedByLang('ja')
+    })(),
+    (async () => {
+      allPostData.aze = await wpGetPostsSortedByLang('az')
+    })(),
+    (async () => {
+      allPostData.en = await wpGetPostsSortedByLang('en')
+    })(),
+    (async () => {
+      allPostData.ru = await wpGetPostsSortedByLang('ru')
+    })(),
+    (async () => {
+      categories = await getCategoriesWp();
+    })(),
+    (async () => {
+      tags = await getTagsWp();
+    })(),
+    (async () => {
+      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', 8);
+    })(),
+    (async () => {
+      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', 8);
+    })(),
+    (async () => {
+      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', 8);
+    })(),
+    (async () => {
+      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', 8);
+    })(),
+  ]);
   return {
     props: {
       allPostData,
@@ -45,7 +76,7 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
   const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
   const tagsArray = tags[langTheme.langName];
-
+  
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,
     title: post.title,
@@ -53,7 +84,7 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
     description: post.content,
     tags: post.tag_name,
   }));
-
+  
   const thumbnailDataArraySelected = postsFilteredByTag[langTheme.langName].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
@@ -61,8 +92,8 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
     description: postData.content.rendered,
     tags: postData.tag_name
   }));
-
-  return(
+  
+  return (
     <Layout home title={lang(langTheme.langName).layout.home}>
       <Head>
         <meta property="og:type" content="website"/>
@@ -90,7 +121,7 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
         />
         <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
         <div className="module-spacer--medium"></div>
-        <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"} />
+        <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"}/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
@@ -98,12 +129,12 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        <CategoryAreaWp categories={categoriesArray} />
+        <CategoryAreaWp categories={categoriesArray}/>
         <Title
           title={lang(langTheme.langName).tags.title}
           subtitle={lang(langTheme.langName).tags.subtitle}
         />
-        <TagArea tags={tagsArray} />
+        <TagArea tags={tagsArray}/>
       </Container>
     </Layout>
   )

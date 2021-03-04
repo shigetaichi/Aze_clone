@@ -14,7 +14,7 @@ export const getSortedPostData =  async () => {
   );
   const data = await res.json();
   const contents = data.contents;
-  const postData = contents.map(content => {
+  return contents.map(content => {
     const id = content.id;
     const title = content.title;
     const eyecatch = content.eyecatch;
@@ -23,8 +23,7 @@ export const getSortedPostData =  async () => {
     const updatedAt = content.updatedAt;
     const tag = content.tag;
     return {id, title, eyecatch, description, publishedAt, updatedAt, tag};
-  })
-  return postData;
+  });
 }
 
 export const getAllPostIds = async() => {
@@ -109,8 +108,7 @@ export const getRandomPostData =  async () => {
   })
   const postDataLength = postData.length;
   const randomIndex = Math.floor(Math.random() * postDataLength);
-  const randomPostData = postData[randomIndex];
-  return randomPostData;
+  return postData[randomIndex];
 }
 
 export const wpGetPostsSortedByLang = async(lang: string) => {

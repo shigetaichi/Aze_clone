@@ -25,10 +25,21 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await wpGetPostDataById('ru', params.id);
-  const categories = await getCategoriesWp();
-  const nextAndPrev = await wpGenerateNextAndPrevArray('ru', params.id);
-  const tags = await getTagsWp();
+  let postData, nextAndPrev, categories, tags;
+  await Promise.all([
+    (async () => {
+      postData = await wpGetPostDataById('ru', params.id);
+    })(),
+    (async () => {
+      nextAndPrev = await wpGenerateNextAndPrevArray('ru', params.id);
+    })(),
+    (async () => {
+      categories = await getCategoriesWp();
+    })(),
+    (async () => {
+      tags = await getTagsWp();
+    })(),
+  ]);
   return {
     props: {
       postData,

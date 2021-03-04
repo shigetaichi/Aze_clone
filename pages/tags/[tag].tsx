@@ -15,20 +15,51 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postsFilteredByTag = {
-    'ja': await getPostsFilteredByTagAndLangWp('ja',params.tag),
-    'aze': await getPostsFilteredByTagAndLangWp('az',params.tag),
-    'en': await getPostsFilteredByTagAndLangWp('en',params.tag),
-    'ru': await getPostsFilteredByTagAndLangWp('ru',params.tag),
+  let postsFilteredByTag: {[key: string]: Array<any>}, tagNameArray: {[key: string]: any}, categories, tags;
+  postsFilteredByTag = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
   }
-  const tagNameArray = {
-    'ja': await getTagNameByLangAndId('ja', params.tag),
-    'aze': await getTagNameByLangAndId('az', params.tag),
-    'en': await getTagNameByLangAndId('en', params.tag),
-    'ru': await getTagNameByLangAndId('ru', params.tag),
+  tagNameArray = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
   }
-  const categories = await getCategoriesWp();
-  const tags = await getTagsWp();
+  await Promise.all([
+    (async () => {
+      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', params.tag);
+    })(),
+    (async () => {
+      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', params.tag);
+    })(),
+    (async () => {
+      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', params.tag);
+    })(),
+    (async () => {
+      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', params.tag);
+    })(),
+    (async () => {
+      tagNameArray.ja = await getTagNameByLangAndId('ja', params.tag);
+    })(),
+    (async () => {
+      tagNameArray.aze = await getTagNameByLangAndId('az', params.tag);
+    })(),
+    (async () => {
+      tagNameArray.en = await getTagNameByLangAndId('en', params.tag);
+    })(),
+    (async () => {
+      tagNameArray.ru = await getTagNameByLangAndId('ru', params.tag);
+    })(),
+    (async () => {
+      categories = await getCategoriesWp();
+    })(),
+    (async () => {
+      tags = await getTagsWp();
+    })(),
+  ]);
   return {
     props: {
       postsFilteredByTag,
