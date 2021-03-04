@@ -90,7 +90,7 @@ export const getCatNameByLangAndId = async (lang: string, id: number | string) =
   return await res.json();
 }
 
-export const getPostsFilteredByCategoryAndLangWp = async(lang: string, id: number) => {
+export const getPostsFilteredByCategoryAndLangWp = async (lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?categories=${id}`);
   return await res.json();
 }
@@ -104,7 +104,7 @@ export const getCategoriesWp = async () => {
   }
 }
 
-export const wpGetCatNamesById = async(id: number) => {
+export const wpGetCatNamesById = async (id: number) => {
   const res = await fetch(`${wpBaseUrl}/ja/wp-json/wp/v2/categories/${id}?_fields=name`);
   const res2 = await fetch(`${wpBaseUrl}/az/wp-json/wp/v2/categories/${id}?_fields=name`);
   const res3 = await fetch(`${wpBaseUrl}/ru/wp-json/wp/v2/categories/${id}?_fields=name`);
@@ -113,7 +113,7 @@ export const wpGetCatNamesById = async(id: number) => {
   const data2 = await res2.json();
   const data3 = await res3.json();
   const data4 = await res4.json();
-  let cat: {[key: string]: string} = {};
+  let cat: { [key: string]: string } = {};
   cat['ja'] = data.name;
   cat['aze'] = data2.name;
   cat['ru'] = data3.name;

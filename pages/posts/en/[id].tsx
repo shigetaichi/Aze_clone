@@ -1,13 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '../../../components/globals';
-import { wpGetAllPostIds, wpGetPostDataById, wpGenerateNextAndPrevArray, sha256 } from '../../../lib/post';
+import { sha256, wpGenerateNextAndPrevArray, wpGetAllPostIds, wpGetPostDataById } from '../../../lib/post';
 import { getCategoriesWp } from '../../../lib/category';
 import Container from '@material-ui/core/Container';
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
-import {ContentIndex, Title, Button, PostThumbnail, PostTranslationMenu, PostCategoryAndTags, CategoryAreaWp, TagArea} from '../../../components';
-import {useLangContext, lang} from '../../../context/langContext';
+import {
+  Button,
+  CategoryAreaWp,
+  ContentIndex,
+  PostCategoryAndTags,
+  PostThumbnail,
+  PostTranslationMenu,
+  TagArea,
+  Title
+} from '../../../components';
+import { lang, useLangContext } from '../../../context/langContext';
 import { useRouter } from 'next/router';
 import { getTagsWp } from '../../../lib/tags';
 
@@ -25,10 +34,21 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  const postData = await wpGetPostDataById('en', params.id);
-  const categories = await getCategoriesWp();
-  const nextAndPrev = await wpGenerateNextAndPrevArray('en', params.id);
-  const tags = await getTagsWp();
+  let postData, nextAndPrev, categories, tags;
+  await Promise.all([
+    (async () => {
+      postData = await wpGetPostDataById('en', params.id);
+    })(),
+    (async () => {
+      nextAndPrev = await wpGenerateNextAndPrevArray('en', params.id);
+    })(),
+    (async () => {
+      categories = await getCategoriesWp();
+    })(),
+    (async () => {
+      tags = await getTagsWp();
+    })(),
+  ]);
   return {
     props: {
       postData,
@@ -47,7 +67,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
   const tagsArray = tags[langTheme.langName];
   useEffect(() => {
     hljs.initHighlighting();
-
+    
     const content = document.getElementById('content');
     const contentNodeList = content.querySelectorAll('h2, h3');
     let indexListArray = [];
@@ -58,7 +78,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
       });
     });
     setIndexList(indexListArray);
-
+    
     // 今回の交差を監視する要素contentNodeList
     const options = {
       root: null, // 今回はビューポートをルート要素とする
@@ -70,7 +90,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
     contentNodeList.forEach(node => {
       observer.observe(node);
     });
-
+    
     /**
      * 交差したときに呼び出す関数
      * @param entries
@@ -83,7 +103,7 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
         }
       });
     }
-
+    
     /**
      * 目次の色を変える関数
      * @param element
@@ -99,12 +119,12 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
       const newActiveIndex = document.querySelector(
         `a[href="#${element.id}"]`
       );
-      if(newActiveIndex){
+      if (newActiveIndex) {
         newActiveIndex.classList.add("active");
       }
     }
   }, []);
-
+  
   const formatDate = (data) => {
     const beforeFormatDate = new Date(data);
     const year = beforeFormatDate.getFullYear();
@@ -112,9 +132,9 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
     const date = beforeFormatDate.getDate();
     return `${year} / ${month} / ${date}`;
   }
-
-
-  return(
+  
+  
+  return (
     <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
@@ -123,9 +143,9 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
           <br className="on480"></br>
           <span className="off480inline">　</span>
           {(() => {
-            if(formatDate(postData.date) === formatDate(postData.modified)){
+            if (formatDate(postData.date) === formatDate(postData.modified)) {
               return;
-            }else{
+            } else {
               return (`${lang(langTheme.langName).post.updatedAt} ${formatDate(postData.modified)}`);
             }
           })()}
@@ -139,10 +159,10 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
       <div id="post-content" lang="en">
         <div className="post-container">
           <div
-          id="content"
-          dangerouslySetInnerHTML={{
-            __html: postData.content.rendered
-          }}
+            id="content"
+            dangerouslySetInnerHTML={{
+              __html: postData.content.rendered
+            }}
           ></div>
           <div className="thanks-reading">
             <p>{lang(langTheme.langName).post.thanks}</p>
@@ -175,13 +195,14 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
       </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
-      <Title title={lang(langTheme.langName).recommendation.title} subtitle={lang(langTheme.langName).recommendation.subtitle}/>
+      <Title title={lang(langTheme.langName).recommendation.title}
+             subtitle={lang(langTheme.langName).recommendation.subtitle}/>
       <div style={{display: 'flex', justifyContent: 'center',}}>
         {/* <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} /> */}
       </div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
-      <Button text={lang(langTheme.langName).buttonText.toArchive} path="/allposts" />
+      <Button text={lang(langTheme.langName).buttonText.toArchive} path="/allposts"/>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
       <div className="module-spacer--medium"></div>
@@ -191,21 +212,20 @@ const Post = ({postData, categories, nextAndPrev, tags}) => {
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
         {/* <CategoryArea categories={categories} /> */}
-        <CategoryAreaWp categories={categoriesArray} />
+        <CategoryAreaWp categories={categoriesArray}/>
         <Title
           title={lang(langTheme.langName).tags.title}
           subtitle={lang(langTheme.langName).tags.subtitle}
         />
-        <TagArea tags={tagsArray} />
+        <TagArea tags={tagsArray}/>
         <div className="module-spacer--medium"></div>
-        <Button text={lang(langTheme.langName).buttonText.toTop} path="/" />
+        <Button text={lang(langTheme.langName).buttonText.toTop} path="/"/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
       </Container>
     </Layout>
   )
 }
-
 
 
 export default Post;
