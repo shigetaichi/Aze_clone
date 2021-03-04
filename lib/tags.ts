@@ -1,6 +1,6 @@
 import { wpBaseUrl } from "./post";
 
-export const getPostsFilteredByTagAndLangWp = async(lang: string, id: number) => {
+export const getPostsFilteredByTagAndLangWp = async (lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?tags=${id}`);
   return await res.json();
 }
@@ -34,7 +34,7 @@ export const getTagsWp = async () => (
   }
 );
 
-export const wpGetTagNamesById = async(id: number) => {
+export const wpGetTagNamesById = async (id: number) => {
   const res = await fetch(`${wpBaseUrl}/ja/wp-json/wp/v2/tags/${id}?_fields=name`);
   const res2 = await fetch(`${wpBaseUrl}/az/wp-json/wp/v2/tags/${id}?_fields=name`);
   const res3 = await fetch(`${wpBaseUrl}/ru/wp-json/wp/v2/tags/${id}?_fields=name`);
@@ -43,7 +43,7 @@ export const wpGetTagNamesById = async(id: number) => {
   const data2 = await res2.json();
   const data3 = await res3.json();
   const data4 = await res4.json();
-  let tags: {[key: string]: string} = {};
+  let tags: { [key: string]: string } = {};
   tags['ja'] = data.name;
   tags['aze'] = data2.name;
   tags['ru'] = data3.name;

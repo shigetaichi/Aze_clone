@@ -4,7 +4,7 @@ import { wpGetCatNamesById } from "./category";
 export const microcmsBaseUrl: string = 'https://azerbaijapan.microcms.io';
 export const wpBaseUrl: string = 'https://azerbaijapan.taichi-sigma2.com';
 
-export const getSortedPostData =  async () => {
+export const getSortedPostData = async () => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
   };
@@ -26,7 +26,7 @@ export const getSortedPostData =  async () => {
   });
 }
 
-export const getAllPostIds = async() => {
+export const getAllPostIds = async () => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
   };
@@ -36,7 +36,7 @@ export const getAllPostIds = async() => {
   );
   const data = await res.json();
   const contents = data.contents;
-
+  
   //ここでreturnされるのは
   // [
   //   {
@@ -60,7 +60,7 @@ export const getAllPostIds = async() => {
   });
 }
 
-export const getPostData = async(slug) => {
+export const getPostData = async (slug) => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
   };
@@ -86,7 +86,7 @@ export const getPostData = async(slug) => {
   }
 }
 
-export const getRandomPostData =  async () => {
+export const getRandomPostData = async () => {
   const key = {
     headers: {'X-API-KEY': process.env.X_API_KEY},
   };
@@ -111,7 +111,7 @@ export const getRandomPostData =  async () => {
   return postData[randomIndex];
 }
 
-export const wpGetPostsSortedByLang = async(lang: string) => {
+export const wpGetPostsSortedByLang = async (lang: string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
   const data = await res.json();
   return data.map(eachData => ({
@@ -145,7 +145,7 @@ export const wpGetAllPostIds = async () => {
   });
 }
 
-export const wpGetPostDataById = async(lang: string, id: number) => {
+export const wpGetPostDataById = async (lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
   const data = await res.json();
   data['cat_obj'] = await Promise.all(data.categories.map(each => (
@@ -157,12 +157,12 @@ export const wpGetPostDataById = async(lang: string, id: number) => {
   return data;
 }
 
-export const wpNextAndPrevious = async(lang: string, id: number) => {
+export const wpNextAndPrevious = async (lang: string, id: number) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
   return await res.json();
 }
 
-function necessaryDataSelect(data: any){
+function necessaryDataSelect(data: any) {
   return {
     id: data.id,
     title: data.title.rendered,
@@ -171,22 +171,23 @@ function necessaryDataSelect(data: any){
     tags: data.tags,
   }
 }
-export const wpGenerateNextAndPrevArray = async(lang: string, id: number) => {
+
+export const wpGenerateNextAndPrevArray = async (lang: string, id: number) => {
   const thisPost = await wpNextAndPrevious(lang, id);
   let nextAndPrevArray: Array<any> = [];
-  if(thisPost.prev){
+  if (thisPost.prev) {
     const data1 = await wpGetPostDataById(lang, thisPost.prev.id);
     nextAndPrevArray.push(necessaryDataSelect(data1));
   }
-  if(thisPost.next){
+  if (thisPost.next) {
     const data2 = await wpGetPostDataById(lang, thisPost.next.id);
     nextAndPrevArray.push(necessaryDataSelect(data2));
   }
   return nextAndPrevArray;
 }
 
-export const sha256 = async(text) => {
-  const uint8  = new TextEncoder().encode(text)
+export const sha256 = async (text) => {
+  const uint8 = new TextEncoder().encode(text)
   const digest = await crypto.subtle.digest('SHA-256', uint8)
-  return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2,'0')).join('')
+  return Array.from(new Uint8Array(digest)).map(v => v.toString(16).padStart(2, '0')).join('')
 }

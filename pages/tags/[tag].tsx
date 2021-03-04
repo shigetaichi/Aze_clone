@@ -1,10 +1,10 @@
 import React from 'react'
-import {Layout} from '../../components/globals/index';
+import { Layout } from '../../components/globals/index';
 import Container from '@material-ui/core/Container';
-import { Title, PostFlex, Button, CategoryAreaWp, TagArea } from '../../components';
-import { useLangContext, lang } from '../../context/langContext';
+import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from '../../components';
+import { lang, useLangContext } from '../../context/langContext';
 import { getCategoriesWp } from '../../lib/category';
-import { getPostsFilteredByTagAndLangWp, getAllTagIdWp, getTagNameByLangAndId, getTagsWp } from '../../lib/tags';
+import { getAllTagIdWp, getPostsFilteredByTagAndLangWp, getTagNameByLangAndId, getTagsWp } from '../../lib/tags';
 
 export const getStaticPaths = async () => {
   const paths = await getAllTagIdWp();
@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({params}) => {
-  let postsFilteredByTag: {[key: string]: Array<any>}, tagNameArray: {[key: string]: any}, categories, tags;
+  let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
   postsFilteredByTag = {
     'ja': [],
     'aze': [],
@@ -86,7 +86,7 @@ const Tag = ({postsFilteredByTag, tagNameArray, categories, tags}) => {
   return (
     <Layout title={tagName.name + lang(langTheme.langName).categories.title}>
       <Container maxWidth="lg">
-        <Title title={tagName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle} />
+        <Title title={tagName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle}/>
         <PostFlex thumbnailDataArray={thumbnailDataArray}/>
         <div className="module-spacer--medium"></div>
         <div className="module-spacer--medium"></div>
@@ -101,12 +101,12 @@ const Tag = ({postsFilteredByTag, tagNameArray, categories, tags}) => {
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}
         />
-        <CategoryAreaWp categories={categoriesArray} />
+        <CategoryAreaWp categories={categoriesArray}/>
         <Title
           title={lang(langTheme.langName).tags.title}
           subtitle={lang(langTheme.langName).tags.subtitle}
         />
-        <TagArea tags={tagsArray} />
+        <TagArea tags={tagsArray}/>
       </Container>
     </Layout>
   )
