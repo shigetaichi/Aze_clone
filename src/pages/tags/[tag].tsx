@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout } from '../../components/globals/index';
+import { Layout } from '../../components/globals';
 import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from '../../components';
 import { lang, useLangContext } from '../../context/langContext';

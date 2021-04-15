@@ -1,9 +1,9 @@
 @font-face {
-  src: url(../public/fonts/tryst.otf);
+  src: url(public/fonts/tryst.otf);
   font-family: tryst;
 }
 @font-face {
-  src: url(../public/fonts/times.ttf);
+  src: url(public/fonts/times.ttf);
   font-family: Times;
 }
 html,

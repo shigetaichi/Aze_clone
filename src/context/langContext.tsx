@@ -36,7 +36,7 @@ const LangProvider: FC = (props: {
 }
 
 const lang = (lang) => {
-  const langJsonData = require(`../lang/${lang}/common.json`);
+  const langJsonData = require(`./lang/${lang}/common.json`);
   return langJsonData;
 }
 

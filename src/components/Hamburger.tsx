@@ -4,7 +4,7 @@ import Toggler from './Toggler';
 import {Transition} from 'react-transition-group';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../context/context';
-import { LangToggler3 } from '.';
+import { LangToggler3 } from './index';
 
 const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);

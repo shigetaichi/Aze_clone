@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styles from '../components-style/PostFlex.module.css';
-import {PostThumbnail} from '../components';
+import {PostThumbnail} from './index';
 import ReactPaginate from 'react-paginate';
 import Router, { withRouter, useRouter } from 'next/router';
 import {lang, useLangContext} from '../context/langContext';
@@ -39,7 +39,7 @@ const PostFlex = (props: Props) => {
   }
 
   useEffect(() => { //After the component is mounted set router event handlers
-    Router.events.on('routeChangeStart', startLoading); 
+    Router.events.on('routeChangeStart', startLoading);
     Router.events.on('routeChangeComplete', stopLoading);
     setNowPath(0);
     return () => {

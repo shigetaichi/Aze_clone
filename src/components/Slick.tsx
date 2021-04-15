@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import {PostThumbnail} from '../components';
+import {PostThumbnail} from './index';
 import styles from '../components-style/Slick.module.css';
 
 const Slick = (props) => {

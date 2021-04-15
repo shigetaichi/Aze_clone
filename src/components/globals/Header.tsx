@@ -38,7 +38,7 @@ const Header = () => {
       <h1 className={styles.site_title}>
         <Link href="/">
           <a id="header-logo" style={scrollStyle} href="/">
-            {themeNames.themeName === 'dark' ? 
+            {themeNames.themeName === 'dark' ?
               <img src="/azerbaijapan-logo-dark.png" alt=""/>:
               <img src="/azerbaijapan.png" alt=""/>
             }

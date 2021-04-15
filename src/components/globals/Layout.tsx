@@ -1,12 +1,12 @@
 import React from 'react'
 import Head from "next/head"
 import Link from "next/link";
-import { Header, Footer } from ".";
+import { Header, Footer } from "./index";
 import styles from '../../components-style/globals/Layout.module.css';
 import ClassNames from 'classnames';
 import { useThemeContext } from '../../context/context';
 import { useLangContext, lang } from '../../context/langContext';
-import { LangToggler2, LangToggler } from '..';
+import { LangToggler2, LangToggler } from '../index';
 
 const Layout = (props) => {
   const {title, children } = props;
@@ -44,7 +44,7 @@ const Layout = (props) => {
         <meta name="twitter:image:src" content={image}/>
 
         <link rel="icon" href="/azerbaijapan-favicon.png" />
-        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"></link>
+        <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"/>
       </Head>
       <Header/>
       <div className={LayoutStyle}>
