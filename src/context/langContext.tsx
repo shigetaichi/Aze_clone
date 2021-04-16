@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, FC,  Dispatch, SetStateAction, ReactNode } from "react"
+import React, { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useState } from "react"
 
 export interface LangContext {
   langName: string;
@@ -36,8 +36,7 @@ const LangProvider: FC = (props: {
 }
 
 const lang = (lang) => {
-  const langJsonData = require(`./lang/${lang}/common.json`);
-  return langJsonData;
+  return require(`../lang/${lang}/common.json`);
 }
 
 export { LangProvider, langNames, useLangContext, useSetLangContext, lang };
