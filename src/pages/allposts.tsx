@@ -4,12 +4,14 @@ import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, LangToggler, PostFlex, TagArea, Title } from '../components';
 import { getCategoriesWp } from '../lib/category';
-import { wpGetPostsSortedByLang } from '../lib/post';
+import { wpBaseUrl } from '../lib/post';
 import { lang, useLangContext } from '../context/langContext';
 import { getTagsWp } from '../lib/tags';
+import { fetchWithCache } from "../lib/helpers";
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
   let allPostData: { [key: string]: Array<any> }, categories, tags;
   allPostData = {
     'ja': [],
@@ -19,16 +21,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
   await Promise.all([
     (async () => {
-      allPostData.ja = await wpGetPostsSortedByLang('ja')
+      allPostData.ja = await fetchWithCache(`${wpBaseUrl}/ja/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.aze = await wpGetPostsSortedByLang('az')
+      allPostData.aze = await fetchWithCache(`${wpBaseUrl}/az/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.en = await wpGetPostsSortedByLang('en')
+      allPostData.en = await fetchWithCache(`${wpBaseUrl}/en/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.ru = await wpGetPostsSortedByLang('ru')
+      allPostData.ru = await fetchWithCache(`${wpBaseUrl}/ru/${allPostsUrl}`)
     })(),
     (async () => {
       categories = await getCategoriesWp();
@@ -54,8 +56,8 @@ const allposts = ({allPostData, categories, tags}) => {
   const tagsArray = tags[langTheme.langName];
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,
-    title: post.title,
-    eyecatch: post.eyecatch,
+    title: post.title.rendered,
+    eyecatch: post.acf.eyecatch,
     description: post.description,
     tags: post.tag_name,
   }));
