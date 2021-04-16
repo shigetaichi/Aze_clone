@@ -1,11 +1,12 @@
 import React from 'react'
-import { getCategoriesWp, getCatNameByLangAndId, getPostsFilteredByCategoryAndLangWp } from '../../lib/category';
+import { getCatNameByLangAndId, getPostsFilteredByCategoryAndLangWp } from '../../lib/category';
 import { Layout } from 'components/globals';
 import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from 'components';
 import { lang, LangContext, useLangContext } from 'context/langContext';
-import { getTagsWp } from 'lib/tags';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { fetchWithCache } from "lib/helpers";
+import { wpBaseUrl } from "lib/post";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   let postsFilteredByCategory: { [key: string]: Array<any> }, catNameArray: { [key: string]: any }, categories, tags;
@@ -21,6 +22,18 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     'en': [],
     'ru': [],
   };
+  categories = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
+  tags = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
   await Promise.all([
     (async () => {
       postsFilteredByCategory.ja = await getPostsFilteredByCategoryAndLangWp('ja', Number(context.query.category));
@@ -47,10 +60,28 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       catNameArray.ru = await getCatNameByLangAndId('ru', Number(context.query.category));
     })(),
     (async () => {
-      categories = await getCategoriesWp();
+      categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
     })(),
     (async () => {
-      tags = await getTagsWp();
+      categories['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
     })(),
   ]);
   return {

@@ -3,10 +3,8 @@ import { GetServerSideProps } from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, LangToggler, PostFlex, TagArea, Title } from '../components';
-import { getCategoriesWp } from '../lib/category';
 import { wpBaseUrl } from '../lib/post';
 import { lang, useLangContext } from '../context/langContext';
-import { getTagsWp } from '../lib/tags';
 import { fetchWithCache } from "../lib/helpers";
 
 
@@ -14,6 +12,18 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
   let allPostData: { [key: string]: Array<any> }, categories, tags;
   allPostData = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
+  categories = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
+  tags = {
     'ja': [],
     'aze': [],
     'en': [],
@@ -33,10 +43,28 @@ export const getServerSideProps: GetServerSideProps = async () => {
       allPostData.ru = await fetchWithCache(`${wpBaseUrl}/ru/${allPostsUrl}`)
     })(),
     (async () => {
-      categories = await getCategoriesWp();
+      categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
     })(),
     (async () => {
-      tags = await getTagsWp();
+      categories['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
     })(),
   ]);
   return {

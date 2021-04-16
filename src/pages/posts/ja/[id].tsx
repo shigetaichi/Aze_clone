@@ -1,13 +1,24 @@
-import { wpGenerateNextAndPrevArray, wpGetPostDataById } from 'lib/post';
-import { getCategoriesWp } from 'lib/category';
-import { getTagsWp } from 'lib/tags';
+import { wpBaseUrl, wpGenerateNextAndPrevArray, wpGetPostDataById } from 'lib/post';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import PostPage from "components/template/PostPage/PostPage";
+import { fetchWithCache } from "lib/helpers";
 
 // postの中のcssはglobal.cssに記載
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   let postData, nextAndPrev, categories, tags;
+  categories = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
+  tags = {
+    'ja': [],
+    'aze': [],
+    'en': [],
+    'ru': [],
+  }
   await Promise.all([
     (async () => {
       postData = await wpGetPostDataById('ja', Number(context.query.id));
@@ -16,10 +27,28 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       nextAndPrev = await wpGenerateNextAndPrevArray('ja', Number(context.query.id));
     })(),
     (async () => {
-      categories = await getCategoriesWp();
+      categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
     })(),
     (async () => {
-      tags = await getTagsWp();
+      categories['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      categories['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+    })(),
+    (async () => {
+      tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/tags`)
+    })(),
+    (async () => {
+      tags['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
     })(),
   ]);
   return {
