@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, LangToggler, PostFlex, TagArea, Title } from '../components';
@@ -9,7 +9,7 @@ import { lang, useLangContext } from '../context/langContext';
 import { getTagsWp } from '../lib/tags';
 
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let allPostData: { [key: string]: Array<any> }, categories, tags;
   allPostData = {
     'ja': [],
@@ -68,12 +68,12 @@ const allposts = ({allPostData, categories, tags}) => {
           subtitle={lang(langTheme.langName).allposts.subtitle}
         />
         <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={12} isPaginate={true}/>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
       </Container>
-      <Button text={lang(langTheme.langName).buttonText.toTop} path={"/"}/>
-      <div className="module-spacer--medium"></div>
-      <div className="module-spacer--medium"></div>
+      <Button path={"/"}>{lang(langTheme.langName).buttonText.toTop}</Button>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
       <Container maxWidth="lg">
         <Title
           title={lang(langTheme.langName).categories.title}

@@ -3,7 +3,6 @@ import Link from 'next/link';
 import styles from './Button.module.scss';
 
 interface Props {
-  text: string;
   path?: string;
 }
 
@@ -27,7 +26,7 @@ const Button: FC<Props> = (props: PropsWithChildren<Props>) => {
           </defs>
           <rect x="5" y="5" rx="25" fill="none" stroke="url(#grad1)" width="266" height="50"/>
         </svg>
-        <span>{props.text}</span>
+        <span>{props.children}</span>
       </a>
     </Link>
   )

@@ -157,7 +157,7 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
       </div>
       <div className="module-spacer--medium"/>
       <div className="module-spacer--medium"/>
-      <Button text={lang(langTheme.langName).buttonText.toArchive} path="/allposts"/>
+      <Button path="/allposts">{lang(langTheme.langName).buttonText.toArchive}</Button>
       <div className="module-spacer--medium"/>
       <div className="module-spacer--medium"/>
       <div className="module-spacer--medium"/>
@@ -174,7 +174,7 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
         />
         <TagArea tags={tagsArray}/>
         <div className="module-spacer--medium"/>
-        <Button text={lang(langTheme.langName).buttonText.toTop} path="/"/>
+        <Button path="/">{lang(langTheme.langName).buttonText.toTop}</Button>
         <div className="module-spacer--medium"/>
         <div className="module-spacer--medium"/>
       </Container>

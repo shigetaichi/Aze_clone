@@ -1,25 +1,13 @@
 import React from 'react'
-import {
-  getAllCategoryIdWp,
-  getCategoriesWp,
-  getCatNameByLangAndId,
-  getPostsFilteredByCategoryAndLangWp
-} from '../../lib/category';
-import { Layout } from '../../components/globals';
+import { getCategoriesWp, getCatNameByLangAndId, getPostsFilteredByCategoryAndLangWp } from '../../lib/category';
+import { Layout } from 'components/globals';
 import Container from '@material-ui/core/Container';
-import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from '../../components';
-import { lang, useLangContext } from '../../context/langContext';
-import { getTagsWp } from '../../lib/tags';
+import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from 'components';
+import { lang, LangContext, useLangContext } from 'context/langContext';
+import { getTagsWp } from 'lib/tags';
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
-export const getStaticPaths = async () => {
-  const paths = await getAllCategoryIdWp();
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export const getStaticProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   let postsFilteredByCategory: { [key: string]: Array<any> }, catNameArray: { [key: string]: any }, categories, tags;
   postsFilteredByCategory = {
     'ja': [],
@@ -35,28 +23,28 @@ export const getStaticProps = async ({params}) => {
   };
   await Promise.all([
     (async () => {
-      postsFilteredByCategory.ja = await getPostsFilteredByCategoryAndLangWp('ja', params.category);
+      postsFilteredByCategory.ja = await getPostsFilteredByCategoryAndLangWp('ja', Number(context.query.category));
     })(),
     (async () => {
-      postsFilteredByCategory.aze = await getPostsFilteredByCategoryAndLangWp('az', params.category);
+      postsFilteredByCategory.aze = await getPostsFilteredByCategoryAndLangWp('az', Number(context.query.category));
     })(),
     (async () => {
-      postsFilteredByCategory.en = await getPostsFilteredByCategoryAndLangWp('en', params.category);
+      postsFilteredByCategory.en = await getPostsFilteredByCategoryAndLangWp('en', Number(context.query.category));
     })(),
     (async () => {
-      postsFilteredByCategory.ru = await getPostsFilteredByCategoryAndLangWp('ru', params.category);
+      postsFilteredByCategory.ru = await getPostsFilteredByCategoryAndLangWp('ru', Number(context.query.category));
     })(),
     (async () => {
-      catNameArray.ja = await getCatNameByLangAndId('ja', params.category);
+      catNameArray.ja = await getCatNameByLangAndId('ja', Number(context.query.category));
     })(),
     (async () => {
-      catNameArray.aze = await getCatNameByLangAndId('az', params.category);
+      catNameArray.aze = await getCatNameByLangAndId('az', Number(context.query.category));
     })(),
     (async () => {
-      catNameArray.en = await getCatNameByLangAndId('en', params.category);
+      catNameArray.en = await getCatNameByLangAndId('en', Number(context.query.category));
     })(),
     (async () => {
-      catNameArray.ru = await getCatNameByLangAndId('ru', params.category);
+      catNameArray.ru = await getCatNameByLangAndId('ru', Number(context.query.category));
     })(),
     (async () => {
       categories = await getCategoriesWp();
@@ -76,7 +64,7 @@ export const getStaticProps = async ({params}) => {
 }
 
 const Category = ({postsFilteredByCategory, catNameArray, categories, tags}) => {
-  const langTheme = useLangContext();
+  const langTheme: LangContext = useLangContext();
   const thumbnailDataArray = postsFilteredByCategory[langTheme.langName].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
@@ -93,14 +81,14 @@ const Category = ({postsFilteredByCategory, catNameArray, categories, tags}) => 
       <Container maxWidth="lg">
         <Title title={catName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle}/>
         <PostFlex thumbnailDataArray={thumbnailDataArray}/>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
       </Container>
-      <div className="module-spacer--medium"></div>
-      <div className="module-spacer--medium"></div>
-      <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"}/>
-      <div className="module-spacer--medium"></div>
-      <div className="module-spacer--medium"></div>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
+      <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive}</Button>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
       <Container maxWidth="lg">
         <Title
           title={lang(langTheme.langName).categories.title}

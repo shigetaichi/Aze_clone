@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import React from 'react';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Container from '@material-ui/core/Container';
-import Layout from '../components/globals/Layout';
-import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from '../components';
-import { wpGetPostsSortedByLang } from '../lib/post';
-import { getCategoriesWp } from '../lib/category';
-import { lang, useLangContext } from '../context/langContext';
-import { getPostsFilteredByTagAndLangWp, getTagsWp } from '../lib/tags';
+import Layout from 'components/globals/Layout';
+import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from 'components';
+import { wpGetPostsSortedByLang } from 'lib/post';
+import { getCategoriesWp } from 'lib/category';
+import { lang, useLangContext } from 'context/langContext';
+import { getPostsFilteredByTagAndLangWp, getTagsWp } from 'lib/tags';
 
 const indexStyle = {
   fontFamily: 'serif',
@@ -15,7 +15,7 @@ const indexStyle = {
 }
 
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   let allPostData: { [key: string]: Array<any> }, categories, tags, postsFilteredByTag;
   allPostData = {
     'ja': [],
@@ -102,9 +102,7 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
         <Container maxWidth="sm">
           <div style={indexStyle}>
             <p style={{display: "none",}}>Dear S.K.</p>
-            {lang(langTheme.langName).top.description.map((p, i) => {
-              return (<p key={i}>{p}</p>)
-            })}
+            {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
             <LangToggler3/>
           </div>
         </Container>
@@ -113,18 +111,18 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
           subtitle={lang(langTheme.langName).selectedEight.subtitle}
         />
         <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
         <Title
           title={lang(langTheme.langName).posts.title}
           subtitle={lang(langTheme.langName).posts.subtitle}
         />
         <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
-        <div className="module-spacer--medium"></div>
-        <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"}/>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"/>
+        <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
         <Title
           title={lang(langTheme.langName).categories.title}
           subtitle={lang(langTheme.langName).categories.subtitle}

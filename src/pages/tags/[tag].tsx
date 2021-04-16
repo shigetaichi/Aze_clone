@@ -4,17 +4,10 @@ import Container from '@material-ui/core/Container';
 import { Button, CategoryAreaWp, PostFlex, TagArea, Title } from '../../components';
 import { lang, useLangContext } from '../../context/langContext';
 import { getCategoriesWp } from '../../lib/category';
-import { getAllTagIdWp, getPostsFilteredByTagAndLangWp, getTagNameByLangAndId, getTagsWp } from '../../lib/tags';
+import { getPostsFilteredByTagAndLangWp, getTagNameByLangAndId, getTagsWp } from '../../lib/tags';
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
-export const getStaticPaths = async () => {
-  const paths = await getAllTagIdWp();
-  return {
-    paths,
-    fallback: false,
-  }
-}
-
-export const getStaticProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
   postsFilteredByTag = {
     'ja': [],
@@ -30,28 +23,28 @@ export const getStaticProps = async ({params}) => {
   }
   await Promise.all([
     (async () => {
-      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', params.tag);
+      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', Number(context.query.tag));
     })(),
     (async () => {
-      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', params.tag);
+      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', Number(context.query.tag));
     })(),
     (async () => {
-      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', params.tag);
+      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', Number(context.query.tag));
     })(),
     (async () => {
-      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', params.tag);
+      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', Number(context.query.tag));
     })(),
     (async () => {
-      tagNameArray.ja = await getTagNameByLangAndId('ja', params.tag);
+      tagNameArray.ja = await getTagNameByLangAndId('ja', Number(context.query.tag));
     })(),
     (async () => {
-      tagNameArray.aze = await getTagNameByLangAndId('az', params.tag);
+      tagNameArray.aze = await getTagNameByLangAndId('az', Number(context.query.tag));
     })(),
     (async () => {
-      tagNameArray.en = await getTagNameByLangAndId('en', params.tag);
+      tagNameArray.en = await getTagNameByLangAndId('en', Number(context.query.tag));
     })(),
     (async () => {
-      tagNameArray.ru = await getTagNameByLangAndId('ru', params.tag);
+      tagNameArray.ru = await getTagNameByLangAndId('ru', Number(context.query.tag));
     })(),
     (async () => {
       categories = await getCategoriesWp();
@@ -88,14 +81,14 @@ const Tag = ({postsFilteredByTag, tagNameArray, categories, tags}) => {
       <Container maxWidth="lg">
         <Title title={tagName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle}/>
         <PostFlex thumbnailDataArray={thumbnailDataArray}/>
-        <div className="module-spacer--medium"></div>
-        <div className="module-spacer--medium"></div>
+        <div className="module-spacer--medium"/>
+        <div className="module-spacer--medium"/>
       </Container>
-      <div className="module-spacer--medium"></div>
-      <div className="module-spacer--medium"></div>
-      <Button text={lang(langTheme.langName).buttonText.toArchive} path={"/allposts"}/>
-      <div className="module-spacer--medium"></div>
-      <div className="module-spacer--medium"></div>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
+      <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive}</Button>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
       <Container maxWidth="lg">
         <Title
           title={lang(langTheme.langName).categories.title}
