@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Link from "next/link";
-import { lang, useLangContext } from "../context/langContext";
-import styles from '../components-style/PostCategoryAndTags.module.css';
+import { lang, useLangContext } from "context/langContext";
+import styles from 'components-style/PostCategoryAndTags.module.css';
 
 interface Category {
   id: number;
@@ -23,7 +23,7 @@ const PostCategoryAndTags: FC<Props> = (props) => {
 
   return (
     <div className="post-cat-and-tags-wrapper">
-      {props.category.length > 0 ? (
+      {props.category.length && (
         <div className={styles.cat}>
           {lang(langTheme.langName).categories.title}：
           {props.category.map((cat, i) => (
@@ -34,10 +34,8 @@ const PostCategoryAndTags: FC<Props> = (props) => {
             </React.Fragment>
           ))}
         </div>
-      ) : (
-        <></>
       )}
-      {props.tags.length > 0 ? (
+      {props.tags.length && (
         <div className={styles.tags}>
           {lang(langTheme.langName).tags.title}：
           {props.tags.map((tag, i) => (
@@ -48,8 +46,6 @@ const PostCategoryAndTags: FC<Props> = (props) => {
             </React.Fragment>
           ))}
         </div>
-      ) : (
-        <></>
       )}
     </div>
   );
