@@ -1,13 +1,12 @@
 import Head from 'next/head'
-import React from 'react';
 import { GetServerSideProps } from 'next';
 import Container from '@material-ui/core/Container';
 import Layout from 'components/globals/Layout';
 import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
-import { lang, useLangContext } from 'context/langContext';
+import { lang, LangContext, useLangContext } from 'context/langContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
-import { fetchWithCache } from "../lib/helpers";
+import { fetchWithCache } from "lib/helpers";
 
 const indexStyle = {
   fontFamily: 'serif',
@@ -103,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
-  const langTheme = useLangContext();
+  const langTheme: LangContext = useLangContext();
   const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
   const tagsArray = tags[langTheme.langName];

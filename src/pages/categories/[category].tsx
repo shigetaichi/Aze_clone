@@ -1,4 +1,3 @@
-import React from 'react'
 import { getCatNameByLangAndId, getPostsFilteredByCategoryAndLangWp } from '../../lib/category';
 import { Layout } from 'components/globals';
 import Container from '@material-ui/core/Container';

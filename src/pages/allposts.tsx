@@ -1,4 +1,3 @@
-import React from 'react'
 import { GetServerSideProps } from 'next';
 import { Layout } from '../components/globals';
 import Container from '@material-ui/core/Container';
