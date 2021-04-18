@@ -8,6 +8,7 @@ import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
 import { langType } from "types";
 import CategoryArea from "components/molecules/CategoryArea/CategoryArea";
+import Link from "next/link";
 
 const Footer: FC = () => {
   const langTheme: LangContext = useLangContext();
@@ -82,14 +83,9 @@ const Footer: FC = () => {
         <a className={styles.instagram_icon} href="https://www.instagram.com/azerbaijapan/">
           <img src={"/instagram.svg"} alt="instagram icon"/>
         </a>
-        <div className="module-spacer--extra-extra-small"/>
-        <a
-          href="/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href={"/"}>
           © 2020 AZERBAIJAPAN
-        </a>
+        </Link>
       </footer>
     </>
   )

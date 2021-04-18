@@ -2,24 +2,19 @@
 
 .footer {
   @include u.wide_container();
+  @include u.flex-center();
   border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  padding-bottom: 40px;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: serif;
-}
-
-.footer .instagram_icon img{
-  display: block;
-  width: 2rem;
+  padding: u.$thirty_six 0;
+  a {
+    @include u.flex-center();
+    @include u.h3normal(u.$shippori);
+  }
+  .instagram_icon img{
+    display: block;
+    width: u.$thirty;
+    margin-bottom: u.$eight*2;
+  }
 }
 
 .dark{

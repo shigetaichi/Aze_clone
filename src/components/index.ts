@@ -12,4 +12,4 @@ export {default as LangToggler2} from './LangToggler2';
 export {default as LangToggler3} from './LangToggler3';
 export {default as PostTranslationMenu} from './PostTranslationMenu';
 export {default as PostCategoryAndTags} from './PostCategoryAndTags';
-export {default as TagArea} from './TagArea';
+export {default as TagArea} from './molecules/TagArea/TagArea';
