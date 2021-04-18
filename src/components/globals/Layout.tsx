@@ -46,7 +46,7 @@ const Layout = (props) => {
         <link rel="icon" href="/azerbaijapan-favicon.png" />
         <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png"/>
       </Head>
-      <Header/>
+      <Header news={"サンプルニュースだよサンプルニュースだよサンプルニュースだよ"}/>
       <div className={LayoutStyle}>
         {/* <LangToggler/> */}
         {/* <LangToggler2/> */}

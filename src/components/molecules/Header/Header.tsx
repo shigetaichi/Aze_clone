@@ -1,39 +1,54 @@
-import { CSSProperties, FC, useEffect, useState } from 'react';
+import React, { FC, PropsWithChildren, useState } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
+import { NextRouter, useRouter } from "next/router";
 
-const scrollTop = (): number => Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop);
+interface HeaderProps {
+  news: string;
+}
 
-const Header: FC = () => {
-  const [isTop, setIsTop] = useState<boolean>(true);
+const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
+  const router: NextRouter = useRouter();
+  const {lang} = router.query;
   const themeNames: ThemeContext = useThemeContext();
   const HeaderStyle: string = ClassNames(styles.header, {
     [styles.dark]: themeNames.themeName === 'dark'
   })
   
-  const onScroll = (): void => scrollTop() >= 5 ? setIsTop(false) : setIsTop(true);
-  
-  useEffect(() => {
-    document.addEventListener("scroll", onScroll);
-    return (): void => document.removeEventListener("scroll", onScroll);
-  });
-  
-  const scrollStyle: CSSProperties = isTop ? {} : {width: '30%'};
-  
   return (
     <header className={HeaderStyle}>
-      <h1 className={styles.site_title}>
-        <Link href="/">
-          <a id="header-logo" style={scrollStyle} href="/">
-            {themeNames.themeName === 'dark' ?
-              <img src={"/azerbaijapan-logo-dark.png"} alt=""/> :
-              <img src={"/azerbaijapan.png"} alt=""/>
-            }
-          </a>
-        </Link>
-      </h1>
+      <div className={styles.headerContainer}>
+        <div className={styles.header1}>
+          <h1 className={styles.site_title}>
+            <Link href="/">
+              {themeNames.themeName === 'dark' ?
+                <img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme"/> :
+                <img src={"/azerbaijapan.png"} alt="azerbaijapan original logo"/>
+              }
+            </Link>
+          </h1>
+          <ul className={styles.headerIcons}>
+            <li className={styles.li}>
+              <a href="https://www.instagram.com/azerbaijapan/">
+                <img src={"/instagram.svg"} alt="instagram icon"/>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <nav className={styles.nav}>
+          <ul className={styles.catList}>
+            {[1,2,3].map((num: number) => <li className={styles.li} key={num}>{props.news}</li>)}
+          </ul>
+          <ul className={styles.langList}>
+            <li className={styles.li}>日本語</li>
+            <li className={styles.li}>azerbaycan</li>
+            <li className={styles.li}>English</li>
+            <li className={styles.li}>русский</li>
+          </ul>
+        </nav>
+      </div>
     </header>
   )
 }

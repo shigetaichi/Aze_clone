@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 }
 
-const Post: NextPage = ({postData, categories, nextAndPrev, tags}) => {
+const Post = ({postData, categories, nextAndPrev, tags}) => {
   
   return (
     <PostPage postData={postData} categories={categories} nextAndPrev={nextAndPrev} tags={tags}/>

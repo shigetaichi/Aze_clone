@@ -1,0 +1,125 @@
+// Margin Rules
+$three: .3rem;
+$six: .6rem;
+$eight: .8rem;
+$twelve: 1.2rem;
+$eighteen: 1.8rem;
+$twenty_four: 2.4rem;
+$thirty: 3rem;
+$thirty_six: 3.6rem;
+$forty: 4.0rem;
+
+$breakpoints: (
+        'xxs': 375px,
+        'xs': 414px,
+        'sm': 480px,
+        'md': 768px,
+        'lg': 992px,
+        'xl': 1200px,
+        'xxl': 1440px,
+);
+
+$default-font: Source Sans Pro, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+
+@mixin max-mq($size) {
+  @media screen and (max-width: #{map-get($breakpoints, $size)}) {
+    @content;
+  }
+}
+
+@mixin min-mq($size) {
+  @media screen and (min-width: #{map-get($breakpoints, $size)}) {
+    @content;
+  }
+}
+
+@mixin h1normal($family: $default-font) {
+  font-family: $family;
+  font-size: 2.6rem;
+  font-weight: 400;
+}
+
+@mixin h1bold($family: $default-font) {
+  font-family: $family;
+  font-size: 2.6rem;
+  font-weight: 500;
+}
+
+@mixin h2normal($family: $default-font) {
+  font-family: $family;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+@mixin h2bold($family: $default-font) {
+  font-family: $family;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+@mixin h3normal($family: $default-font) {
+  font-family: $family;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+@mixin h3bold($family: $default-font) {
+  font-family: $family;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+@mixin h4normal($family: $default-font) {
+  font-family: $family;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+@mixin h4bold($family: $default-font) {
+  font-family: $family;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+@mixin h5normal($family: $default-font) {
+  font-family: $family;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+
+@mixin h5bold($family: $default-font) {
+  font-family: $family;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+@mixin h6normal($family: $default-font) {
+  font-family: $family;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+@mixin h6bold($family: $default-font) {
+  font-family: $family;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+
+@mixin wide_container() {
+  margin: 0 auto;
+  padding: 0 50px;
+  width: 1140px;
+}
+
+@mixin flex-between() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

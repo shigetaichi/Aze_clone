@@ -1,4 +1,4 @@
-import 'styles/globals.css';
+import 'styles/globals.scss';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router'
 import * as gtag from 'lib/gtag';
