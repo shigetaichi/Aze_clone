@@ -5,9 +5,9 @@ import { wpBaseUrl } from 'lib/post';
 import { lang, LangContext, useLangContext } from 'context/langContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
-import { langType } from "../types";
+import { langType } from "../../types";
 import styles from "styles/index.module.scss";
-import Pagination from "../components/molecules/Pagination/Pagination";
+import Pagination from "../../components/molecules/Pagination/Pagination";
 import React from "react";
 
 

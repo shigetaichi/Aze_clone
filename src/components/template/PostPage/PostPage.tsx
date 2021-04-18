@@ -2,16 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { lang, LangContext, useLangContext } from "../../../context/langContext";
 import { sha256 } from "../../../lib/post";
-import {
-  Button,
-  CategoryAreaWp,
-  ContentIndex,
-  PostCategoryAndTags,
-  PostThumbnail,
-  PostTranslationMenu,
-  TagArea,
-  Title
-} from "../../index";
+import { Button, ContentIndex, PostCategoryAndTags, PostThumbnail, PostTranslationMenu, Title } from "../../index";
 import Container from "@material-ui/core/Container";
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -19,19 +10,15 @@ import 'highlight.js/styles/atom-one-dark.css';
 
 interface PostPageProps {
   postData: any;
-  categories: any;
   nextAndPrev: any;
-  tags: any;
 }
 
 hljs.registerLanguage('javascript', javascript);
 
-const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: PostPageProps) => {
+const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
   const router: NextRouter = useRouter();
   const langTheme: LangContext = useLangContext();
   const [indexList, setIndexList] = useState<Array<any>>([]);
-  const categoriesArray = categories[langTheme.langName];
-  const tagsArray = tags[langTheme.langName];
   useEffect(() => {
     hljs.initHighlighting();
     const content = document.getElementById('content');
@@ -108,7 +95,7 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
         <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt} {formatDate(postData.date)}
           <br className="on480"/>
           <span className="off480inline">　</span>
-          {formatDate(postData.date) === formatDate(postData.modified) ? "": `${lang(langTheme.langName).post.updatedAt} ${formatDate(postData.modified)}`}
+          {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${lang(langTheme.langName).post.updatedAt} ${formatDate(postData.modified)}`}
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
         <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
@@ -148,36 +135,10 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
           />
         )}
       </div>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
       <Title title={lang(langTheme.langName).recommendation.title}
              subtitle={lang(langTheme.langName).recommendation.subtitle}/>
-      <div style={{display: 'flex', justifyContent: 'center',}}>
-        {/* <PostThumbnail id={randomPostData.id} image={randomPostData.eyecatch.url} title={randomPostData.title} /> */}
-      </div>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
       <Button path="/allposts">{lang(langTheme.langName).buttonText.toArchive}</Button>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
-      <Container maxWidth="lg">
-        <Title
-          title={lang(langTheme.langName).categories.title}
-          subtitle={lang(langTheme.langName).categories.subtitle}
-        />
-        {/* <CategoryArea categories={categories} /> */}
-        <CategoryAreaWp categories={categoriesArray}/>
-        <Title
-          title={lang(langTheme.langName).tags.title}
-          subtitle={lang(langTheme.langName).tags.subtitle}
-        />
-        <TagArea tags={tagsArray}/>
-        <div className="module-spacer--medium"/>
-        <Button path="/">{lang(langTheme.langName).buttonText.toTop}</Button>
-        <div className="module-spacer--medium"/>
-        <div className="module-spacer--medium"/>
-      </Container>
+      <Button path="/">{lang(langTheme.langName).buttonText.toTop}</Button>
     </>
   )
 }
