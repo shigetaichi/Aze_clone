@@ -1,18 +1,19 @@
 import Head from 'next/head'
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { Button, LangToggler3, PostFlex, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
 import { lang, LangContext, useLangContext } from 'context/langContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
-import { langType } from "../../types";
+import { langType } from "types";
 import styles from "styles/index.module.scss";
-import Pagination from "../../components/molecules/Pagination/Pagination";
-import React from "react";
+import Pagination from "components/molecules/Pagination/Pagination";
+import { NextRouter, useRouter } from "next/router";
 
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
+  const langString: string = String(context.query.lang);
   let allPostData: langType = {
     'ja': [],
     'az': [],
@@ -26,28 +27,10 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
   await Promise.all([
     (async () => {
-      allPostData['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/${allPostsUrl}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${langString}/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData['az'] = await fetchWithCache(`${wpBaseUrl}/az/${allPostsUrl}`)
-    })(),
-    (async () => {
-      allPostData['en'] = await fetchWithCache(`${wpBaseUrl}/en/${allPostsUrl}`)
-    })(),
-    (async () => {
-      allPostData['ru'] = await fetchWithCache(`${wpBaseUrl}/ru/${allPostsUrl}`)
-    })(),
-    (async () => {
-      postsFilteredByTag['ja'] = await getPostsFilteredByTagAndLangWp('ja', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag['az'] = await getPostsFilteredByTagAndLangWp('az', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag['en'] = await getPostsFilteredByTagAndLangWp('en', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag['ru'] = await getPostsFilteredByTagAndLangWp('ru', 8);
+      postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
     })(),
   ]);
   return {
@@ -59,6 +42,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 }
 
 const Home = ({allPostData, postsFilteredByTag}) => {
+  const router: NextRouter = useRouter();
   const langTheme: LangContext = useLangContext();
   const allPostDataArray = allPostData[langTheme.langName];
   
@@ -86,14 +70,14 @@ const Home = ({allPostData, postsFilteredByTag}) => {
       </Head>
       <div className={styles.indexStatement}>
         <div className={styles.left}>
-        <p style={{display: "none",}}>Dear S.K.</p>
-        {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
+          <p style={{display: "none",}}>Dear S.K.</p>
+          {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
         </div>
         <div className={styles.right}>
-        <LangToggler3/>
+          <LangToggler3/>
         </div>
       </div>
-  
+      
       <Title
         title={lang(langTheme.langName).selectedEight.title}
         subtitle={lang(langTheme.langName).selectedEight.subtitle}
@@ -109,7 +93,7 @@ const Home = ({allPostData, postsFilteredByTag}) => {
       <PostFlex thumbnailDataArray={thumbnailDataArray}/>
       <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
-      <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
+      <Button path={`/${String(router.query.lang)}/allposts`}>{lang(langTheme.langName).buttonText.toArchive}</Button>
       <div className="m-s-36"/>
       <div className="m-s-36"/>
       <div className="m-s-36"/>

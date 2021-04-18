@@ -6,7 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useLangContext, useSetLangContext, lang } from '../context/langContext';
 import ClassNames from 'classnames';
-import styles from '../components-style/LangToggler.module.css';
+import styles from './atom/LangSelect/LangSelect.module.scss';
 
 
 const LangToggler: FC = () => {
