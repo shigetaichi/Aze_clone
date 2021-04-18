@@ -1,5 +1,7 @@
+@use "src/styles/utils" as u;
+
 .footer {
-  width: 100%;
+  @include u.wide_container();
   border-top: 1px solid #eaeaea;
   display: flex;
   justify-content: center;

@@ -4,8 +4,8 @@ import styles from './Layout.module.scss';
 import ClassNames from 'classnames';
 import { useThemeContext } from 'context/context';
 import { lang, useLangContext } from 'context/langContext';
-import Header from "components/molecules/Header/Header";
-import Footer from "components/molecules/Footer/Footer";
+import Header from "components/organism/Header/Header";
+import Footer from "components/organism/Footer/Footer";
 import ContentLeft from "components/organism/ContentLeft/ContentLeft";
 import ContentRight from "components/organism/ContentRight/ContentRight";
 

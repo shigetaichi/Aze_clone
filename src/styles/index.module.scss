@@ -4,7 +4,7 @@
   @include u.flex-between();
   @include u.h3normal();
   line-height: 1.8;
-  margin-bottom: u.$thirty_six;
+  margin-bottom: u.$thirty_six*2;
 
   .left {
     width: 68%;

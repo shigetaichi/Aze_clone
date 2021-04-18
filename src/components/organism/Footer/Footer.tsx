@@ -2,11 +2,12 @@ import React, { FC, useEffect, useState } from 'react'
 import styles from './Footer.module.scss';
 import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
-import { CategoryAreaWp, TagArea, Title } from "../../index";
+import { TagArea, Title } from "../../index";
 import { lang, LangContext, useLangContext } from "context/langContext";
 import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
-import { langType } from "../../../types";
+import { langType } from "types";
+import CategoryArea from "components/molecules/CategoryArea/CategoryArea";
 
 const Footer: FC = () => {
   const langTheme: LangContext = useLangContext();
@@ -70,7 +71,7 @@ const Footer: FC = () => {
         title={lang(langTheme.langName).categories.title}
         subtitle={lang(langTheme.langName).categories.subtitle}
       />
-      {categories[langTheme.langName] && <CategoryAreaWp categories={categories[langTheme.langName]}/>}
+      {categories[langTheme.langName] && <CategoryArea categories={categories[langTheme.langName]}/>}
       <Title
         title={lang(langTheme.langName).tags.title}
         subtitle={lang(langTheme.langName).tags.subtitle}
