@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { lang, LangContext, useLangContext } from "../../../context/langContext";
 import { sha256 } from "../../../lib/post";
-import { Layout } from "../../globals";
 import {
   Button,
   CategoryAreaWp,
@@ -101,10 +100,11 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
   }
   
   return (
-    <Layout title={postData.title.rendered} image={postData.acf.eyecatch} url={router.asPath}>
+    <>
       <ContentIndex indexList={indexList}/>
       <Container maxWidth="xl">
-        <h1 className="post-title">{postData.title.rendered}</h1>
+        <h1 className="post-title">
+          {postData.title.rendered}</h1>
         <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt} {formatDate(postData.date)}
           <br className="on480"/>
           <span className="off480inline">　</span>
@@ -178,7 +178,7 @@ const PostPage: FC<PostPageProps> = ({postData, categories, nextAndPrev, tags}: 
         <div className="module-spacer--medium"/>
         <div className="module-spacer--medium"/>
       </Container>
-    </Layout>
+    </>
   )
 }
 

@@ -40,6 +40,19 @@
           margin: 0 auto;
         }
       }
+      .langList {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        margin: 0 0 0 auto;
+        @include u.h3normal();
+
+        .li {
+          margin: 0 0 0 u.$twelve;
+          cursor: pointer;
+        }
+      }
 
       .headerIcons {
         display: flex;
@@ -49,7 +62,7 @@
 
         .li {
           width: u.$thirty;
-          margin: 0 u.$three;
+          margin: 0 0 0 u.$thirty_six;
 
           img {
             display: block;
@@ -65,28 +78,19 @@
       @include u.flex-between();
       @include u.h3normal();
 
-      .catList {
-        width: 70%;
+      .news {
+        width: 100%;
         display: flex;
         list-style: none;
         overflow-x: hidden;
         white-space: nowrap;
 
         .li {
+          width: inherit;
+          @include u.h3normal();
           margin: 0 u.$twelve 0 0;
           white-space: nowrap;
           animation: loop-slide 10s infinite linear 1s both;
-        }
-      }
-
-      .langList {
-        display: flex;
-        align-items: center;
-        list-style: none;
-
-        .li {
-          margin: 0 0 0 u.$twelve;
-          cursor: pointer;
         }
       }
     }

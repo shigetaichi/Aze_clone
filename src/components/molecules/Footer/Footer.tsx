@@ -4,8 +4,9 @@ import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
 import { CategoryAreaWp, TagArea, Title } from "../../index";
 import { lang, LangContext, useLangContext } from "context/langContext";
-import { fetchWithCache } from "../../../lib/helpers";
-import { wpBaseUrl } from "../../../lib/post";
+import { fetchWithCache } from "lib/helpers";
+import { wpBaseUrl } from "lib/post";
+import { langType } from "../../../types";
 
 const Footer: FC = () => {
   const langTheme: LangContext = useLangContext();
@@ -14,16 +15,11 @@ const Footer: FC = () => {
     [styles.dark]: themeNames.themeName === 'dark'
   })
   
-  const [categories, setCategories] = useState<Array<any>>([]);
-  const [tags, setTags] = useState<Array<any>>([]);
+  const [categories, setCategories] = useState<langType>({'ja': [], 'az': [], 'en': [], 'ru': [],});
+  const [tags, setTags] = useState<langType>({'ja': [], 'az': [], 'en': [], 'ru': [],});
   
-  const getCategories = async () => {
-    let categories = {
-      'ja': [],
-      'az': [],
-      'en': [],
-      'ru': [],
-    }
+  const getCategories = async (): Promise<langType> => {
+    let categories: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
         categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
@@ -42,12 +38,7 @@ const Footer: FC = () => {
   }
   
   const getTags = async () => {
-    let tags = {
-      'ja': [],
-      'az': [],
-      'en': [],
-      'ru': [],
-    }
+    let tags: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
         tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
@@ -66,14 +57,8 @@ const Footer: FC = () => {
   }
   
   useEffect(() => {
-    getCategories().then(cat => {
-      console.log(cat)
-      setCategories(cat);
-    });
-    getTags().then(tag => {
-      console.log(tag)
-      setTags(tag);
-    });
+    getCategories().then((cat: langType) => setCategories(cat));
+    getTags().then((tag: langType) => setTags(tag));
     
     return () => {
     };

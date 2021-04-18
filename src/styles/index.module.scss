@@ -1,0 +1,16 @@
+@use "src/styles/utils" as u;
+
+.indexStatement {
+  @include u.flex-between();
+  @include u.h3normal();
+  line-height: 1.8;
+  margin-bottom: u.$thirty_six;
+
+  .left {
+    width: 68%;
+  }
+
+  .right {
+    width: 30%;
+  }
+}

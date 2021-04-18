@@ -29,6 +29,12 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
               }
             </Link>
           </h1>
+          <ul className={styles.langList}>
+            <li className={styles.li}>日本語</li>
+            <li className={styles.li}>azerbaycan</li>
+            <li className={styles.li}>English</li>
+            <li className={styles.li}>русский</li>
+          </ul>
           <ul className={styles.headerIcons}>
             <li className={styles.li}>
               <a href="https://www.instagram.com/azerbaijapan/">
@@ -38,14 +44,8 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           </ul>
         </div>
         <nav className={styles.nav}>
-          <ul className={styles.catList}>
+          <ul className={styles.news}>
             {[1,2,3].map((num: number) => <li className={styles.li} key={num}>{props.news}</li>)}
-          </ul>
-          <ul className={styles.langList}>
-            <li className={styles.li}>日本語</li>
-            <li className={styles.li}>azerbaycan</li>
-            <li className={styles.li}>English</li>
-            <li className={styles.li}>русский</li>
           </ul>
         </nav>
       </div>

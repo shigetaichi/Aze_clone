@@ -1,105 +1,64 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next';
-import Layout from 'components/organism/Layout/Layout';
-import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from 'components';
+import { Button, LangToggler3, PostFlex, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
 import { lang, LangContext, useLangContext } from 'context/langContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
+import { langType } from "../types";
+import styles from "styles/index.module.scss";
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
-  let allPostData: { [key: string]: Array<any> }, categories, tags, postsFilteredByTag;
-  allPostData = {
+  let allPostData: langType = {
     'ja': [],
-    'aze': [],
+    'az': [],
     'en': [],
     'ru': [],
-  }
-  postsFilteredByTag = {
+  }, postsFilteredByTag: langType = {
     'ja': [],
-    'aze': [],
-    'en': [],
-    'ru': [],
-  }
-  categories = {
-    'ja': [],
-    'aze': [],
-    'en': [],
-    'ru': [],
-  }
-  tags = {
-    'ja': [],
-    'aze': [],
+    'az': [],
     'en': [],
     'ru': [],
   }
   await Promise.all([
     (async () => {
-      allPostData.ja = await fetchWithCache(`${wpBaseUrl}/ja/${allPostsUrl}`)
+      allPostData['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.aze = await fetchWithCache(`${wpBaseUrl}/az/${allPostsUrl}`)
+      allPostData['az'] = await fetchWithCache(`${wpBaseUrl}/az/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.en = await fetchWithCache(`${wpBaseUrl}/en/${allPostsUrl}`)
+      allPostData['en'] = await fetchWithCache(`${wpBaseUrl}/en/${allPostsUrl}`)
     })(),
     (async () => {
-      allPostData.ru = await fetchWithCache(`${wpBaseUrl}/ru/${allPostsUrl}`)
+      allPostData['ru'] = await fetchWithCache(`${wpBaseUrl}/ru/${allPostsUrl}`)
     })(),
     (async () => {
-      categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+      postsFilteredByTag['ja'] = await getPostsFilteredByTagAndLangWp('ja', 8);
     })(),
     (async () => {
-      categories['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+      postsFilteredByTag['az'] = await getPostsFilteredByTagAndLangWp('az', 8);
     })(),
     (async () => {
-      categories['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/categories`)
+      postsFilteredByTag['en'] = await getPostsFilteredByTagAndLangWp('en', 8);
     })(),
     (async () => {
-      categories['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
-    })(),
-    (async () => {
-      tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
-    })(),
-    (async () => {
-      tags['aze'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
-    })(),
-    (async () => {
-      tags['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/tags`)
-    })(),
-    (async () => {
-      tags['ru'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
-    })(),
-    (async () => {
-      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', 8);
-    })(),
-    (async () => {
-      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', 8);
+      postsFilteredByTag['ru'] = await getPostsFilteredByTagAndLangWp('ru', 8);
     })(),
   ]);
   return {
     props: {
       allPostData,
-      categories,
-      tags,
       postsFilteredByTag,
     }
   }
 }
 
-const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
+const Home = ({allPostData, postsFilteredByTag}) => {
   const langTheme: LangContext = useLangContext();
-  const categoriesArray = categories[langTheme.langName];
   const allPostDataArray = allPostData[langTheme.langName];
-  const tagsArray = tags[langTheme.langName];
   
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,
@@ -118,43 +77,39 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
   }));
   
   return (
-    <Layout home title={lang(langTheme.langName).layout.home}>
+    <>
       <Head>
         <meta property="og:type" content="website"/>
+        <title>{lang(langTheme.langName).layout.home}</title>
       </Head>
-      <div className={""}>
+      <div className={styles.indexStatement}>
+        <div className={styles.left}>
         <p style={{display: "none",}}>Dear S.K.</p>
         {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
+        </div>
+        <div className={styles.right}>
         <LangToggler3/>
+        </div>
       </div>
+  
       <Title
         title={lang(langTheme.langName).selectedEight.title}
         subtitle={lang(langTheme.langName).selectedEight.subtitle}
       />
       <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
+      <div className="m-s-36"/>
+      <div className="m-s-36"/>
       <Title
         title={lang(langTheme.langName).posts.title}
         subtitle={lang(langTheme.langName).posts.subtitle}
       />
       <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
-      <div className="module-spacer--medium"/>
+      <div className="m-s-36"/>
       <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
-      <div className="module-spacer--medium"/>
-      <Title
-        title={lang(langTheme.langName).categories.title}
-        subtitle={lang(langTheme.langName).categories.subtitle}
-      />
-      <CategoryAreaWp categories={categoriesArray}/>
-      <Title
-        title={lang(langTheme.langName).tags.title}
-        subtitle={lang(langTheme.langName).tags.subtitle}
-      />
-      <TagArea tags={tagsArray}/>
-    </Layout>
+      <div className="m-s-36"/>
+      <div className="m-s-36"/>
+      <div className="m-s-36"/>
+    </>
   )
 }
 

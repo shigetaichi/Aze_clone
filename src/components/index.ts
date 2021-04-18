@@ -1,5 +1,5 @@
 export {default as Toggler} from './Toggler';
-export {default as Title} from './Title';
+export {default as Title} from './atom/Title/Title';
 export {default as Hamburger} from './Hamburger';
 export {default as TogglerChild} from './TogglerChild';
 export {default as Slick} from './Slick';
