@@ -7,6 +7,8 @@ import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
 import { langType } from "../types";
 import styles from "styles/index.module.scss";
+import Pagination from "../components/molecules/Pagination/Pagination";
+import React from "react";
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -96,14 +98,16 @@ const Home = ({allPostData, postsFilteredByTag}) => {
         title={lang(langTheme.langName).selectedEight.title}
         subtitle={lang(langTheme.langName).selectedEight.subtitle}
       />
-      <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
+      <PostFlex thumbnailDataArray={thumbnailDataArraySelected}/>
+      <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
       <div className="m-s-36"/>
       <Title
         title={lang(langTheme.langName).posts.title}
         subtitle={lang(langTheme.langName).posts.subtitle}
       />
-      <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
+      <PostFlex thumbnailDataArray={thumbnailDataArray}/>
+      <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
       <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
       <div className="m-s-36"/>

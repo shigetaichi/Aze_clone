@@ -1,0 +1,13 @@
+@use "src/styles/utils" as u;
+
+.post_flex{
+  @include u.grid-base();
+  margin-bottom: u.$thirty_six;
+}
+
+.post_flex_no_posts{
+  text-align: center;
+  @include u.h3normal(u.$shippori);
+  min-height: 100px;
+  @include u.flex-center();
+}

@@ -2,9 +2,7 @@
 
 .category_wrapper {
   @include u.wide_container();
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: u.$thirty_six;
+  @include u.grid-base();
   margin: 0 auto u.$thirty_six*2;
 }
 
