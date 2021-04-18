@@ -10,7 +10,8 @@ const langNames: LangContext = {
 
 const LangContext = createContext<LangContext>(langNames);
 const SetLangContext = createContext<Dispatch<SetStateAction<LangContext>>>(
-  () => {},
+  () => {
+  },
 )
 
 const useLangContext = () => {
@@ -21,11 +22,11 @@ const useSetLangContext = () => {
 }
 
 const LangProvider: FC = (props: {
-    langNames?: LangContext,
-    children: ReactNode,
-  }) => {
+  langNames?: LangContext,
+  children: ReactNode,
+}) => {
   const [langName, setLangName] = useState<LangContext>(props.langNames ?? langNames);
-
+  
   return (
     <LangContext.Provider value={langName}>
       <SetLangContext.Provider value={setLangName}>

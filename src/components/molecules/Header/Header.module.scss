@@ -13,12 +13,11 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: rgba(255, 255, 255, 1);
-  -webkit-box-shadow: 0 10px 6px -6px #777;
-  -moz-box-shadow: 0 10px 6px -6px #777;
-  box-shadow: 0 10px 6px -6px #777;
+  padding: u.$eight 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0 10px 6px -6px #ccc;
+  -moz-box-shadow: 0 10px 6px -6px #ccc;
+  box-shadow: 0 10px 6px -6px #ccc;
   z-index: 10;
 
   .headerContainer {

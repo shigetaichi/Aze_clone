@@ -1,17 +1,11 @@
 import Head from 'next/head'
 import { GetServerSideProps } from 'next';
-import Container from '@material-ui/core/Container';
-import Layout from 'components/globals/Layout';
+import Layout from 'components/organism/Layout/Layout';
 import { Button, CategoryAreaWp, LangToggler3, PostFlex, TagArea, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
 import { lang, LangContext, useLangContext } from 'context/langContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
-
-const indexStyle = {
-  fontFamily: 'serif',
-  margin: '0 auto 80px',
-}
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -128,42 +122,38 @@ const Home = ({allPostData, categories, tags, postsFilteredByTag}) => {
       <Head>
         <meta property="og:type" content="website"/>
       </Head>
-      <Container maxWidth="lg">
-        <Container maxWidth="sm">
-          <div style={indexStyle}>
-            <p style={{display: "none",}}>Dear S.K.</p>
-            {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
-            <LangToggler3/>
-          </div>
-        </Container>
-        <Title
-          title={lang(langTheme.langName).selectedEight.title}
-          subtitle={lang(langTheme.langName).selectedEight.subtitle}
-        />
-        <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
-        <div className="module-spacer--medium"/>
-        <div className="module-spacer--medium"/>
-        <Title
-          title={lang(langTheme.langName).posts.title}
-          subtitle={lang(langTheme.langName).posts.subtitle}
-        />
-        <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
-        <div className="module-spacer--medium"/>
-        <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
-        <div className="module-spacer--medium"/>
-        <div className="module-spacer--medium"/>
-        <div className="module-spacer--medium"/>
-        <Title
-          title={lang(langTheme.langName).categories.title}
-          subtitle={lang(langTheme.langName).categories.subtitle}
-        />
-        <CategoryAreaWp categories={categoriesArray}/>
-        <Title
-          title={lang(langTheme.langName).tags.title}
-          subtitle={lang(langTheme.langName).tags.subtitle}
-        />
-        <TagArea tags={tagsArray}/>
-      </Container>
+      <div className={""}>
+        <p style={{display: "none",}}>Dear S.K.</p>
+        {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
+        <LangToggler3/>
+      </div>
+      <Title
+        title={lang(langTheme.langName).selectedEight.title}
+        subtitle={lang(langTheme.langName).selectedEight.subtitle}
+      />
+      <PostFlex thumbnailDataArray={thumbnailDataArraySelected} isPaginate={false}/>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
+      <Title
+        title={lang(langTheme.langName).posts.title}
+        subtitle={lang(langTheme.langName).posts.subtitle}
+      />
+      <PostFlex thumbnailDataArray={thumbnailDataArray} perPage={8} isPaginate={true}/>
+      <div className="module-spacer--medium"/>
+      <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive} </Button>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
+      <div className="module-spacer--medium"/>
+      <Title
+        title={lang(langTheme.langName).categories.title}
+        subtitle={lang(langTheme.langName).categories.subtitle}
+      />
+      <CategoryAreaWp categories={categoriesArray}/>
+      <Title
+        title={lang(langTheme.langName).tags.title}
+        subtitle={lang(langTheme.langName).tags.subtitle}
+      />
+      <TagArea tags={tagsArray}/>
     </Layout>
   )
 }
