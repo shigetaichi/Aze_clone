@@ -1,4 +1,4 @@
-export const localeData: { [key: string]: {} } = {
+export const localeData: { [key: string]: {[key2: string]: any} } = {
     "az": {
       "locale": "az",
       "description": "Ümid edirik ki, Azərbaycan Yaponiya ilə Azərbaycan arasında körpü rolunu oynayacaqdır. Dildən əlavə, müxtəlif janrlarda məqalələr toplayacağıq. Ümid edirik ki, bu sayt Azərbaycan haqqında məlumatı olan hər kəsə kömək edəcəkdir.",
