@@ -2,10 +2,12 @@ import React, { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import { sha256 } from "lib/post";
-import { ContentIndex, PostCategoryAndTags, PostTranslationMenu } from "../../index";
+import { PostCategoryAndTags, PostTranslationMenu } from "../../index";
 import Button from "components/atom/Button/Button";
 import Title from "components/atom/Title/Title";
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
+import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
+import styles from "./PostPage.module.scss";
 
 interface PostPageProps {
   postData: any;
@@ -84,28 +86,27 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
   
   return (
     <>
-      <ContentIndex indexList={indexList}/>
-      <h1 className="post-title">
-        {postData.title.rendered}</h1>
-      <span className="post-publishedAt">{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
-        <br className="on480"/>
-          <span className="off480inline">　</span>
-        {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}
-        </span>
-      <PostTranslationMenu translate_group={postData.translate_group}/>
-      <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
-      <div className="post-eyecatch">
-        <img src={postData.acf.eyecatch} alt=""/>
-      </div>
-      <div id="post-content">
-        <div className="post-container">
-          <div id="content" dangerouslySetInnerHTML={{__html: postData.content.rendered}}/>
-          <div className="thanks-reading">
-            <p>{locale(localeContext).post.thanks}</p>
-          </div>
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <article className={styles.article}>
+            <h1 className={styles.title}>{postData.title.rendered}</h1>
+            <span className={styles.published_at}>{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
+              <br className="on480"/><span className="off480inline">　</span>{formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}</span>
+            <PostTranslationMenu translate_group={postData.translate_group}/>
+            <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
+            <div className={styles.eyecatch}>
+              <img src={postData.acf.eyecatch} alt=""/>
+            </div>
+            <div id="content" className={styles.content} dangerouslySetInnerHTML={{__html: postData.content.rendered}}/>
+            <div className={styles.thanks}>
+              <p>{locale(localeContext).post.thanks}</p>
+            </div>
+          </article>
+        </div>
+        <div className={styles.right}>
+          <ContentIndex indexList={indexList}/>
         </div>
       </div>
-      <div className="module-spacer--medium"/>
       <Title title={locale(localeContext).nextPrev.title} subtitle={locale(localeContext).nextPrev.subtitle}/>
       <div className="prev-and-next">
         <p className="prev-flag">前の記事</p>

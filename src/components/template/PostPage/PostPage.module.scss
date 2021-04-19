@@ -1,0 +1,138 @@
+@use "src/styles/utils" as u;
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr u.$thirty*10;
+  align-items: flex-start;
+  gap: u.$thirty_six;
+
+  .left {
+    .article {
+      width: 100%;
+      margin-bottom: u.$thirty_six*2;
+
+      .title {
+        @include u.h1normal(u.$shippori);
+        margin-bottom: u.$eighteen;
+        text-align: center;
+      }
+
+      .published_at {
+        display: block;
+        @include u.h4normal(u.$shippori);
+        text-align: center;
+        margin-bottom: u.$eighteen;
+      }
+
+      .eyecatch {
+        width: 100%;
+        margin: 0 auto u.$thirty_six;
+        position: relative;
+
+        &::before {
+          content: "";
+          display: block;
+          padding-top: 56.25%;
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .content {
+        line-height: 2;
+
+        h2 {
+          @include u.h2bold();
+          padding-top: 130px;
+          margin-bottom: u.$eighteen;
+          margin-top: -110px;
+          display: inline-block;
+          border-bottom: 2px solid #03AE65;
+        }
+
+        h3 {
+          @include u.h3bold();
+          padding-top: 130px;
+          margin-bottom: u.$eighteen;
+          margin-top: -110px;
+          display: inline-block;
+          border-bottom: 1px solid black;
+        }
+
+        p {
+          @include u.h3normal();
+          width: 100%;
+          word-wrap: break-word;
+          margin-bottom: u.$eighteen;
+        }
+
+        a {
+          color: #2200c1;
+          text-decoration: underline;
+          &:visited {
+            color: #551a8b;
+          }
+        }
+
+        figure {
+          margin: 0 0 u.$eighteen;
+          figcaption {
+            @include u.h5normal();
+            text-align: center;
+          }
+        }
+        img {
+          display: block;
+          width: 94%;
+          max-width: u.$twelve*50;
+          margin: 0 auto;
+          height: auto;
+        }
+        iframe {
+          margin: 0 auto;
+          display: block;
+        }
+
+        pre {
+          font-size: 1.4rem;
+          margin: 0 0 u.$eighteen;
+          padding: u.$eight;
+          border-radius: u.$six;
+          background: #25292f;
+          color: #fff;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        code {
+          font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont, "Segoe UI", Meiryo, monospace;
+        }
+      }
+
+      .thanks {
+        @include u.h3normal();
+        width: 100%;
+        word-wrap: break-word;
+        margin-bottom: u.$eighteen;
+      }
+
+    }
+  }
+
+  .right {
+    position: sticky;
+    top: u.$eighteen*10;
+  }
+}
+
+
