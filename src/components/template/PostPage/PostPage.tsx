@@ -3,27 +3,20 @@ import { NextRouter, useRouter } from "next/router";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import { sha256 } from "lib/post";
 import { ContentIndex, PostCategoryAndTags, PostTranslationMenu } from "../../index";
-import Container from "@material-ui/core/Container";
-import hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/localeuages/javascript';
-import 'highlight.js/styles/atom-one-dark.css';
 import Button from "components/atom/Button/Button";
-import Title from "../../atom/Title/Title";
-import Thumbnail from "../../molecules/Thumbnail/Thumbnail";
+import Title from "components/atom/Title/Title";
+import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 
 interface PostPageProps {
   postData: any;
   nextAndPrev: any;
 }
 
-hljs.registerLanguage('javascript', javascript);
-
 const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
   const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
   const [indexList, setIndexList] = useState<Array<any>>([]);
   useEffect(() => {
-    hljs.initHighlighting();
     const content = document.getElementById('content');
     const contentNodeList = content.querySelectorAll('h2, h3');
     let indexListArray = [];
@@ -92,20 +85,18 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
   return (
     <>
       <ContentIndex indexList={indexList}/>
-      <Container maxWidth="xl">
-        <h1 className="post-title">
-          {postData.title.rendered}</h1>
-        <span className="post-publishedAt">{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
-          <br className="on480"/>
+      <h1 className="post-title">
+        {postData.title.rendered}</h1>
+      <span className="post-publishedAt">{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
+        <br className="on480"/>
           <span className="off480inline">　</span>
-          {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}
+        {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}
         </span>
-        <PostTranslationMenu translate_group={postData.translate_group}/>
-        <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
-        <div className="post-eyecatch">
-          <img src={postData.acf.eyecatch} alt=""/>
-        </div>
-      </Container>
+      <PostTranslationMenu translate_group={postData.translate_group}/>
+      <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
+      <div className="post-eyecatch">
+        <img src={postData.acf.eyecatch} alt=""/>
+      </div>
       <div id="post-content">
         <div className="post-container">
           <div id="content" dangerouslySetInnerHTML={{__html: postData.content.rendered}}/>

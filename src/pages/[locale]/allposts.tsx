@@ -1,5 +1,4 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { Button, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { fetchWithCache } from "lib/helpers";
@@ -7,6 +6,9 @@ import Head from "next/head";
 import PostList from "components/organism/PostList/PostList";
 import { langType } from "types";
 import LangSelect from "components/atom/LangSelect/LangSelect";
+import Title from "components/atom/Title/Title";
+import Button from "components/atom/Button/Button";
+import { NextRouter, useRouter } from "next/router";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -31,6 +33,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const allposts = ({allPostData}) => {
+  const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
   
   const allPostDataArray = allPostData[localeContext];
@@ -52,7 +55,7 @@ const allposts = ({allPostData}) => {
         subtitle={locale(localeContext).allposts.subtitle}
       />
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={"/"}>{locale(localeContext).buttonText.toTop}</Button>
+      <Button path={`/${String(router.query.lang)}`}>{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
 }

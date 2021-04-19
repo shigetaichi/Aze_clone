@@ -25,7 +25,7 @@ const Thumbnail = (props) => {
   }
   
   return (
-    <Link href={`/${String(router.query.locale)}/posts/${String(router.query.id)}`}>
+    <Link href={`/${String(router.query.locale)}/posts/${props.id}`}>
       <div className={styles.root}>
         <div>
           <div className={styles.media}>
