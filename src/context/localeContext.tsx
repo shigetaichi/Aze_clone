@@ -1,5 +1,6 @@
 import { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
 import { NextRouter, useRouter } from "next/router";
+import { localeData } from "../lang/common";
 
 export type LocaleType = 'ja' | 'az' | 'en' | 'ru';
 
@@ -40,6 +41,6 @@ const LocaleProvider: FC = (props: {
   )
 }
 
-const locale = (lang: string) => require(`../lang/${lang}/common.json`);
+const locale = (lang: string) => !lang ? localeData['ja'] : localeData[lang];
 
 export { LocaleProvider, useLocaleContext, useSetLocaleContext, locale };
