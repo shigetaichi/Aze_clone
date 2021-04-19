@@ -18,7 +18,7 @@ const LangSelect = () => {
     [styles.langInputOptionsDark]: themeNames.themeName === "dark"
   });
   const handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {
-    router.push(router.pathname.replace('[lang]',event.target.value));
+    router.push(router.pathname.replace('[locale]',event.target.value));
     setLocaleContext(event.target.value as LocaleType);
   }
 

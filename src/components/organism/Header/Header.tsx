@@ -13,17 +13,25 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
   const router: NextRouter = useRouter();
   const themeNames: ThemeContext = useThemeContext();
-  const setLangContext: Dispatch<SetStateAction<LocaleType>> = useSetLocaleContext();
+  const setLocaleContext: Dispatch<SetStateAction<LocaleType>> = useSetLocaleContext();
   const HeaderStyle: string = ClassNames(styles.header, {
     [styles.dark]: themeNames.themeName === 'dark'
   })
+  
+  const generateRoute = (locale: LocaleType): string => {
+    let s: string = router.pathname;
+    Object.keys(router.query).map((v: string) => {
+      s = s.replace(`[${v}]`,v === 'locale' ? locale : String(router.query[v]))
+    })
+    return s
+  }
   
   return (
     <header className={HeaderStyle}>
       <div className={styles.headerContainer}>
         <div className={styles.header1}>
           <h1 className={styles.site_title}>
-            <Link href={`/${router.query.lang}`}>
+            <Link href={`/${router.query.locale}`}>
               {themeNames.themeName === 'dark' ?
                 <img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme"/> :
                 <img src={"/azerbaijapan.png"} alt="azerbaijapan original logo"/>
@@ -31,17 +39,17 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
             </Link>
           </h1>
           <ul className={styles.langList}>
-            <li className={styles.li} onClick={() => setLangContext('ja')}>
-              <Link href={router.pathname.replace('[lang]', 'ja')}>日本語</Link>
+            <li className={styles.li} onClick={() => setLocaleContext('ja')}>
+              <Link href={generateRoute('ja')}>日本語</Link>
             </li>
-            <li className={styles.li} onClick={() => setLangContext('az')}>
-              <Link href={router.pathname.replace('[lang]', 'az')}>azerbaycan</Link>
+            <li className={styles.li} onClick={() => setLocaleContext('az')}>
+              <Link href={generateRoute('az')}>azerbaycan</Link>
             </li>
-            <li className={styles.li} onClick={() => setLangContext('en')}>
-              <Link href={router.pathname.replace('[lang]', 'en')}>English</Link>
+            <li className={styles.li} onClick={() => setLocaleContext('en')}>
+              <Link href={generateRoute('en')}>English</Link>
             </li>
-            <li className={styles.li} onClick={() => setLangContext('ru')}>
-              <Link href={router.pathname.replace('[lang]', 'ru')}>русский</Link>
+            <li className={styles.li} onClick={() => setLocaleContext('ru')}>
+              <Link href={generateRoute('ru')}>русский</Link>
             </li>
           </ul>
           <ul className={styles.headerIcons}>

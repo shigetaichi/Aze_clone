@@ -16,7 +16,7 @@ import LangSelect from "../../components/atom/LangSelect/LangSelect";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
-  const langString: string = String(context.query.lang);
+  const langString: string = String(context.query.locale);
   let allPostData: langType = {
     'ja': [],
     'az': [],
@@ -96,7 +96,7 @@ const Home = ({allPostData, postsFilteredByTag}) => {
       <PostList thumbnailDataArray={thumbnailDataArray}/>
       <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
-      <Button path={`/${String(router.query.lang)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
+      <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
       <div className="m-s-36"/>
       <div className="m-s-36"/>
       <div className="m-s-36"/>

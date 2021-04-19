@@ -1,9 +1,11 @@
-import { Button, Title } from 'components';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { getPostsFilteredByTagAndLangWp, getTagNameByLangAndId } from 'lib/tags';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import PostList from "components/organism/PostList/PostList";
+import Title from "../../../components/atom/Title/Title";
+import Button from "../../../components/atom/Button/Button";
+import { NextRouter, useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
@@ -54,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const Tag = ({postsFilteredByTag, tagNameArray}) => {
+  const router: NextRouter = useRouter();
   const langTheme: LocaleType = useLocaleContext();
   const thumbnailDataArray = postsFilteredByTag[langTheme].map(postData => ({
     id: postData.id,
@@ -71,7 +74,7 @@ const Tag = ({postsFilteredByTag, tagNameArray}) => {
       </Head>
       <Title title={tagName.name} subtitle={locale(langTheme).categoryArchive.subtitle}/>
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={"/allposts"}>{locale(langTheme).buttonText.toArchive}</Button>
+      <Button path={`/${String(router.query.locale)}`}>{locale(langTheme).buttonText.toArchive}</Button>
     </>
   )
 }

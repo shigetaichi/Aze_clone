@@ -140,7 +140,7 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
       </div>
       <Title title={locale(localeContext).recommendation.title}
              subtitle={locale(localeContext).recommendation.subtitle}/>
-      <Button path="/allposts">{locale(localeContext).buttonText.toArchive}</Button>
+      <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
       <Button path="/">{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
