@@ -12,6 +12,7 @@ import Title from "components/atom/Title/Title";
 import PostList from "components/organism/PostList/PostList";
 import Button from "components/atom/Button/Button";
 import LangSelect from "components/atom/LangSelect/LangSelect";
+import Top from "../../components/template/Top/Top";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -71,35 +72,8 @@ const Home = ({allPostData, postsFilteredByTag}) => {
         <meta property="og:type" content="website"/>
         <title>{locale(localeContext).layout.home}</title>
       </Head>
-      <div className={styles.indexStatement}>
-        <div className={styles.left}>
-          <p style={{display: "none",}}>Dear S.K.</p>
-          {locale(localeContext).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
-        </div>
-        <div className={styles.right}>
-          <LangSelect/>
-        </div>
-      </div>
       
-      <Title
-        title={locale(localeContext).selectedEight.title}
-        subtitle={locale(localeContext).selectedEight.subtitle}
-      />
-      <PostList thumbnailDataArray={thumbnailDataArraySelected}/>
-      <Pagination perPage={10} total={330}/>
-      <div className="m-s-36"/>
-      <div className="m-s-36"/>
-      <Title
-        title={locale(localeContext).posts.title}
-        subtitle={locale(localeContext).posts.subtitle}
-      />
-      <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Pagination perPage={10} total={330}/>
-      <div className="m-s-36"/>
-      <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
-      <div className="m-s-36"/>
-      <div className="m-s-36"/>
-      <div className="m-s-36"/>
+      <Top arraySelected={thumbnailDataArraySelected} topArray={thumbnailDataArray} />
     </>
   )
 }

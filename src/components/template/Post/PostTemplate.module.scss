@@ -87,7 +87,7 @@
         figure {
           margin: 0 0 u.$eighteen;
           figcaption {
-            @include u.h5normal();
+            @include u.h4normal(u.$shippori);
             text-align: center;
           }
         }
@@ -135,4 +135,24 @@
   }
 }
 
+.prev_and_next {
+  @include u.grid-base();
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin: 0 auto u.$thirty_six;
+}
+
+.prev_flag, .next_flag {
+  display: none;
+  font-family: tryst, serif;
+  text-align: center;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 480px) {
+  .prev_flag, .next_flag {
+    display: block;
+  }
+}
 

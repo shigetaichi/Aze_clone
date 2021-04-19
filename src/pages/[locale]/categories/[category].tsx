@@ -1,12 +1,9 @@
 import { getCatNameByLangAndId, getPostsFilteredByCategoryAndLangWp } from 'lib/category';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import PostList from "components/organism/PostList/PostList";
 import Head from "next/head";
-import Title from "components/atom/Title/Title";
-import Button from "components/atom/Button/Button";
-import { NextRouter, useRouter } from "next/router";
 import { langType } from "types";
+import Category from "components/template/Category/Category";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale)
@@ -39,8 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 }
 
-const Category = ({postsFilteredByCategory, catNameArray}) => {
-  const router: NextRouter = useRouter();
+const CategoryPage = ({postsFilteredByCategory, catNameArray}) => {
   const localeContext: LocaleType = useLocaleContext();
   const thumbnailDataArray = postsFilteredByCategory[localeContext].map(postData => ({
     id: postData.id,
@@ -56,11 +52,9 @@ const Category = ({postsFilteredByCategory, catNameArray}) => {
       <Head>
         <title>{catName.name + locale(localeContext).categories.title}</title>
       </Head>
-      <Title title={catName.name} subtitle={locale(localeContext).categoryArchive.subtitle}/>
-      <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toArchive}</Button>
+      <Category catName={catName.name} thumbnailDataArray={thumbnailDataArray}/>
     </>
   )
 }
 
-export default Category
+export default CategoryPage

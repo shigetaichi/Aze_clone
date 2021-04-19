@@ -22,7 +22,7 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
   const localeContext: LocaleType = useLocaleContext();
   
   return (
-    <div className="post-cat-and-tags-wrapper">
+    <div className={styles.wrapper}>
       {props.category.length && (
         <div className={styles.cat}>
           {locale(localeContext).categories.title}：

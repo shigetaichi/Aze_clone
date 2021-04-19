@@ -1,6 +1,6 @@
 import { wpBaseUrl, wpGenerateNextAndPrevArray } from 'lib/post';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import PostPage from "components/template/PostPage/PostPage";
+import PostTemplate from "components/template/Post/PostTemplate";
 import { fetchWithCache } from "lib/helpers";
 import { wpGetCatNamesById } from "lib/category";
 import { wpGetTagNamesById } from "lib/tags";
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const Post = ({postData, nextAndPrev}) => {
   return (
-    <PostPage postData={postData} nextAndPrev={nextAndPrev}/>
+    <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>
   )
 }
 

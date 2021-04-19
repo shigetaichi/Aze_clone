@@ -6,7 +6,7 @@ import Button from "components/atom/Button/Button";
 import Title from "components/atom/Title/Title";
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
-import styles from "./PostPage.module.scss";
+import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
 import PostCategoryAndTags from "components/molecules/PostCategoryAndTags/PostCategoryAndTags";
 
@@ -15,7 +15,7 @@ interface PostPageProps {
   nextAndPrev: any;
 }
 
-const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
+const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
   const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
   const [indexList, setIndexList] = useState<Array<any>>([]);
@@ -109,8 +109,8 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
         </div>
       </div>
       <Title title={locale(localeContext).nextPrev.title} subtitle={locale(localeContext).nextPrev.subtitle}/>
-      <div className="prev-and-next">
-        <p className="prev-flag">前の記事</p>
+      <div className={styles.prev_and_next}>
+        <p className={styles.prev_flag}>前の記事</p>
         {nextAndPrev[0] && (
           <Thumbnail
             id={nextAndPrev[0].id}
@@ -120,7 +120,7 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
             tags={nextAndPrev[0].tags}
           />
         )}
-        <p className="next-flag">次の記事</p>
+        <p className={styles.next_flag}>次の記事</p>
         {nextAndPrev[1] && (
           <Thumbnail
             id={nextAndPrev[1].id}
@@ -139,4 +139,4 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
   )
 }
 
-export default PostPage
+export default PostTemplate

@@ -1,23 +1,25 @@
-.cat, .tags {
-  text-align: center;
-  margin-bottom: .4rem;
-  font-family: tryst, serif;
-}
+@use "src/styles/utils" as u;
 
-@media screen and (max-width: 480px){
-  .cat, .tags{
-    text-align: left;
+
+.wrapper {
+  margin-bottom: u.$twelve;
+  .cat, .tags {
+    text-align: center;
+    margin-bottom: u.$six;
+    @include u.h4normal(u.$shippori);
+
+    @include u.max-mq("sm") {
+      text-align: left;
+    }
   }
-}
 
-.cat .each_cat, .tags .each_tag {
-  cursor: pointer;
-  padding: 0 1rem;
-  text-decoration: underline;
-}
-
-@media screen and (max-width: 480px){
   .cat .each_cat, .tags .each_tag {
-    padding: 0 .2rem;
+    cursor: pointer;
+    padding: 0 u.$eight;
+    text-decoration: underline;
+
+    @include u.max-mq("sm") {
+      padding: 0 u.$three;
+    }
   }
 }
