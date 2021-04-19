@@ -2,6 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import Link from "next/link";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import styles from './PostCategoryAndTags.module.scss';
+import { NextRouter, useRouter } from "next/router";
 
 interface Category {
   id: number;
@@ -19,6 +20,7 @@ interface Props {
 }
 
 const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
+  const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
   
   return (
@@ -27,7 +29,7 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
         <div className={styles.cat}>
           {locale(localeContext).categories.title}：
           {props.category.map((cat: Category, i: number) => (
-            <Link href={`/categories/${Object.keys(cat)}`} key={i}>
+            <Link href={`/${String(router.query.locale)}/categories/${Object.keys(cat)}`} key={i}>
               <span className={styles.each_cat}>{Object.values(cat)[0][localeContext]}</span>
             </Link>
           ))}
@@ -37,7 +39,7 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
         <div className={styles.tags}>
           {locale(localeContext).tags.title}：
           {props.tags.map((tag: Tags, i: number) => (
-            <Link href={`/tags/${Object.keys(tag)}`} key={i}>
+            <Link href={`/${String(router.query.locale)}/tags/${Object.keys(tag)}`} key={i}>
               <span className={styles.each_tag}>{Object.values(tag)[0][localeContext]}</span>
             </Link>
           ))}

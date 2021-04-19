@@ -92,7 +92,8 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
           <article className={styles.article}>
             <h1 className={styles.title}>{postData.title.rendered}</h1>
             <span className={styles.published_at}>{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
-              <br className="on480"/><span className="off480inline">　</span>{formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}</span>
+              <br className="on480"/><span
+                className="off480inline">　</span>{formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}</span>
             <PostTransMenu translate_group={postData.translate_group}/>
             <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
             <div className={styles.eyecatch}>
@@ -110,31 +111,37 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
       </div>
       <Title title={locale(localeContext).nextPrev.title} subtitle={locale(localeContext).nextPrev.subtitle}/>
       <div className={styles.prev_and_next}>
-        <p className={styles.prev_flag}>前の記事</p>
-        {nextAndPrev[0] && (
-          <Thumbnail
-            id={nextAndPrev[0].id}
-            title={nextAndPrev[0].title}
-            image={nextAndPrev[0].eyecatch}
-            description={nextAndPrev[0].description}
-            tags={nextAndPrev[0].tags}
-          />
-        )}
-        <p className={styles.next_flag}>次の記事</p>
-        {nextAndPrev[1] && (
-          <Thumbnail
-            id={nextAndPrev[1].id}
-            title={nextAndPrev[1].title}
-            image={nextAndPrev[1].eyecatch}
-            description={nextAndPrev[1].description}
-            tags={nextAndPrev[1].tags}
-          />
-        )}
+        <div className={styles.prev}>
+          <p className={styles.flag}>前の記事</p>
+          {nextAndPrev[0] && (
+            <Thumbnail
+              id={nextAndPrev[0].id}
+              title={nextAndPrev[0].title}
+              image={nextAndPrev[0].eyecatch}
+              description={nextAndPrev[0].description}
+              tags={nextAndPrev[0].tags}
+            />
+          )}
+        </div>
+        <div className={styles.next}>
+          <p className={styles.flag}>次の記事</p>
+          {nextAndPrev[1] && (
+            <Thumbnail
+              id={nextAndPrev[1].id}
+              title={nextAndPrev[1].title}
+              image={nextAndPrev[1].eyecatch}
+              description={nextAndPrev[1].description}
+              tags={nextAndPrev[1].tags}
+            />
+          )}
+        </div>
       </div>
-      <Title title={locale(localeContext).recommendation.title}
-             subtitle={locale(localeContext).recommendation.subtitle}/>
-      <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
-      <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toTop}</Button>
+      <div className={styles.recommend}>
+        <Title title={locale(localeContext).recommendation.title}
+               subtitle={locale(localeContext).recommendation.subtitle}/>
+        <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
+        <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toTop}</Button>
+      </div>
     </>
   )
 }
