@@ -1,4 +1,3 @@
-import React from 'react'
 import Head from "next/head"
 import styles from './Layout.module.scss';
 import ClassNames from 'classnames';
@@ -23,7 +22,7 @@ const Layout = (props) => {
   
   
   return (
-    <React.Fragment>
+    <>
       <Head>
         <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
         {/* Facebook：この内容は他のSNSにも使用されます。 */}
@@ -52,7 +51,7 @@ const Layout = (props) => {
       <main className={styles.main}>
         <div className={styles.left}>
           <ContentLeft>
-            <p>a</p>
+            {/*<p>a</p>*/}
           </ContentLeft>
         </div>
         <div className={styles.center}>
@@ -60,12 +59,12 @@ const Layout = (props) => {
         </div>
         <div className={styles.right}>
           <ContentRight>
-            <p>b</p>
+            {/*<p>b</p>*/}
           </ContentRight>
         </div>
       </main>
       <Footer/>
-    </React.Fragment>
+    </>
   )
 }
 

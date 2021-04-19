@@ -24,10 +24,9 @@ const LocaleProvider: FC = (props: {
   const [locale, setLocale] = useState<LocaleType>(props.locale ? props.locale : 'ja');
   
   useEffect(() => {
-    
-    // setLocale();
+    setLocale(String(router.query.locale) as LocaleType);
     return () => {
-    
+      setLocale('ja');
     };
   }, []);
   
