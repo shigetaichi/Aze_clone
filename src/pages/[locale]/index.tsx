@@ -11,7 +11,7 @@ import { NextRouter, useRouter } from "next/router";
 import Title from "components/atom/Title/Title";
 import PostList from "components/organism/PostList/PostList";
 import Button from "components/atom/Button/Button";
-import LangSelect from "../../components/atom/LangSelect/LangSelect";
+import LangSelect from "components/atom/LangSelect/LangSelect";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

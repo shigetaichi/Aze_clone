@@ -1,13 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import { sha256 } from "lib/post";
-import { PostCategoryAndTags, PostTranslationMenu } from "../../index";
 import Button from "components/atom/Button/Button";
 import Title from "components/atom/Title/Title";
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
 import styles from "./PostPage.module.scss";
+import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
+import PostCategoryAndTags from "components/molecules/PostCategoryAndTags/PostCategoryAndTags";
 
 interface PostPageProps {
   postData: any;
@@ -92,7 +93,7 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
             <h1 className={styles.title}>{postData.title.rendered}</h1>
             <span className={styles.published_at}>{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
               <br className="on480"/><span className="off480inline">　</span>{formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}</span>
-            <PostTranslationMenu translate_group={postData.translate_group}/>
+            <PostTransMenu translate_group={postData.translate_group}/>
             <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
             <div className={styles.eyecatch}>
               <img src={postData.acf.eyecatch} alt=""/>
@@ -133,7 +134,7 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
       <Title title={locale(localeContext).recommendation.title}
              subtitle={locale(localeContext).recommendation.subtitle}/>
       <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
-      <Button path="/">{locale(localeContext).buttonText.toTop}</Button>
+      <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
 }

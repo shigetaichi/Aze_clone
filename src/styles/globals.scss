@@ -31,55 +31,6 @@ ul {
   padding: 0;
 }
 
-.post-translations {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  font-family: tryst, serif;
-}
-
-@media screen and (max-width: 480px) {
-  .post-translations {
-    margin: 0 auto 1rem;
-  }
-}
-
-.post-translations .to-translate {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 10px;
-  margin: 0 10px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-height: 40px;
-}
-
-@media screen and (max-width: 480px) {
-  .post-translations .to-translate {
-    font-size: 12px;
-    padding: 0 5px;
-    min-height: 30px;
-  }
-}
-
-.post-translations .to-translate a {
-  text-decoration: underline;
-  color: #0398c3;
-}
-
-.post-translations .to-translate a:visited {
-  color: #7d59a0;
-}
-
-.post-translations .to-translate a.dark {
-  color: #00ccff;
-}
-
 .prev-and-next {
   display: flex;
   justify-content: center;

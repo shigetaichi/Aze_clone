@@ -1,48 +1,49 @@
-import React, { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 import Link from 'next/link';
 import Classnames from 'classnames';
-import { useThemeContext } from '../context/context';
+import { ThemeContext, useThemeContext } from 'context/context';
+import styles from "./PostTransMenu.module.scss";
 
 
-interface props {
+interface Props {
   translate_group: object;
 }
 
-const PostTranslationMenu: FC<props> = (props) => {
-  const themeNames = useThemeContext();
+const PostTransMenu: FC<Props> = (props: PropsWithChildren<Props>) => {
+  const themeNames: ThemeContext = useThemeContext();
   const translate_group = props.translate_group;
-
+  
   const translationLink = Classnames({
     'dark': themeNames.themeName === 'dark',
   });
   
-
+  
   return (
-    <div className="post-translations">
+    <div className={styles.translation}>
       {translate_group['en_US'] && (
-        <Link href={`/posts/en/${translate_group['en_US'].ID}`}>
-          <div className="to-translate">
+        <Link href={`/en/posts/${translate_group['en_US'].ID}`}>
+          <div className={styles.to_translate}>
             <a className={translationLink}>English</a>
           </div>
         </Link>
       )}
       {translate_group['ru_RU'] && (
-        <Link href={`/posts/ru/${translate_group['ru_RU'].ID}`}>
-          <div className="to-translate">
+        <Link href={`/ru/posts/${translate_group['ru_RU'].ID}`}>
+          <div className={styles.to_translate}>
             <a className={translationLink}>ロシア語</a>
           </div>
         </Link>
       )}
       {translate_group['ja'] && (
-        <Link href={`/posts/ja/${translate_group['ja'].ID}`}>
-          <div className="to-translate">
+        <Link href={`/ja/posts/${translate_group['ja'].ID}`}>
+          <div className={styles.to_translate}>
             <a className={translationLink}>日本語</a>
           </div>
         </Link>
       )}
       {translate_group['az'] && (
-        <Link href={`/posts/aze/${translate_group['az'].ID}`}>
-          <div className="to-translate">
+        <Link href={`/az/posts/${translate_group['az'].ID}`}>
+          <div className={styles.to_translate}>
             <a className={translationLink}>アゼルバイジャン語</a>
           </div>
         </Link>
@@ -51,4 +52,4 @@ const PostTranslationMenu: FC<props> = (props) => {
   )
 }
 
-export default PostTranslationMenu
+export default PostTransMenu

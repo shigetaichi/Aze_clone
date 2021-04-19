@@ -3,8 +3,8 @@ import { getPostsFilteredByTagAndLangWp, getTagNameByLangAndId } from 'lib/tags'
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import PostList from "components/organism/PostList/PostList";
-import Title from "../../../components/atom/Title/Title";
-import Button from "../../../components/atom/Button/Button";
+import Title from "components/atom/Title/Title";
+import Button from "components/atom/Button/Button";
 import { NextRouter, useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

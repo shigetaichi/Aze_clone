@@ -1,7 +1,7 @@
-import React, { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from "react";
 import Link from "next/link";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
-import styles from 'components-style/PostCategoryAndTags.module.css';
+import styles from './PostCategoryAndTags.module.scss';
 
 interface Category {
   id: number;
@@ -27,9 +27,9 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
         <div className={styles.cat}>
           {locale(localeContext).categories.title}：
           {props.category.map((cat: Category, i: number) => (
-              <Link href={`/categories/${Object.keys(cat)}`} key={i}>
-                <span className={styles.each_cat}>{Object.values(cat)[0][localeContext]}</span>
-              </Link>
+            <Link href={`/categories/${Object.keys(cat)}`} key={i}>
+              <span className={styles.each_cat}>{Object.values(cat)[0][localeContext]}</span>
+            </Link>
           ))}
         </div>
       )}
