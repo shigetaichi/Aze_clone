@@ -1,28 +1,30 @@
-import { useLangContext, useSetLangContext, lang, LangContext } from 'context/langContext';
+import { useLocaleContext, useSetLocaleContext, locale, LocaleType } from 'context/localeContext';
 import ClassNames from 'classnames';
 import styles from './LangSelect.module.scss';
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { NextRouter, useRouter } from "next/router";
+import { ThemeContext, useThemeContext } from "context/context";
 
 const LangSelect = () => {
   const router: NextRouter = useRouter();
-  const langTheme: LangContext = useLangContext();
-  const setLangTheme: Dispatch<SetStateAction<LangContext>> = useSetLangContext();
+  const themeNames: ThemeContext = useThemeContext();
+  const localeContext: LocaleType = useLocaleContext();
+  const setLocaleContext: Dispatch<SetStateAction<LocaleType>> = useSetLocaleContext();
 
   const LangInputLabel = ClassNames(styles.langInputLabel, {
-    [styles.langInputLabelDark]: langTheme.langName === "dark"
+    [styles.langInputLabelDark]: themeNames.themeName === "dark"
   });
   const LangInputOptions = ClassNames(styles.langInputOptions, {
-    [styles.langInputOptionsDark]: langTheme.langName === "dark"
+    [styles.langInputOptionsDark]: themeNames.themeName === "dark"
   });
   const handleChange = (event: ChangeEvent<HTMLSelectElement>): void => {
     router.push(router.pathname.replace('[lang]',event.target.value));
-    setLangTheme(() => ({ langName: event.target.value }));
+    setLocaleContext(event.target.value as LocaleType);
   }
 
   return (
     <>
-      <label htmlFor="lang-select" className={LangInputLabel}>{lang(langTheme.langName).language}</label>
+      <label htmlFor="lang-select" className={LangInputLabel}>{locale(localeContext).language}</label>
       <select name="lang-select" id="lang-select" className={LangInputOptions} onChange={handleChange}>
         <option value="ja">日本語</option>
         <option value="az">Azerbaycan</option>

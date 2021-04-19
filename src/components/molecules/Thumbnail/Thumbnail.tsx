@@ -3,11 +3,11 @@ import Link from 'next/link';
 import styles from './Thumbnail.module.scss';
 import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
-import { LangContext, useLangContext } from 'context/langContext';
+import { LocaleType, useLocaleContext } from 'context/localeContext';
 
 const Thumbnail = (props) => {
   const themeNames: ThemeContext = useThemeContext();
-  const langTheme: LangContext = useLangContext();
+  const localeContext: LocaleType = useLocaleContext();
   const PostThumbnailStyle = ClassNames(styles.content, {
     [styles.contentDark]: themeNames.themeName === 'dark'
   });
@@ -25,7 +25,7 @@ const Thumbnail = (props) => {
   }
   
   return (
-    <Link href={`/posts/${langTheme.langName}/[id]`} as={`/posts/${langTheme.langName}/${props.id}`}>
+    <Link href={`/posts/${localeContext}/[id]`} as={`/posts/${localeContext}/${props.id}`}>
       <div className={styles.root}>
         <div>
           <div className={styles.media}>

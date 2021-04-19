@@ -1,7 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { Button, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
-import { lang, useLangContext } from 'context/langContext';
+import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { fetchWithCache } from "lib/helpers";
 import Head from "next/head";
 import PostList from "components/organism/PostList/PostList";
@@ -31,9 +31,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const allposts = ({allPostData}) => {
-  const langTheme = useLangContext();
+  const localeContext: LocaleType = useLocaleContext();
   
-  const allPostDataArray = allPostData[langTheme.langName];
+  const allPostDataArray = allPostData[localeContext];
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,
     title: post.title.rendered,
@@ -44,15 +44,15 @@ const allposts = ({allPostData}) => {
   return (
     <>
       <Head>
-        <title>{lang(langTheme.langName).layout.archives}</title>
+        <title>{locale(localeContext).layout.archives}</title>
       </Head>
       <LangSelect/>
       <Title
-        title={lang(langTheme.langName).allposts.title}
-        subtitle={lang(langTheme.langName).allposts.subtitle}
+        title={locale(localeContext).allposts.title}
+        subtitle={locale(localeContext).allposts.subtitle}
       />
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={"/"}>{lang(langTheme.langName).buttonText.toTop}</Button>
+      <Button path={"/"}>{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
 }

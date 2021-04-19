@@ -3,7 +3,7 @@ import Head from "next/head"
 import styles from './Layout.module.scss';
 import ClassNames from 'classnames';
 import { useThemeContext } from 'context/context';
-import { lang, useLangContext } from 'context/langContext';
+import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import Header from "components/organism/Header/Header";
 import Footer from "components/organism/Footer/Footer";
 import ContentLeft from "components/organism/ContentLeft/ContentLeft";
@@ -15,7 +15,7 @@ const Layout = (props) => {
   const url = props.url ? props.url : 'https://azerbaijapan.xyz/';
   const siteTitle = "Azerbaijapan";
   const themeNames = useThemeContext();
-  const langTheme = useLangContext();
+  const localeContext: LocaleType = useLocaleContext();
   
   const LayoutStyle = ClassNames(styles.layout, {
     [styles.dark]: themeNames.themeName === 'dark'
@@ -27,14 +27,14 @@ const Layout = (props) => {
       <Head>
         <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
         {/* Facebook：この内容は他のSNSにも使用されます。 */}
-        <meta property="og:locale" content={lang(langTheme.langName).locale}/>
+        <meta property="og:locale" content={locale(localeContext).locale}/>
         <meta property="og:title" content={title}/>
         <meta property="og:type" content="article"/>
         <meta property="og:url" content={"https://azerbaijapan.xyz" + url}/>
         <meta property="og:image" content={image}/>
         <meta property="og:site_name" content="AZERBAIJAPAN"/>
-        <meta name="description" content={lang(langTheme.langName).description}/>
-        <meta property="og:description" content={lang(langTheme.langName).description}/>
+        <meta name="description" content={locale(localeContext).description}/>
+        <meta property="og:description" content={locale(localeContext).description}/>
         {/* Twitter Cards */}
         <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site" content="@azerbaijapan"/>
@@ -42,7 +42,7 @@ const Layout = (props) => {
         {/* Twitter Cards：※「Twitter Analytics」を使用する場合は、上記＋以下も必須。 */}
         <meta name="twitter:title" content={title}/>
         <meta name="twitter:domain" content="https://azerbaijapan.xyz"/>
-        <meta name="twitter:description" content={lang(langTheme.langName).description}/>
+        <meta name="twitter:description" content={locale(localeContext).description}/>
         <meta name="twitter:image:src" content={image}/>
         
         <link rel="icon" href={"/azerbaijapan-favicon.png"}/>

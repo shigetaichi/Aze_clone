@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import Link from "next/link";
-import { lang, useLangContext } from "context/langContext";
+import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import styles from 'components-style/PostCategoryAndTags.module.css';
 
 interface Category {
@@ -18,32 +18,28 @@ interface Props {
   tags?: Array<Tags>;
 }
 
-const PostCategoryAndTags: FC<Props> = (props) => {
-  const langTheme = useLangContext();
-
+const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
+  const localeContext: LocaleType = useLocaleContext();
+  
   return (
     <div className="post-cat-and-tags-wrapper">
       {props.category.length && (
         <div className={styles.cat}>
-          {lang(langTheme.langName).categories.title}：
-          {props.category.map((cat, i) => (
-            <React.Fragment key={i}>
-              <Link href={`/categories/${Object.keys(cat)}`}>
-                <span className={styles.each_cat}>{Object.values(cat)[0][langTheme.langName]}</span>
+          {locale(localeContext).categories.title}：
+          {props.category.map((cat: Category, i: number) => (
+              <Link href={`/categories/${Object.keys(cat)}`} key={i}>
+                <span className={styles.each_cat}>{Object.values(cat)[0][localeContext]}</span>
               </Link>
-            </React.Fragment>
           ))}
         </div>
       )}
       {props.tags.length && (
         <div className={styles.tags}>
-          {lang(langTheme.langName).tags.title}：
-          {props.tags.map((tag, i) => (
-            <React.Fragment key={i}>
-              <Link href={`/tags/${Object.keys(tag)}`}>
-                <span className={styles.each_tag}>{Object.values(tag)[0][langTheme.langName]}</span>
-              </Link>
-            </React.Fragment>
+          {locale(localeContext).tags.title}：
+          {props.tags.map((tag: Tags, i: number) => (
+            <Link href={`/tags/${Object.keys(tag)}`} key={i}>
+              <span className={styles.each_tag}>{Object.values(tag)[0][localeContext]}</span>
+            </Link>
           ))}
         </div>
       )}

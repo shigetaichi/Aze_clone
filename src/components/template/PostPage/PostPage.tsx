@@ -1,12 +1,15 @@
 import React, { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
-import { lang, LangContext, useLangContext } from "../../../context/langContext";
-import { sha256 } from "../../../lib/post";
-import { Button, ContentIndex, PostCategoryAndTags, PostThumbnail, PostTranslationMenu, Title } from "../../index";
+import { locale, LocaleType, useLocaleContext } from "context/localeContext";
+import { sha256 } from "lib/post";
+import { ContentIndex, PostCategoryAndTags, PostTranslationMenu } from "../../index";
 import Container from "@material-ui/core/Container";
 import hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/languages/javascript';
+import javascript from 'highlight.js/lib/localeuages/javascript';
 import 'highlight.js/styles/atom-one-dark.css';
+import Button from "components/atom/Button/Button";
+import Title from "../../atom/Title/Title";
+import Thumbnail from "../../molecules/Thumbnail/Thumbnail";
 
 interface PostPageProps {
   postData: any;
@@ -17,7 +20,7 @@ hljs.registerLanguage('javascript', javascript);
 
 const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
   const router: NextRouter = useRouter();
-  const langTheme: LangContext = useLangContext();
+  const localeContext: LocaleType = useLocaleContext();
   const [indexList, setIndexList] = useState<Array<any>>([]);
   useEffect(() => {
     hljs.initHighlighting();
@@ -92,10 +95,10 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
       <Container maxWidth="xl">
         <h1 className="post-title">
           {postData.title.rendered}</h1>
-        <span className="post-publishedAt">{lang(langTheme.langName).post.publishedAt} {formatDate(postData.date)}
+        <span className="post-publishedAt">{locale(localeContext).post.publishedAt} {formatDate(postData.date)}
           <br className="on480"/>
           <span className="off480inline">　</span>
-          {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${lang(langTheme.langName).post.updatedAt} ${formatDate(postData.modified)}`}
+          {formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}
         </span>
         <PostTranslationMenu translate_group={postData.translate_group}/>
         <PostCategoryAndTags category={postData.cat_obj} tags={postData.tags_obj}/>
@@ -103,20 +106,20 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
           <img src={postData.acf.eyecatch} alt=""/>
         </div>
       </Container>
-      <div id="post-content" lang="ja">
+      <div id="post-content">
         <div className="post-container">
           <div id="content" dangerouslySetInnerHTML={{__html: postData.content.rendered}}/>
           <div className="thanks-reading">
-            <p>{lang(langTheme.langName).post.thanks}</p>
+            <p>{locale(localeContext).post.thanks}</p>
           </div>
         </div>
       </div>
       <div className="module-spacer--medium"/>
-      <Title title={lang(langTheme.langName).nextPrev.title} subtitle={lang(langTheme.langName).nextPrev.subtitle}/>
+      <Title title={locale(localeContext).nextPrev.title} subtitle={locale(localeContext).nextPrev.subtitle}/>
       <div className="prev-and-next">
         <p className="prev-flag">前の記事</p>
         {nextAndPrev[0] && (
-          <PostThumbnail
+          <Thumbnail
             id={nextAndPrev[0].id}
             title={nextAndPrev[0].title}
             image={nextAndPrev[0].eyecatch}
@@ -126,7 +129,7 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
         )}
         <p className="next-flag">次の記事</p>
         {nextAndPrev[1] && (
-          <PostThumbnail
+          <Thumbnail
             id={nextAndPrev[1].id}
             title={nextAndPrev[1].title}
             image={nextAndPrev[1].eyecatch}
@@ -135,10 +138,10 @@ const PostPage: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => 
           />
         )}
       </div>
-      <Title title={lang(langTheme.langName).recommendation.title}
-             subtitle={lang(langTheme.langName).recommendation.subtitle}/>
-      <Button path="/allposts">{lang(langTheme.langName).buttonText.toArchive}</Button>
-      <Button path="/">{lang(langTheme.langName).buttonText.toTop}</Button>
+      <Title title={locale(localeContext).recommendation.title}
+             subtitle={locale(localeContext).recommendation.subtitle}/>
+      <Button path="/allposts">{locale(localeContext).buttonText.toArchive}</Button>
+      <Button path="/">{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
 }

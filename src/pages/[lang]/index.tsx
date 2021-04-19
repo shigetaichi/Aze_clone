@@ -1,14 +1,17 @@
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { Button, LangToggler3, PostFlex, Title } from 'components';
 import { wpBaseUrl } from 'lib/post';
-import { lang, LangContext, useLangContext } from 'context/langContext';
+import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
 import { langType } from "types";
 import styles from "styles/index.module.scss";
 import Pagination from "components/molecules/Pagination/Pagination";
 import { NextRouter, useRouter } from "next/router";
+import Title from "components/atom/Title/Title";
+import PostList from "components/organism/PostList/PostList";
+import Button from "components/atom/Button/Button";
+import LangSelect from "../../components/atom/LangSelect/LangSelect";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -43,8 +46,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const Home = ({allPostData, postsFilteredByTag}) => {
   const router: NextRouter = useRouter();
-  const langTheme: LangContext = useLangContext();
-  const allPostDataArray = allPostData[langTheme.langName];
+  const localeContext: LocaleType = useLocaleContext();
+  const allPostDataArray = allPostData[localeContext];
   
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,
@@ -54,7 +57,7 @@ const Home = ({allPostData, postsFilteredByTag}) => {
     tags: post.tag_name,
   }));
   
-  const thumbnailDataArraySelected = postsFilteredByTag[langTheme.langName].map(postData => ({
+  const thumbnailDataArraySelected = postsFilteredByTag[localeContext].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
     eyecatch: postData.acf.eyecatch,
@@ -66,34 +69,34 @@ const Home = ({allPostData, postsFilteredByTag}) => {
     <>
       <Head>
         <meta property="og:type" content="website"/>
-        <title>{lang(langTheme.langName).layout.home}</title>
+        <title>{locale(localeContext).layout.home}</title>
       </Head>
       <div className={styles.indexStatement}>
         <div className={styles.left}>
           <p style={{display: "none",}}>Dear S.K.</p>
-          {lang(langTheme.langName).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
+          {locale(localeContext).top.description.map((p: string, i: number) => <p key={i}>{p}</p>)}
         </div>
         <div className={styles.right}>
-          <LangToggler3/>
+          <LangSelect/>
         </div>
       </div>
       
       <Title
-        title={lang(langTheme.langName).selectedEight.title}
-        subtitle={lang(langTheme.langName).selectedEight.subtitle}
+        title={locale(localeContext).selectedEight.title}
+        subtitle={locale(localeContext).selectedEight.subtitle}
       />
-      <PostFlex thumbnailDataArray={thumbnailDataArraySelected}/>
+      <PostList thumbnailDataArray={thumbnailDataArraySelected}/>
       <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
       <div className="m-s-36"/>
       <Title
-        title={lang(langTheme.langName).posts.title}
-        subtitle={lang(langTheme.langName).posts.subtitle}
+        title={locale(localeContext).posts.title}
+        subtitle={locale(localeContext).posts.subtitle}
       />
-      <PostFlex thumbnailDataArray={thumbnailDataArray}/>
+      <PostList thumbnailDataArray={thumbnailDataArray}/>
       <Pagination perPage={10} total={330}/>
       <div className="m-s-36"/>
-      <Button path={`/${String(router.query.lang)}/allposts`}>{lang(langTheme.langName).buttonText.toArchive}</Button>
+      <Button path={`/${String(router.query.lang)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
       <div className="m-s-36"/>
       <div className="m-s-36"/>
       <div className="m-s-36"/>

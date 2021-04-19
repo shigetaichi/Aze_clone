@@ -4,8 +4,7 @@ import { NextRouter, useRouter } from 'next/router'
 import * as gtag from 'lib/gtag';
 import { useEffect } from 'react';
 import { ColorProvider } from "context/context";
-import { LangProvider } from "context/langContext";
-import { Hamburger } from 'components';
+import { LocaleProvider } from "context/localeContext";
 import Layout from "components/organism/Layout/Layout";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { fetchWithCache } from "../lib/helpers";
@@ -55,12 +54,11 @@ function MyApp({Component, pageProps}: AppProps) {
   return (
     
     <ColorProvider>
-      <LangProvider>
-        <Hamburger/>
+      <LocaleProvider>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </LangProvider>
+      </LocaleProvider>
     </ColorProvider>
   )
 }

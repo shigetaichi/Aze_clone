@@ -1,17 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './Footer.module.scss';
 import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
-import { TagArea, Title } from "../../index";
-import { lang, LangContext, useLangContext } from "context/langContext";
+import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
-import { langType } from "types";
 import CategoryArea from "components/molecules/CategoryArea/CategoryArea";
 import Link from "next/link";
+import { langType } from "types";
+import TagArea from "components/molecules/TagArea/TagArea";
+import Title from "components/atom/Title/Title";
 
 const Footer: FC = () => {
-  const langTheme: LangContext = useLangContext();
+  const localeTheme: LocaleType = useLocaleContext();
   const themeNames: ThemeContext = useThemeContext();
   const FooterStyle = ClassNames(styles.footer, {
     [styles.dark]: themeNames.themeName === 'dark'
@@ -69,15 +70,15 @@ const Footer: FC = () => {
   return (
     <>
       <Title
-        title={lang(langTheme.langName).categories.title}
-        subtitle={lang(langTheme.langName).categories.subtitle}
+        title={locale(localeTheme).categories.title}
+        subtitle={locale(localeTheme).categories.subtitle}
       />
-      {categories[langTheme.langName] && <CategoryArea categories={categories[langTheme.langName]}/>}
+      {categories[localeTheme] && <CategoryArea categories={categories[localeTheme]}/>}
       <Title
-        title={lang(langTheme.langName).tags.title}
-        subtitle={lang(langTheme.langName).tags.subtitle}
+        title={locale(localeTheme).tags.title}
+        subtitle={locale(localeTheme).tags.subtitle}
       />
-      {tags[langTheme.langName] && <TagArea tags={tags[langTheme.langName]}/>}
+      {tags[localeTheme] && <TagArea tags={tags[localeTheme]}/>}
       <footer className={FooterStyle}>
         <div className="module-spacer--medium"/>
         <a className={styles.instagram_icon} href="https://www.instagram.com/azerbaijapan/">

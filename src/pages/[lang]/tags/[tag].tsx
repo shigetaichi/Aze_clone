@@ -1,5 +1,5 @@
 import { Button, Title } from 'components';
-import { lang, useLangContext } from 'context/langContext';
+import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { getPostsFilteredByTagAndLangWp, getTagNameByLangAndId } from 'lib/tags';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
@@ -54,24 +54,24 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const Tag = ({postsFilteredByTag, tagNameArray}) => {
-  const langTheme = useLangContext();
-  const thumbnailDataArray = postsFilteredByTag[langTheme.langName].map(postData => ({
+  const langTheme: LocaleType = useLocaleContext();
+  const thumbnailDataArray = postsFilteredByTag[langTheme].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
     eyecatch: postData.acf.eyecatch,
     description: postData.content.rendered,
     tags: postData.tag_name
   }));
-  const tagName = tagNameArray[langTheme.langName];
+  const tagName = tagNameArray[langTheme];
   
   return (
     <>
       <Head>
-        <title>{tagName.name + lang(langTheme.langName).categories.title}</title>
+        <title>{tagName.name + locale(langTheme).categories.title}</title>
       </Head>
-      <Title title={tagName.name} subtitle={lang(langTheme.langName).categoryArchive.subtitle}/>
+      <Title title={tagName.name} subtitle={locale(langTheme).categoryArchive.subtitle}/>
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={"/allposts"}>{lang(langTheme.langName).buttonText.toArchive}</Button>
+      <Button path={"/allposts"}>{locale(langTheme).buttonText.toArchive}</Button>
     </>
   )
 }
