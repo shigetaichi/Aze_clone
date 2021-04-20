@@ -1,0 +1,18 @@
+@use "src/styles/utils" as u;
+
+.main {
+  @include u.grid-base();
+  margin-bottom: u.$thirty_six*4;
+
+  .each {
+    @include u.card-hover();
+    border-radius: u.$six;
+    cursor: pointer;
+
+    .text {
+      @include u.flex-center();
+      padding: u.$eighteen 0;
+      @include u.h1bold(u.$shippori);
+    }
+  }
+}
