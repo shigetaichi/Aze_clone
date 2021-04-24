@@ -30,7 +30,7 @@ const LocaleProvider: FC = (props: {
     return () => {
       setLocale('ja');
     };
-  }, []);
+  }, [router.query.locale]);
   
   
   return (

@@ -35,6 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const Post = ({postData, nextAndPrev}) => {
+  console.log(postData)
   return (
     <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>
   )
