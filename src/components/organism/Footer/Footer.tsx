@@ -25,16 +25,16 @@ const Footer: FC = () => {
     let categories: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
-        categories['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=ja`)
+        categories['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?lang=ja`)
       })(),
       (async () => {
-        categories['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=az`)
+        categories['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?lang=az`)
       })(),
       (async () => {
-        categories['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=en`)
+        categories['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?lang=en`)
       })(),
       (async () => {
-        categories['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=ru`)
+        categories['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?lang=ru`)
       })(),
     ]);
     return categories
@@ -44,16 +44,16 @@ const Footer: FC = () => {
     let tags: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
-        tags['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=ja`)
+        tags['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?lang=ja`)
       })(),
       (async () => {
-        tags['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=az`)
+        tags['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?lang=az`)
       })(),
       (async () => {
-        tags['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=en`)
+        tags['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?lang=en`)
       })(),
       (async () => {
-        tags['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=ru`)
+        tags['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?lang=ru`)
       })(),
     ]);
     return tags;
