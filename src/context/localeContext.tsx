@@ -1,4 +1,4 @@
-import { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useState } from "react"
+import { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
 import { localeData } from "../lang/common";
 import { NextRouter, useRouter } from "next/router";
 
@@ -21,8 +21,16 @@ const LocaleProvider: FC = (props: {
   locale?: LocaleType,
   children: ReactNode,
 }) => {
-  const router: NextRouter = useRouter()
+  const router: NextRouter = useRouter();
   const [locale, setLocale] = useState<LocaleType>(props.locale ? props.locale : 'ja');
+  
+  useEffect(() => {
+    setLocale(String(router.query.locale) as LocaleType);
+    return () => {
+      setLocale('ja');
+    };
+  }, []);
+  
   
   return (
     <LocaleContext.Provider value={locale}>
