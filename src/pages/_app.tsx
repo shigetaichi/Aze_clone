@@ -4,7 +4,7 @@ import { NextRouter, useRouter } from 'next/router'
 import * as gtag from 'lib/gtag';
 import { useEffect } from 'react';
 import { ColorProvider } from "context/context";
-import { LocaleProvider } from "context/localeContext";
+import { LocaleProvider, LocaleType } from "context/localeContext";
 import Layout from "components/organism/Layout/Layout";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { fetchWithCache } from "../lib/helpers";

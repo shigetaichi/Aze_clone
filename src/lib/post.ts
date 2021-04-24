@@ -146,7 +146,7 @@ export const wpGetAllPostIds = async () => {
 }
 
 export const wpGetPostDataById = async (lang: string, id: number) => {
-  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts/${id}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group&?filter[lang]=${lang}`);
   const data = await res.json();
   data['cat_obj'] = await Promise.all(data.categories.map(each => (
     wpGetCatNamesById(each)
@@ -158,7 +158,7 @@ export const wpGetPostDataById = async (lang: string, id: number) => {
 }
 
 export const wpNextAndPrevious = async (lang: string, id: number) => {
-  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts/${id}?_fields=next,prev`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts/${id}?_fields=next,prev&?filter[lang]=${lang}`);
   return await res.json();
 }
 

@@ -8,13 +8,13 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
   postsFilteredByTag = {
     'ja': [],
-    'aze': [],
+    'az': [],
     'en': [],
     'ru': [],
   }
   tagNameArray = {
     'ja': [],
-    'aze': [],
+    'az': [],
     'en': [],
     'ru': [],
   }
@@ -23,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', Number(context.query.tag));
     })(),
     (async () => {
-      postsFilteredByTag.aze = await getPostsFilteredByTagAndLangWp('az', Number(context.query.tag));
+      postsFilteredByTag.az = await getPostsFilteredByTagAndLangWp('az', Number(context.query.tag));
     })(),
     (async () => {
       postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', Number(context.query.tag));
@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
       tagNameArray.ja = await getTagNameByLangAndId('ja', Number(context.query.tag));
     })(),
     (async () => {
-      tagNameArray.aze = await getTagNameByLangAndId('az', Number(context.query.tag));
+      tagNameArray.az = await getTagNameByLangAndId('az', Number(context.query.tag));
     })(),
     (async () => {
       tagNameArray.en = await getTagNameByLangAndId('en', Number(context.query.tag));
@@ -54,6 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const TagPage = ({postsFilteredByTag, tagNameArray}) => {
   const langTheme: LocaleType = useLocaleContext();
+  console.log(postsFilteredByTag)
   const thumbnailDataArray = postsFilteredByTag[langTheme].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
@@ -66,7 +67,7 @@ const TagPage = ({postsFilteredByTag, tagNameArray}) => {
   return (
     <>
       <Head>
-        <title>{tagName.name + locale(langTheme).categories.title}</title>
+        <title>{tagName.name + locale(langTheme).tags.title}</title>
       </Head>
       <Tag tagName={tagName.name} thumbnailDataArray={thumbnailDataArray}/>
     </>

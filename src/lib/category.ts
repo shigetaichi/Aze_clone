@@ -86,12 +86,12 @@ export const getAllCategoryIdWp = async () => {
 }
 
 export const getCatNameByLangAndId = async (lang: string, id: number | string) => {
-  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories/${id}`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}`);
   return await res.json();
 }
 
 export const getPostsFilteredByCategoryAndLangWp = async (lang: string, id: number) => {
-  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?categories=${id}`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${id}`);
   return await res.json();
 }
 
@@ -105,10 +105,10 @@ export const getCategoriesWp = async () => {
 }
 
 export const wpGetCatNamesById = async (id: number) => {
-  const res = await fetch(`${wpBaseUrl}/ja/wp-json/wp/v2/categories/${id}?_fields=name`);
-  const res2 = await fetch(`${wpBaseUrl}/az/wp-json/wp/v2/categories/${id}?_fields=name`);
-  const res3 = await fetch(`${wpBaseUrl}/ru/wp-json/wp/v2/categories/${id}?_fields=name`);
-  const res4 = await fetch(`${wpBaseUrl}/en/wp-json/wp/v2/categories/${id}?_fields=name`);
+  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?_fields=name&?filter[lang]=ja`);
+  const res2 = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?_fields=name&?filter[lang]=az`);
+  const res3 = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?_fields=name&?filter[lang]=en`);
+  const res4 = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?_fields=name&?filter[lang]=ru`);
   const data = await res.json();
   const data2 = await res2.json();
   const data3 = await res3.json();

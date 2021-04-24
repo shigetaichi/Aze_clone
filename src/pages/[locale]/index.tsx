@@ -2,17 +2,9 @@ import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { wpBaseUrl } from 'lib/post';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
-import { getPostsFilteredByTagAndLangWp } from 'lib/tags';
 import { fetchWithCache } from "lib/helpers";
 import { langType } from "types";
-import styles from "styles/index.module.scss";
-import Pagination from "components/molecules/Pagination/Pagination";
-import { NextRouter, useRouter } from "next/router";
-import Title from "components/atom/Title/Title";
-import PostList from "components/organism/PostList/PostList";
-import Button from "components/atom/Button/Button";
-import LangSelect from "components/atom/LangSelect/LangSelect";
-import Top from "../../components/template/Top/Top";
+import Top from "components/template/Top/Top";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
@@ -31,11 +23,11 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${langString}/${allPostsUrl}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}&?filter[lang]=${langString}`)
     })(),
-    (async () => {
-      postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
-    })(),
+    // (async () => {
+    //   postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
+    // })(),
   ]);
   return {
     props: {
@@ -46,7 +38,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const Home = ({allPostData, postsFilteredByTag}) => {
-  const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
   const allPostDataArray = allPostData[localeContext];
   
@@ -73,7 +64,7 @@ const Home = ({allPostData, postsFilteredByTag}) => {
         <title>{locale(localeContext).layout.home}</title>
       </Head>
       
-      <Top arraySelected={thumbnailDataArraySelected} topArray={thumbnailDataArray} />
+      <Top arraySelected={thumbnailDataArraySelected} topArray={thumbnailDataArray}/>
     </>
   )
 }

@@ -12,7 +12,7 @@ import { NextRouter, useRouter } from "next/router";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const langString: string = String(context.query.lang)
+  const langString: string = String(context.query.locale)
   const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
   let allPostData: langType = {
     'ja': [],
@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${langString}/${allPostsUrl}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}&?filter[lang]=${langString}`)
     })(),
   ]);
   return {
@@ -55,7 +55,7 @@ const allposts = ({allPostData}) => {
         subtitle={locale(localeContext).allposts.subtitle}
       />
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Button path={`/${String(router.query.lang)}`}>{locale(localeContext).buttonText.toTop}</Button>
+      <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toTop}</Button>
     </>
   )
 }

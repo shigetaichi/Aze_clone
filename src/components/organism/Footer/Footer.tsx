@@ -25,16 +25,16 @@ const Footer: FC = () => {
     let categories: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
-        categories['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/categories`)
+        categories['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=ja`)
       })(),
       (async () => {
-        categories['az'] = await fetchWithCache(`${wpBaseUrl}/az/wp-json/wp/v2/categories`)
+        categories['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=az`)
       })(),
       (async () => {
-        categories['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/categories`)
+        categories['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=en`)
       })(),
       (async () => {
-        categories['ru'] = await fetchWithCache(`${wpBaseUrl}/ru/wp-json/wp/v2/categories`)
+        categories['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories?filter[lang]=ru`)
       })(),
     ]);
     return categories
@@ -44,16 +44,16 @@ const Footer: FC = () => {
     let tags: langType = {'ja': [], 'az': [], 'en': [], 'ru': [],}
     await Promise.all([
       (async () => {
-        tags['ja'] = await fetchWithCache(`${wpBaseUrl}/ja/wp-json/wp/v2/tags`)
+        tags['ja'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=ja`)
       })(),
       (async () => {
-        tags['az'] = await fetchWithCache(`${wpBaseUrl}/az/wp-json/wp/v2/tags`)
+        tags['az'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=az`)
       })(),
       (async () => {
-        tags['en'] = await fetchWithCache(`${wpBaseUrl}/en/wp-json/wp/v2/tags`)
+        tags['en'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=en`)
       })(),
       (async () => {
-        tags['ru'] = await fetchWithCache(`${wpBaseUrl}/ru/wp-json/wp/v2/tags`)
+        tags['ru'] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags?filter[lang]=ru`)
       })(),
     ]);
     return tags;

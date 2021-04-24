@@ -13,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const idParam: number = Number(context.query.id);
   await Promise.all([
     (async () => {
-      postData = await fetchWithCache(`${wpBaseUrl}/${localeParam}/wp-json/wp/v2/posts/${idParam}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
+      postData = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/posts/${idParam}?_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,translate_group`);
     })(),
     (async () => {
       nextAndPrev = await wpGenerateNextAndPrevArray(`${localeParam}`, idParam);
