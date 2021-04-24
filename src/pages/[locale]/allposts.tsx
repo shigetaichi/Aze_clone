@@ -13,7 +13,8 @@ import { NextRouter, useRouter } from "next/router";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const langString: string = String(context.query.locale)
-  const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
+  // const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
+  const allPostsUrl: string = "wp-json/wp/v2/posts";
   let allPostData: langType = {
     'ja': [],
     'az': [],
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}&?filter[lang]=${langString}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?lang=${langString}`)
     })(),
   ]);
   return {
@@ -35,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 const allposts = ({allPostData}) => {
   const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
-  
+  console.log(allPostData)
   const allPostDataArray = allPostData[localeContext];
   const thumbnailDataArray = allPostDataArray.map(post => ({
     id: post.id,

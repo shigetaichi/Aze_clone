@@ -8,8 +8,9 @@ import Top from "components/template/Top/Top";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const allPostsUrl: string = "wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name";
   const langString: string = String(context.query.locale);
+  const allPostsUrl: string = `wp-json/wp/v2/posts`;
+  // const allPostsUrl: string = `wp-json/wp/v2/posts?per_page=100&?lang=${langString}&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`;
   let allPostData: langType = {
     'ja': [],
     'az': [],
@@ -23,7 +24,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}&?filter[lang]=${langString}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?lang=${langString}`)
     })(),
     // (async () => {
     //   postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
@@ -39,6 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const Home = ({allPostData, postsFilteredByTag}) => {
   const localeContext: LocaleType = useLocaleContext();
+  console.log(allPostData)
   const allPostDataArray = allPostData[localeContext];
   
   const thumbnailDataArray = allPostDataArray.map(post => ({
