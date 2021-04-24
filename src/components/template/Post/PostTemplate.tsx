@@ -95,7 +95,7 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
               <br className="on480"/><span
                 className="off480inline">　</span>{formatDate(postData.date) === formatDate(postData.modified) ? "" : `${locale(localeContext).post.updatedAt} ${formatDate(postData.modified)}`}</span>
             <PostTransMenu translate_group={postData.translate_group}/>
-            <PostCategoryAndTags categories={postData.cat_obj} tags={postData.tags_obj}/>
+            <PostCategoryAndTags categories={postData.categories} tags={postData.tags}/>
             <div className={styles.eyecatch}>
               <img src={postData.acf.eyecatch} alt=""/>
             </div>

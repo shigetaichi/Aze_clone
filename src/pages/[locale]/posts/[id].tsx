@@ -20,12 +20,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     })(),
   ]);
   
-  postData['cat_obj'] = await Promise.all(postData.categories.map(each => (
-    wpGetCatNamesById(each)
-  )))
-  postData['tags_obj'] = await Promise.all(postData.tags.map(each => (
-    wpGetTagNamesById(each)
-  )))
   return {
     props: {
       postData,
@@ -34,12 +28,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 }
 
-const Post = ({postData, nextAndPrev}) => {
-  console.log(postData)
-  return (
-    <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>
-  )
-}
-
+const Post = ({postData, nextAndPrev}) => <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>;
 
 export default Post;
