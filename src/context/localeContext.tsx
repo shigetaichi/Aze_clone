@@ -22,7 +22,7 @@ const LocaleProvider: FC = (props: {
   children: ReactNode,
 }) => {
   const router: NextRouter = useRouter()
-  const [locale, setLocale] = useState<LocaleType>(String(router.query.locale) as LocaleType);
+  const [locale, setLocale] = useState<LocaleType>(props.locale ? props.locale : 'ja');
   
   return (
     <LocaleContext.Provider value={locale}>
