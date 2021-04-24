@@ -25,7 +25,7 @@ const LangSelect = () => {
   return (
     <>
       <label htmlFor="lang-select" className={LangInputLabel}>{locale(localeContext).language}</label>
-      <select name="lang-select" id="lang-select" className={LangInputOptions} onChange={handleChange}>
+      <select value={localeContext} name="lang-select" id="lang-select" className={LangInputOptions} onChange={handleChange}>
         <option value="ja">日本語</option>
         <option value="az">Azerbaycan</option>
         <option value="en">English</option>
