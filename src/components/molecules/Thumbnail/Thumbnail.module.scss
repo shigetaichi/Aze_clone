@@ -42,6 +42,7 @@
 
   @include u.max-mq("xs") {
     @include u.flex-center();
+    max-height: u.$twelve*8;
   }
 }
 
@@ -53,6 +54,10 @@
     content: "";
     display: block;
     padding-top: 56.25%;
+
+    @include u.max-mq("xs") {
+      display: none;
+    }
   }
 
   .image {
@@ -65,11 +70,16 @@
     height: 100%;
     display: block;
     object-fit: cover;
+
+    @include u.max-mq("xs") {
+      position: unset;
+    }
   }
 
   @include u.max-mq("xs") {
     width: 35%;
     height: 100%;
+    overflow: hidden;
   }
 }
 

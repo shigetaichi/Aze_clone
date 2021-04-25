@@ -9,7 +9,7 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "archives": "Arxiv"
       },
       "top": {
-        "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.", "Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.", "Buna görə də,AZERBAIJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm.", "Dilinizi buradan seçə bilərsiniz. Və bu seçilmiş menyu yuxarı sağ küncdəki 'MENU' dadır!"]
+        "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.", "Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.", "Buna görə də,AZERBAIJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm.", "Dilinizi buradan seçə bilərsiniz."]
       },
       "selectedEight": {
         "title": "Səkkiz seçildi",
@@ -70,7 +70,7 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "archives": "Archives"
       },
       "top": {
-        "description": ["This website is a blog to connect Azerbaijan and Japan.", "I am the administrator of this website and I am Japanese.", "At the time of setting up this website", "there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan.", "You can choose your language from here. And This select menu is also in 'MENU' at the top-right corner!"]
+        "description": ["This website is a blog to connect Azerbaijan and Japan.", "I am the administrator of this website and I am Japanese.", "At the time of setting up this website", "there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan.", "You can choose your language from here."]
       },
       "selectedEight": {
         "title": "SELECTED EIGHT",
@@ -131,7 +131,7 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "archives": "全投稿一覧"
       },
       "top":{
-        "description": ["このサイトはアゼルバイジャンと日本をつなぐブログです。","当サイトの管理者である私は日本人です。", "このサイトを開設した当時は、アゼルバイジャンに関する日本語の記事がネット上にほとんどなく、情報収集に苦労しました。","そこで、AZERBAIJAPANが日本とアゼルバイジャンの架け橋になればと思っています。", "下のセレクトボックスから言語を選択できます。ここ以外にも右上の'MENU'のところからいつでも言語を選択することもできます。"]
+        "description": ["このサイトはアゼルバイジャンと日本をつなぐブログです。","当サイトの管理者である私は日本人です。", "このサイトを開設した当時は、アゼルバイジャンに関する日本語の記事がネット上にほとんどなく、情報収集に苦労しました。","そこで、AZERBAIJAPANが日本とアゼルバイジャンの架け橋になればと思っています。", "下のセレクトボックスから言語を選択できます。"]
       },
       "selectedEight": {
         "title": "厳選８記事",

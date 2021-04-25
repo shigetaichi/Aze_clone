@@ -29,21 +29,33 @@
 
     .header1 {
       width: 100%;
-      display: flex;
-      justify-content: space-between;
+      @include u.flex-between();
       align-items: center;
+
+      @include u.max-mq("md") {
+        flex-wrap: wrap;
+      }
 
       .site_title {
         display: block;
-        width: 280px;
+        width: 28rem;
         cursor: pointer;
+
+        @include u.max-mq("md") {
+          width: 100%;
+        }
 
         img {
           width: 100%;
           display: block;
           margin: 0 auto;
+
+          @include u.max-mq("md") {
+            width: 28rem;
+          }
         }
       }
+
       .langList {
         display: flex;
         justify-content: flex-start;
@@ -52,6 +64,14 @@
         margin: 0 0 0 auto;
         @include u.h3normal();
 
+        @include u.max-mq("md") {
+          margin: 0 auto 0 0;
+        }
+
+        @include u.max-mq("xs") {
+          display: none;
+        }
+
         .li {
           margin: 0 0 0 u.$twelve;
           cursor: pointer;
@@ -59,10 +79,13 @@
       }
 
       .headerIcons {
-        display: flex;
-        justify-content: center;
+        @include u.flex-center();
         align-items: center;
         list-style: none;
+
+        @include u.max-mq("xs") {
+          display: none;
+        }
 
         .li {
           width: u.$thirty;
