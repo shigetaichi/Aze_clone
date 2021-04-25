@@ -2,6 +2,7 @@
 
 .prev_and_next {
   @include u.grid-base();
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   margin: 0 auto u.$thirty_six*2;
 
