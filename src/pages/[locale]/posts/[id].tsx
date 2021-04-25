@@ -2,8 +2,6 @@ import { wpBaseUrl, wpGenerateNextAndPrevArray } from 'lib/post';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import PostTemplate from "components/template/Post/PostTemplate";
 import { fetchWithCache } from "lib/helpers";
-import { wpGetCatNamesById } from "lib/category";
-import { wpGetTagNamesById } from "lib/tags";
 
 // postの中のcssはglobal.cssに記載
 

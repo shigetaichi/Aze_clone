@@ -9,6 +9,7 @@ import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
 import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
 import PostCategoryAndTags from "components/molecules/PostCategoryAndTags/PostCategoryAndTags";
+import PrevAndNext from "../../molecules/PrevAndNext/PrevAndNext";
 
 interface PostPageProps {
   postData: any;
@@ -110,32 +111,7 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
         </div>
       </div>
       <Title title={locale(localeContext).nextPrev.title} subtitle={locale(localeContext).nextPrev.subtitle}/>
-      <div className={styles.prev_and_next}>
-        <div className={styles.prev}>
-          <p className={styles.flag}>前の記事</p>
-          {nextAndPrev[0] && (
-            <Thumbnail
-              id={nextAndPrev[0].id}
-              title={nextAndPrev[0].title}
-              image={nextAndPrev[0].eyecatch}
-              description={nextAndPrev[0].description}
-              tags={nextAndPrev[0].tags}
-            />
-          )}
-        </div>
-        <div className={styles.next}>
-          <p className={styles.flag}>次の記事</p>
-          {nextAndPrev[1] && (
-            <Thumbnail
-              id={nextAndPrev[1].id}
-              title={nextAndPrev[1].title}
-              image={nextAndPrev[1].eyecatch}
-              description={nextAndPrev[1].description}
-              tags={nextAndPrev[1].tags}
-            />
-          )}
-        </div>
-      </div>
+      <PrevAndNext id={Number(router.query.id)}/>
       <div className={styles.recommend}>
         <Title title={locale(localeContext).recommendation.title}
                subtitle={locale(localeContext).recommendation.subtitle}/>
