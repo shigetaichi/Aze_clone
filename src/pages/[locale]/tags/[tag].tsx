@@ -5,6 +5,7 @@ import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  const localeData: string = String(context.query.locale)
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
   postsFilteredByTag = {
     'ja': [],
@@ -20,28 +21,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      postsFilteredByTag.ja = await getPostsFilteredByTagAndLangWp('ja', Number(context.query.tag));
+      postsFilteredByTag[localeData] = await getPostsFilteredByTagAndLangWp(localeData, Number(context.query.tag));
     })(),
     (async () => {
-      postsFilteredByTag.az = await getPostsFilteredByTagAndLangWp('az', Number(context.query.tag));
-    })(),
-    (async () => {
-      postsFilteredByTag.en = await getPostsFilteredByTagAndLangWp('en', Number(context.query.tag));
-    })(),
-    (async () => {
-      postsFilteredByTag.ru = await getPostsFilteredByTagAndLangWp('ru', Number(context.query.tag));
-    })(),
-    (async () => {
-      tagNameArray.ja = await getTagNameByLangAndId('ja', Number(context.query.tag));
-    })(),
-    (async () => {
-      tagNameArray.az = await getTagNameByLangAndId('az', Number(context.query.tag));
-    })(),
-    (async () => {
-      tagNameArray.en = await getTagNameByLangAndId('en', Number(context.query.tag));
-    })(),
-    (async () => {
-      tagNameArray.ru = await getTagNameByLangAndId('ru', Number(context.query.tag));
+      tagNameArray[localeData] = await getTagNameByLangAndId(localeData, Number(context.query.tag));
     })(),
   ]);
   return {
@@ -53,21 +36,21 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 }
 
 const TagPage = ({postsFilteredByTag, tagNameArray}) => {
-  const langTheme: LocaleType = useLocaleContext();
+  const localeContext: LocaleType = useLocaleContext();
   console.log(postsFilteredByTag)
-  const thumbnailDataArray = postsFilteredByTag[langTheme].map(postData => ({
+  const thumbnailDataArray = postsFilteredByTag[localeContext].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,
     eyecatch: postData.acf.eyecatch,
     description: postData.content.rendered,
     tags: postData.tag_name
   }));
-  const tagName = tagNameArray[langTheme];
+  const tagName = tagNameArray[localeContext];
   
   return (
     <>
       <Head>
-        <title>{tagName.name + locale(langTheme).tags.title}</title>
+        <title>{tagName.name + locale(localeContext).tags.title}</title>
       </Head>
       <Tag tagName={tagName.name} thumbnailDataArray={thumbnailDataArray}/>
     </>

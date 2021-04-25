@@ -1,9 +1,6 @@
 import { wpBaseUrl } from "./post";
 
-export const getPostsFilteredByTagAndLangWp = async (lang: string, id: number) => {
-  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${id}`);
-  return await res.json();
-}
+export const getPostsFilteredByTagAndLangWp = async (lang: string, id: number) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${id}&lang=${lang}`)).json();
 
 export const getAllTagIdWp = async () => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags?_fields=id`);
@@ -15,10 +12,7 @@ export const getAllTagIdWp = async () => {
   }));
 }
 
-export const getTagNameByLangAndId = async (lang: string, id: number | string) => {
-  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags/${id}`);
-  return await res.json();
-}
+export const getTagNameByLangAndId = async (lang: string, id: number | string) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags/${id}?lang=${lang}`)).json();
 
 export const getAllTagsWp = async (lang: string) => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags`);

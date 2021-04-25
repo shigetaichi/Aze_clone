@@ -38,6 +38,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const CategoryPage = ({postsFilteredByCategory, catNameArray}) => {
   const localeContext: LocaleType = useLocaleContext();
+  console.log(catNameArray)
   const thumbnailDataArray = postsFilteredByCategory[localeContext].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,

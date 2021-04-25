@@ -85,15 +85,9 @@ export const getAllCategoryIdWp = async () => {
   });
 }
 
-export const getCatNameByLangAndId = async (lang: string, id: number | string) => {
-  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}`);
-  return await res.json();
-}
+export const getCatNameByLangAndId = async (lang: string, id: number | string) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?lang=${lang}`)).json();
 
-export const getPostsFilteredByCategoryAndLangWp = async (lang: string, id: number) => {
-  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${id}`);
-  return await res.json();
-}
+export const getPostsFilteredByCategoryAndLangWp = async (lang: string, id: number) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${id}&lang=${lang}`)).json();
 
 export const getCategoriesWp = async () => {
   return {
