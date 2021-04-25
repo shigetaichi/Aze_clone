@@ -18,13 +18,18 @@ const Category: FC<Props> = (props: PropsWithChildren<Props>) => {
   const [total, setTotal] = useState(0);
   const [paginateVisible, setPaginateVisible] = useState<boolean>(false);
   
-  useEffect(() => {
-    if (!localeContext) return;
+  const getTotal = () => {
+    if (localeContext !== String(router.query.locale)) return;
     fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${Number(router.query.category)}&lang=${localeContext}`).then(res => {
       setTotal(Number(res.headers.get('X-WP-Total')));
       setPaginateVisible(true);
     })
+  }
+  
+  useEffect(() => {
+    getTotal();
     return () => {
+      getTotal();
     };
   }, [localeContext]);
   
