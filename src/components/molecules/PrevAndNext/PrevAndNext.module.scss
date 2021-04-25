@@ -6,12 +6,27 @@
   grid-template-rows: 1fr;
   margin: 0 auto u.$thirty_six*2;
 
+  @include u.max-mq("md") {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include u.max-mq("xs") {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
   .prev {
     grid-column: 2 / 3;
+    @include u.max-mq("md"){
+      grid-column: unset;
+    }
   }
 
   .next {
     grid-column: 3 / 4;
+    @include u.max-mq("md"){
+      grid-column: unset;
+    }
   }
 
   .flag {

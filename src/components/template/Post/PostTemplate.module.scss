@@ -6,6 +6,10 @@
   align-items: flex-start;
   gap: u.$thirty_six;
 
+  @include u.max-mq("md") {
+    grid-template-columns: 1fr;
+  }
+
   .left {
     .article {
       width: 100%;
@@ -132,26 +136,6 @@
   .right {
     position: sticky;
     top: u.$eighteen*10;
-  }
-}
-
-.prev_and_next {
-  @include u.grid-base();
-  grid-template-rows: 1fr;
-  margin: 0 auto u.$thirty_six*2;
-
-  .prev {
-    grid-column: 2 / 3;
-  }
-
-  .next {
-    grid-column: 3 / 4;
-  }
-
-  .flag {
-    margin: 0 0 u.$six;
-    @include u.h4normal(u.$shippori);
-    text-align: center;
   }
 }
 
