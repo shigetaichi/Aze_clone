@@ -10,7 +10,16 @@
     grid-template-columns: 1fr;
   }
 
+  @include u.max-mq("sm") {
+    display: block;
+    width: 100%;
+  }
+
   .left {
+    @include u.max-mq("md") {
+      width: 100%;
+    }
+
     .article {
       width: 100%;
       margin-bottom: u.$thirty_six*2;
@@ -83,6 +92,7 @@
         a {
           color: #2200c1;
           text-decoration: underline;
+
           &:visited {
             color: #551a8b;
           }
@@ -90,11 +100,13 @@
 
         figure {
           margin: 0 0 u.$eighteen;
+
           figcaption {
             @include u.h4normal(u.$shippori);
             text-align: center;
           }
         }
+
         img {
           display: block;
           width: 94%;
@@ -102,6 +114,7 @@
           margin: 0 auto;
           height: auto;
         }
+
         iframe {
           margin: 0 auto;
           display: block;
@@ -136,6 +149,10 @@
   .right {
     position: sticky;
     top: u.$eighteen*10;
+
+    @include u.max-mq("md") {
+      display: none;
+    }
   }
 }
 
