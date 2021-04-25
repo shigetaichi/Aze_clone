@@ -2,15 +2,16 @@ import { FC, useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
 import { NextRouter, useRouter } from "next/router";
 import styles from "./Pagination.module.scss";
-import { LocaleType, useLocaleContext } from "../../../context/localeContext";
-import { generateRoute } from "../../../lib/helpers";
+import { LocaleType, useLocaleContext } from "context/localeContext";
+import { generateRoute } from "lib/helpers";
 
 interface PaginationProps {
+  visible: boolean;
   total: number;
   perPage: number;
 }
 
-const Pagination: FC<PaginationProps> = ({total, perPage}: PaginationProps) => {
+const Pagination: FC<PaginationProps> = ({total, perPage, visible}: PaginationProps) => {
   
   const router: NextRouter = useRouter();
   const current: string | string[] = router.query.page;
@@ -38,30 +39,34 @@ const Pagination: FC<PaginationProps> = ({total, perPage}: PaginationProps) => {
   }, [router.query])
   
   return (
-    <div className={styles.paginate_wrapper}>
-      <ReactPaginate
-        pageCount={pageCount}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={3}
-        forcePage={page - 1}
-        containerClassName={styles.pagination}
-        pageClassName={styles.page_item}
-        pageLinkClassName={styles.item_link}
-        activeClassName={styles.active}
-        activeLinkClassName={styles.active_link}
-        previousLabel={"<"}
-        nextLabel={">"}
-        previousClassName={styles.page_item}
-        nextClassName={styles.page_item}
-        previousLinkClassName={styles.item_link}
-        nextLinkClassName={styles.item_link}
-        disabledClassName={styles.disabled}
-        breakLabel="..."
-        breakClassName={styles.page_item}
-        breakLinkClassName={styles.item_link}
-        onPageChange={paginationHandler}
-      />
-    </div>
+    <>
+      {!visible && (
+        <div className={styles.paginate_wrapper}>
+          <ReactPaginate
+            pageCount={pageCount}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={3}
+            forcePage={page - 1}
+            containerClassName={styles.pagination}
+            pageClassName={styles.page_item}
+            pageLinkClassName={styles.item_link}
+            activeClassName={styles.active}
+            activeLinkClassName={styles.active_link}
+            previousLabel={"<"}
+            nextLabel={">"}
+            previousClassName={styles.page_item}
+            nextClassName={styles.page_item}
+            previousLinkClassName={styles.item_link}
+            nextLinkClassName={styles.item_link}
+            disabledClassName={styles.disabled}
+            breakLabel="..."
+            breakClassName={styles.page_item}
+            breakLinkClassName={styles.item_link}
+            onPageChange={paginationHandler}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

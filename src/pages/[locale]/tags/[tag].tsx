@@ -5,7 +5,7 @@ import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const localeData: string = String(context.query.locale)
+  const localeData: string = String(context.query.locale);
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any };
   postsFilteredByTag = {
     'ja': [],

@@ -7,7 +7,7 @@ import styles from "./Top.module.scss";
 import PostList from "components/organism/PostList/PostList";
 import Pagination from "components/molecules/Pagination/Pagination";
 import { NextRouter, useRouter } from "next/router";
-import { wpBaseUrl } from "lib/post";
+import { perPage, wpBaseUrl } from "lib/post";
 
 interface TopProps {
   arraySelected: Array<any>;
@@ -19,10 +19,12 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
   const localeContext: LocaleType = useLocaleContext();
   
   const [total, setTotal] = useState(0);
+  const [paginateVisible, setPaginateVisible] = useState<boolean>(false);
   
   useEffect(() => {
     fetch(`${wpBaseUrl}/wp-json/wp/v2/posts`).then(res => {
-      setTotal(Number(res.headers.get('X-WP-Total')))
+      setTotal(Number(res.headers.get('X-WP-Total')));
+      setPaginateVisible(prevState => !prevState);
     })
     return () => {
     };
@@ -50,7 +52,7 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
         subtitle={locale(localeContext).posts.subtitle}
       />
       <PostList thumbnailDataArray={props.topArray}/>
-      <Pagination perPage={9} total={total}/>
+      <Pagination perPage={perPage} total={total} visible={paginateVisible}/>
       <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
     </>
   )
