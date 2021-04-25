@@ -9,6 +9,7 @@ import ContentLeft from "components/organism/ContentLeft/ContentLeft";
 import ContentRight from "components/organism/ContentRight/ContentRight";
 import { useEffect, useState } from "react";
 import { wpBaseUrl } from "lib/post";
+import { NextRouter, useRouter } from "next/router";
 
 const Layout = (props) => {
   const {title, children} = props;
@@ -17,6 +18,7 @@ const Layout = (props) => {
   const siteTitle = "Azerbaijapan";
   const themeNames = useThemeContext();
   const localeContext: LocaleType = useLocaleContext();
+  const router: NextRouter = useRouter();
   
   const LayoutStyle = ClassNames(styles.layout, {
     [styles.dark]: themeNames.themeName === 'dark'
