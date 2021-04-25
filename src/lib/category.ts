@@ -1,102 +1,10 @@
 import { wpBaseUrl } from "./post";
 
-export const getAllCategoryData = async () => {
-  const key = {
-    headers: {'X-API-KEY': process.env.X_API_KEY},
-  };
-  const res = await fetch(
-    `https://azerbaijapan.microcms.io/api/v1/categories`,
-    key,
-  );
-  const data = await res.json();
-  const categories = data.contents;
-  return categories.map(category => {
-    return {
-      id: category.id,
-      catName: category.category,
-      catImage: category.catImage.url,
-    }
-  })
-}
-export const getAllCategoryId = async () => {
-  const key = {
-    headers: {'X-API-KEY': process.env.X_API_KEY},
-  };
-  const res = await fetch(
-    `https://azerbaijapan.microcms.io/api/v1/categories`,
-    key,
-  );
-  const data = await res.json();
-  const contents = data.contents;
-  return contents.map(content => {
-    return {
-      params: {
-        category: content.id
-      }
-    }
-  });
-}
-
-export const getCatName = async (id) => {
-  const key = {
-    headers: {'X-API-KEY': process.env.X_API_KEY},
-  };
-  const res = await fetch(
-    `https://azerbaijapan.microcms.io/api/v1/categories/${id}`,
-    key,
-  );
-  const data = await res.json();
-  return data.category;
-}
-
-export const getPostsFilteredByCategory = async (id) => {
-  const key = {
-    headers: {'X-API-KEY': process.env.X_API_KEY},
-  };
-  const res = await fetch(
-    `https://azerbaijapan.microcms.io/api/v1/blogs?filters=category[contains]${id}`,
-    key,
-  );
-  const data = await res.json();
-  const contents = data.contents;
-  return contents.map(content => ({
-    id: content.id,
-    title: content.title,
-    eyecatch: content.eyecatch,
-    description: content.body,
-    tag: content.tag
-  }));
-}
-
-export const getAllCategoryWp = async (lang: string) => {
-  const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories`);
-  return await res.json();
-}
-
-export const getAllCategoryIdWp = async () => {
-  const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories?_fields=id`);
-  const data = await res.json();
-  return data.map(content => {
-    return {
-      params: {
-        category: content.id.toString()
-      }
-    }
-  });
-}
+export const getAllCategoryWp = async (lang: string) => await (await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/categories`)).json();
 
 export const getCatNameByLangAndId = async (lang: string, id: number | string) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?lang=${lang}`)).json();
 
 export const getPostsFilteredByCategoryAndLangWp = async (lang: string, id: number) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${id}&lang=${lang}`)).json();
-
-export const getCategoriesWp = async () => {
-  return {
-    'ja': await getAllCategoryWp('ja'),
-    'az': await getAllCategoryWp('az'),
-    'en': await getAllCategoryWp('en'),
-    'ru': await getAllCategoryWp('ru'),
-  }
-}
 
 export const wpGetCatNamesById = async (id: number) => {
   const res = await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${id}?lang=ja`);
