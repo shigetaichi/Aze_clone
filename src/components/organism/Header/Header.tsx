@@ -5,7 +5,7 @@ import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
 import { NextRouter, useRouter } from "next/router";
 import { LocaleType, useSetLocaleContext } from "context/localeContext";
-import { generateRoute } from "../../../lib/helpers";
+import { generateRoute } from "lib/helpers";
 
 interface HeaderProps {
   news: string;

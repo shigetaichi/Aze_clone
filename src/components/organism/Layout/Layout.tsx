@@ -7,6 +7,8 @@ import Header from "components/organism/Header/Header";
 import Footer from "components/organism/Footer/Footer";
 import ContentLeft from "components/organism/ContentLeft/ContentLeft";
 import ContentRight from "components/organism/ContentRight/ContentRight";
+import { useEffect, useState } from "react";
+import { wpBaseUrl } from "lib/post";
 
 const Layout = (props) => {
   const {title, children} = props;
@@ -20,6 +22,13 @@ const Layout = (props) => {
     [styles.dark]: themeNames.themeName === 'dark'
   });
   
+  const [news, setNews] = useState<string>("");
+  
+  useEffect(() => {
+    fetch(`${wpBaseUrl}/wp-json/wp/v2/header-info/201?_fields=acf`).then(res => res.json()).then(v => setNews(v['acf'][localeContext]))
+    return () => {
+    };
+  }, [localeContext]);
   
   return (
     <>
@@ -47,7 +56,7 @@ const Layout = (props) => {
         <link rel="icon" href={"/azerbaijapan-favicon.png"}/>
         <link rel="apple-touch-icon-precomposed" href={"/apple-touch-icon-precomposed.png"}/>
       </Head>
-      <Header news={"サンプルニュースだよサンプルニュースだよサンプルニュースだよ"}/>
+      <Header news={news}/>
       <main className={styles.main}>
         <div className={styles.left}>
           <ContentLeft>
