@@ -2,6 +2,7 @@ import { wpBaseUrl, wpGenerateNextAndPrevArray } from 'lib/post';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import PostTemplate from "components/template/Post/PostTemplate";
 import { fetchWithCache } from "lib/helpers";
+import Head from "next/head";
 
 // postの中のcssはglobal.cssに記載
 
@@ -26,6 +27,17 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
 }
 
-const Post = ({postData, nextAndPrev}) => <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>;
+const Post = ({postData, nextAndPrev}) => (
+  <>
+    <Head>
+      <meta property="og:image" content={postData.acf.eyecatch} key={"og_image"}/>
+      <meta name="twitter:image:src" content={postData.acf.eyecatch} key={"tw_image_src"}/>
+      <meta name="twitter:image" content={postData.acf.eyecatch} key={"tw_image"}/>
+      {/*<meta name="keywords" content={postData}/>*/}
+      <title>{postData.title.rendered}</title>
+    </Head>
+    <PostTemplate postData={postData} nextAndPrev={nextAndPrev}/>
+  </>
+);
 
 export default Post;

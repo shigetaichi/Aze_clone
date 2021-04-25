@@ -10,6 +10,7 @@ import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
 import PostCategoryAndTags from "components/molecules/PostCategoryAndTags/PostCategoryAndTags";
 import PrevAndNext from "../../molecules/PrevAndNext/PrevAndNext";
+import { Head } from "next/document";
 
 interface PostPageProps {
   postData: any;
