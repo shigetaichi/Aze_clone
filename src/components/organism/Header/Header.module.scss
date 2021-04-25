@@ -112,12 +112,20 @@
         overflow-x: hidden;
         white-space: nowrap;
 
+        @include u.max-mq("md") {
+          width: auto;
+        }
+
         .li {
           width: inherit;
           @include u.h3normal();
           margin: 0 u.$twelve 0 0;
           white-space: nowrap;
           animation: loop-slide 10s infinite linear 1s both;
+
+          @include u.max-mq("md") {
+            display: inline;
+          }
         }
       }
     }
