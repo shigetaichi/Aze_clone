@@ -54,8 +54,8 @@ const allposts = ({allPostData}) => {
   useEffect(() => {
     if (!localeContext) return;
     fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?lang=${localeContext}`).then(res => {
-      setTotal(Number(res.headers.get('X-WP-Total')))
-      setPaginateVisible(prevState => !prevState);
+      setTotal(Number(res.headers.get('X-WP-Total')));
+      setPaginateVisible(true);
     })
     return () => {
     };
@@ -72,7 +72,7 @@ const allposts = ({allPostData}) => {
         subtitle={locale(localeContext).allposts.subtitle}
       />
       <PostList thumbnailDataArray={thumbnailDataArray}/>
-      <Pagination perPage={perPage} total={total} visible={paginateVisible}/>
+      {paginateVisible && (<Pagination perPage={perPage} total={total}/>)}
       <Button path={`/${String(router.query.locale)}`}>{locale(localeContext).buttonText.toTop}</Button>
     </>
   )

@@ -22,9 +22,9 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
   const [paginateVisible, setPaginateVisible] = useState<boolean>(false);
   
   useEffect(() => {
-    fetch(`${wpBaseUrl}/wp-json/wp/v2/posts`).then(res => {
+    fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?lang=${localeContext}`).then(res => {
       setTotal(Number(res.headers.get('X-WP-Total')));
-      setPaginateVisible(prevState => !prevState);
+      setPaginateVisible(true);
     })
     return () => {
     };
@@ -52,7 +52,7 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
         subtitle={locale(localeContext).posts.subtitle}
       />
       <PostList thumbnailDataArray={props.topArray}/>
-      <Pagination perPage={perPage} total={total} visible={paginateVisible}/>
+      {paginateVisible && (<Pagination perPage={perPage} total={total}/>)}
       <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
     </>
   )
