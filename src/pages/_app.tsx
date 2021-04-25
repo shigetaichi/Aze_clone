@@ -10,7 +10,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
 import nprogress from 'nprogress' // NProgressインポート
-import 'nprogress/nprogress.css' // バーのデフォルトスタイルのインポート
+import 'nprogress/nprogress.css'
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

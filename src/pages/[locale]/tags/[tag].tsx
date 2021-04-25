@@ -6,7 +6,7 @@ import Tag from "components/template/Tag/Tag";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale)
-  let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any }, categories, tags;
+  let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any };
   postsFilteredByTag = {
     'ja': [],
     'az': [],
@@ -37,7 +37,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const TagPage = ({postsFilteredByTag, tagNameArray}) => {
   const localeContext: LocaleType = useLocaleContext();
-  console.log(postsFilteredByTag)
   const thumbnailDataArray = postsFilteredByTag[localeContext].map(postData => ({
     id: postData.id,
     title: postData.title.rendered,

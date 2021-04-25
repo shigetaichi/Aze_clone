@@ -5,6 +5,7 @@ import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
 import { NextRouter, useRouter } from "next/router";
 import { LocaleType, useSetLocaleContext } from "context/localeContext";
+import { generateRoute } from "../../../lib/helpers";
 
 interface HeaderProps {
   news: string;
@@ -17,14 +18,6 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
   const HeaderStyle: string = ClassNames(styles.header, {
     [styles.dark]: themeNames.themeName === 'dark'
   })
-  
-  const generateRoute = (locale: LocaleType): string => {
-    let s: string = router.pathname;
-    Object.keys(router.query).map((v: string) => {
-      s = s.replace(`[${v}]`,v === 'locale' ? locale : String(router.query[v]))
-    })
-    return s
-  }
   
   return (
     <header className={HeaderStyle}>
@@ -40,16 +33,16 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           </h1>
           <ul className={styles.langList}>
             <li className={styles.li} onClick={() => setLocaleContext('ja')}>
-              <Link href={generateRoute('ja')}>日本語</Link>
+              <Link href={generateRoute('ja', router)}>日本語</Link>
             </li>
             <li className={styles.li} onClick={() => setLocaleContext('az')}>
-              <Link href={generateRoute('az')}>azerbaycan</Link>
+              <Link href={generateRoute('az', router)}>azerbaycan</Link>
             </li>
             <li className={styles.li} onClick={() => setLocaleContext('en')}>
-              <Link href={generateRoute('en')}>English</Link>
+              <Link href={generateRoute('en', router)}>English</Link>
             </li>
             <li className={styles.li} onClick={() => setLocaleContext('ru')}>
-              <Link href={generateRoute('ru')}>русский</Link>
+              <Link href={generateRoute('ru', router)}>русский</Link>
             </li>
           </ul>
           <ul className={styles.headerIcons}>

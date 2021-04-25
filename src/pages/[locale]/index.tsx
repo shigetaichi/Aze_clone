@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { wpBaseUrl } from 'lib/post';
+import { perPage, wpBaseUrl } from 'lib/post';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { fetchWithCache } from "lib/helpers";
 import { langType } from "types";
@@ -9,6 +9,7 @@ import Top from "components/template/Top/Top";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const langString: string = String(context.query.locale);
+  const p: number = Number(context.query.page);
   const allPostsUrl: string = `wp-json/wp/v2/posts`;
   // const allPostsUrl: string = `wp-json/wp/v2/posts?per_page=100&?lang=${langString}&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`;
   let allPostData: langType = {
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?lang=${langString}`)
+      allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?lang=${langString}&per_page=${perPage}&page=${p ? p : 1}`)
     })(),
     // (async () => {
     //   postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
@@ -40,10 +41,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const Home = ({allPostData, postsFilteredByTag}) => {
   const localeContext: LocaleType = useLocaleContext();
-  console.log(allPostData)
-  const allPostDataArray = allPostData[localeContext];
   
-  const thumbnailDataArray = allPostDataArray.map(post => ({
+  const thumbnailDataArray = allPostData[localeContext].map(post => ({
     id: post.id,
     title: post.title.rendered,
     eyecatch: post.acf.eyecatch,

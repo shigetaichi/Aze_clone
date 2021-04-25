@@ -1,5 +1,6 @@
 export const microcmsBaseUrl: string = 'https://azerbaijapan.microcms.io';
 export const wpBaseUrl: string = 'https://azerbaijapan.taichi-sigma2.com';
+export const perPage: number = 9;
 
 export const wpGetPostsSortedByLang = async (lang: string) => {
   const res = await fetch(`${wpBaseUrl}/${lang}/wp-json/wp/v2/posts?per_page=100&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`);
@@ -36,7 +37,7 @@ export const wpGetPostDataById = async (lang: string, id: number) => {
 
 export const wpNextAndPrevious = async (lang: string, id: number) => await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts/${id}?_fields=next,prev&lang=${lang}`)).json();
 
-const necessaryDataSelect =(data: any) => ({
+const necessaryDataSelect = (data: any) => ({
   id: data.id,
   title: data.title.rendered,
   eyecatch: data.acf.eyecatch,

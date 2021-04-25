@@ -138,6 +138,6 @@ $shippori: 'Shippori Mincho B1', serif;
 
 @mixin grid-base() {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: $thirty $thirty_six;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $thirty_six $thirty*2;
 }

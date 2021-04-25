@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
 import { NextRouter, useRouter } from "next/router";
 import styles from "./Pagination.module.scss";
+import { LocaleType, useLocaleContext } from "../../../context/localeContext";
+import { generateRoute } from "../../../lib/helpers";
 
 interface PaginationProps {
   total: number;
@@ -16,10 +18,14 @@ const Pagination: FC<PaginationProps> = ({total, perPage}: PaginationProps) => {
   
   const [page, setPage] = useState<number>(1);
   
+  const localeContext: LocaleType = useLocaleContext();
+  
   const paginationHandler = (data: { selected: number }) => {
     router.push({
-      pathname: router.pathname,
-      search: `?page=${data.selected + 1}`,
+      pathname: generateRoute(localeContext, router),
+      query: {
+        page: data.selected + 1,
+      },
     });
   };
   

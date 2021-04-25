@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
 import Title from "components/atom/Title/Title";
 import Button from "components/atom/Button/Button";
@@ -7,6 +7,7 @@ import styles from "./Top.module.scss";
 import PostList from "components/organism/PostList/PostList";
 import Pagination from "components/molecules/Pagination/Pagination";
 import { NextRouter, useRouter } from "next/router";
+import { wpBaseUrl } from "lib/post";
 
 interface TopProps {
   arraySelected: Array<any>;
@@ -16,6 +17,17 @@ interface TopProps {
 const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
   const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
+  
+  const [total, setTotal] = useState(0);
+  
+  useEffect(() => {
+    fetch(`${wpBaseUrl}/wp-json/wp/v2/posts`).then(res => {
+      setTotal(Number(res.headers.get('X-WP-Total')))
+    })
+    return () => {
+    };
+  }, []);
+  
   return (
     <>
       <div className={styles.indexStatement}>
@@ -33,13 +45,12 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
         subtitle={locale(localeContext).selectedEight.subtitle}
       />
       <PostList thumbnailDataArray={props.arraySelected}/>
-      <Pagination perPage={10} total={330}/>
       <Title
         title={locale(localeContext).posts.title}
         subtitle={locale(localeContext).posts.subtitle}
       />
       <PostList thumbnailDataArray={props.topArray}/>
-      <Pagination perPage={10} total={330}/>
+      <Pagination perPage={9} total={total}/>
       <Button path={`/${String(router.query.locale)}/allposts`}>{locale(localeContext).buttonText.toArchive}</Button>
     </>
   )

@@ -10,6 +10,7 @@
   @include u.flex-between();
   @include u.card-hover();
   width: 100%;
+  height: u.$thirty_six*2;
   cursor: pointer;
   overflow: hidden;
   border-radius: u.$six;
