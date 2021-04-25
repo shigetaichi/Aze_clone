@@ -20,6 +20,9 @@ const Tag: FC<Props> = (props: PropsWithChildren<Props>) => {
   const [paginateVisible, setPaginateVisible] = useState<boolean>(false);
   
   const getTotal = () => {
+    console.log(String(router.query.locale))
+    console.log(localeContext)
+    console.log(localeContext !== String(router.query.locale))
     if (localeContext !== String(router.query.locale)) return;
     fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(router.query.tag)}&lang=${localeContext}`).then(res => {
       setTotal(Number(res.headers.get('X-WP-Total')));
@@ -30,7 +33,6 @@ const Tag: FC<Props> = (props: PropsWithChildren<Props>) => {
   useEffect(() => {
     getTotal();
     return () => {
-      getTotal();
     };
   }, []);
   

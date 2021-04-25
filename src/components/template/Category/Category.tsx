@@ -29,7 +29,6 @@ const Category: FC<Props> = (props: PropsWithChildren<Props>) => {
   useEffect(() => {
     getTotal();
     return () => {
-      getTotal();
     };
   }, [localeContext]);
   

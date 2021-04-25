@@ -2,10 +2,11 @@ import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
-import { wpBaseUrl } from "lib/post";
+import { perPage, wpBaseUrl } from "lib/post";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
+  const p: number = Number(context.query.page);
   let postsFilteredByTag: { [key: string]: Array<any> }, tagNameArray: { [key: string]: any };
   postsFilteredByTag = {
     'ja': [],
@@ -21,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      postsFilteredByTag[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(context.query.tag)}&lang=${localeData}`)).json();
+      postsFilteredByTag[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(context.query.tag)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`)).json();
     })(),
     (async () => {
       tagNameArray[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags/${Number(context.query.tag)}?lang=${localeData}`)).json();

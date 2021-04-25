@@ -3,10 +3,11 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { langType } from "types";
 import Category from "components/template/Category/Category";
-import { wpBaseUrl } from "lib/post";
+import { perPage, wpBaseUrl } from "lib/post";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-  const localeData: string = String(context.query.locale)
+  const localeData: string = String(context.query.locale);
+  const p: number = Number(context.query.page);
   let postsFilteredByCategory: langType, catNameArray: langType;
   postsFilteredByCategory = {
     'ja': [],
@@ -22,7 +23,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   };
   await Promise.all([
     (async () => {
-      postsFilteredByCategory[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${Number(context.query.category)}&lang=${localeData}`)).json();
+      postsFilteredByCategory[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${Number(context.query.category)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`)).json();
     })(),
     (async () => {
       catNameArray[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${Number(context.query.category)}?lang=${localeData}`)).json();
