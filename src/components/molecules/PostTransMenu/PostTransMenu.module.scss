@@ -1,0 +1,41 @@
+@use "src/styles/utils" as u;
+
+.translation {
+  width: 100%;
+  margin: 0 auto u.$eighteen;
+  flex-wrap: wrap;
+  @include u.flex-center();
+  @include u.h4normal(u.$shippori);
+
+  .to_translate {
+    @include u.flex-center();
+    @include u.card-hover();
+    padding: u.$six u.$twelve;
+    margin: 0 u.$twelve;
+    border-radius: u.$six;
+    cursor: pointer;
+
+    a {
+      text-decoration: underline;
+      color: #0398c3;
+
+      &:visited {
+        color: #7d59a0;
+      }
+
+      &.dark {
+        color: #00ccff;
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 480px) {
+    .translations .to_translate {
+      font-size: 12px;
+      padding: 0 5px;
+      min-height: 30px;
+    }
+  }
+
+}

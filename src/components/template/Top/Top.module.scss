@@ -1,0 +1,38 @@
+@use "src/styles/utils" as u;
+
+.indexStatement {
+  @include u.flex-between();
+  @include u.h3normal();
+  line-height: 1.8;
+  margin-bottom: u.$thirty_six*2;
+
+
+  @include u.max-mq("xs") {
+    flex-wrap: wrap;
+  }
+
+  .left {
+    width: 68%;
+
+    @include u.max-mq("md") {
+      width: 75%;
+    }
+
+    @include u.max-mq("xs") {
+      width: 100%;
+      margin-bottom: u.$thirty_six;
+    }
+  }
+
+  .right {
+    width: 30%;
+
+    @include u.max-mq("md") {
+      width: 25%;
+    }
+
+    @include u.max-mq("xs") {
+      width: 100%;
+    }
+  }
+}

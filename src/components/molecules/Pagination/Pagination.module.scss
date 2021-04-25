@@ -1,0 +1,48 @@
+@use "src/styles/utils" as u;
+
+/*********** Pagination ***********/
+.pagination {
+  margin: 0 auto u.$thirty_six;
+  list-style: none;
+  padding: 0;
+  @include u.flex-center();
+
+  .page_item {
+    width: u.$thirty_six;
+    height: u.$thirty_six;
+    @include u.h4normal(u.$shippori);
+    border: 1px solid #ccc;
+    border-right: none;
+    cursor: pointer;
+
+    &:first-child {
+      border-top-left-radius: u.$six;
+      border-bottom-left-radius: u.$six;
+    }
+
+    &:last-child {
+      border-top-right-radius: u.$six;
+      border-bottom-right-radius: u.$six;
+      border-right: 1px solid #ccc;
+    }
+
+    &:nth-of-type(2n).active .item_link {
+      background: linear-gradient(to bottom right, #03ae65 0%, #03ae65 30%, #ff0202 30%, #ff0202 70%, #0398c3 70%, #0398c3 100%);
+    }
+
+    &:nth-of-type(2n + 1).active .item_link {
+      background-color: red;
+    }
+
+    &.disabled, &.active {
+      cursor: default;
+    }
+
+    .item_link {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      @include u.flex-center();
+    }
+  }
+}

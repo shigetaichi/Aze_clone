@@ -1,0 +1,47 @@
+@use "src/styles/utils" as u;
+
+.btn{
+  margin: 0 auto u.$thirty_six;
+  @include u.flex-center();
+  width: 277px;
+  height: u.$thirty*2;
+  position: relative;
+
+  &::before{
+    content: "GO";
+    @include u.flex-center();
+    @include u.h3normal(u.$shippori);
+    color: white;
+    position: absolute;
+    top: -60px;
+    right: 10%;
+    width: u.$twelve*5;
+    height: u.$twelve*5;
+    border-radius: 50%;
+    background-color: #FF0202;
+    opacity: 0;
+    transition: .6s;
+    z-index: 2;
+  }
+
+  &:hover{
+    &::before{
+      transform: translateY(u.$thirty_six);
+      opacity: 1;
+      svg rect{
+        color: black;
+      }
+    }
+  }
+
+  svg{
+    position: absolute;
+    width: 100%;
+    transition: .3s;
+  }
+
+  span{
+    @include u.h3normal(u.$shippori);
+    position: absolute;
+  }
+}

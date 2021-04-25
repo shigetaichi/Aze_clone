@@ -1,0 +1,52 @@
+@use "src/styles/utils" as u;
+
+.category_wrapper {
+  @include u.wide_container();
+  @include u.grid-base();
+  margin: 0 auto u.$thirty_six*2;
+}
+
+.category {
+  @include u.flex-between();
+  @include u.card-hover();
+  width: 100%;
+  height: u.$thirty_six*2;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: u.$six;
+
+  &:hover {
+    .image {
+      transform: scale(1.1);
+    }
+  }
+
+  .image_wrapper {
+    display: block;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+
+    .image {
+      transition: .2s;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .title_wrapper {
+    width: 75%;
+
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      @include u.h4normal(u.$shippori);
+    }
+  }
+}
+

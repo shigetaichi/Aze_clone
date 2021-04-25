@@ -1,0 +1,24 @@
+@use "src/styles/utils" as u;
+
+.title_wrapper {
+  margin-bottom: u.$eight*2;
+
+  .title {
+    @include u.h1bold(u.$shippori);
+    margin: 0 0 u.$six;
+    text-align: center;
+  }
+
+  .title_border_bottom {
+    display: block;
+    width: 200px;
+    height: u.$three;
+    margin: 0 auto;
+    background: linear-gradient(to right, #0097C4 70%, #FF0202 70%, #FF0202 80%, #03AE66 80%, #03AE66 100%);
+  }
+
+  .subtitle {
+    text-align: center;
+    @include u.h2bold(u.$shippori);
+  }
+}

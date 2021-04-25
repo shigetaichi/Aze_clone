@@ -1,0 +1,144 @@
+@use "src/styles/utils" as u;
+@keyframes loop-slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: u.$eight 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0 10px 6px -6px #ccc;
+  -moz-box-shadow: 0 10px 6px -6px #ccc;
+  box-shadow: 0 10px 6px -6px #ccc;
+  z-index: 10;
+
+  @include u.max-mq("xl") {
+    width: 100%;
+  }
+
+  .headerContainer {
+    @include u.wide_container();
+
+    .header1 {
+      width: 100%;
+      @include u.flex-between();
+      align-items: center;
+
+      @include u.max-mq("md") {
+        flex-wrap: wrap;
+      }
+
+      .site_title {
+        display: block;
+        width: 28rem;
+        cursor: pointer;
+
+        @include u.max-mq("md") {
+          width: 100%;
+        }
+
+        img {
+          width: 100%;
+          display: block;
+          margin: 0 auto;
+
+          @include u.max-mq("md") {
+            width: 28rem;
+          }
+        }
+      }
+
+      .langList {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        list-style: none;
+        margin: 0 0 0 auto;
+        @include u.h3normal();
+
+        @include u.max-mq("md") {
+          margin: 0 auto 0 0;
+        }
+
+        @include u.max-mq("xs") {
+          display: none;
+        }
+
+        .li {
+          margin: 0 0 0 u.$twelve;
+          cursor: pointer;
+        }
+      }
+
+      .headerIcons {
+        @include u.flex-center();
+        align-items: center;
+        list-style: none;
+
+        @include u.max-mq("xs") {
+          display: none;
+        }
+
+        .li {
+          width: u.$thirty;
+          margin: 0 0 0 u.$thirty_six;
+
+          img {
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .nav {
+      width: 100%;
+      padding: u.$twelve 0 0;
+      @include u.flex-between();
+      @include u.h3normal();
+
+      .news {
+        width: 100%;
+        display: flex;
+        list-style: none;
+        overflow-x: hidden;
+        white-space: nowrap;
+
+        @include u.max-mq("md") {
+          width: auto;
+        }
+
+        .li {
+          width: inherit;
+          @include u.h3normal();
+          margin: 0 u.$twelve 0 0;
+          white-space: nowrap;
+          animation: loop-slide 10s infinite linear 1s both;
+
+          @include u.max-mq("md") {
+            display: inline;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.site_title_smaller {
+  width: 30%;
+  display: block;
+  margin: 0 auto 0 30px;
+}
+
+.dark {
+  background-color: #3d3d3d;
+}
