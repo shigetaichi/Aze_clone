@@ -1,8 +1,8 @@
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
-import { getPostsFilteredByTagAndLangWp, getTagNameByLangAndId } from 'lib/tags';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
+import { wpBaseUrl } from "lib/post";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
@@ -21,10 +21,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      postsFilteredByTag[localeData] = await getPostsFilteredByTagAndLangWp(localeData, Number(context.query.tag));
+      postsFilteredByTag[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(context.query.tag)}&lang=${localeData}`)).json();
     })(),
     (async () => {
-      tagNameArray[localeData] = await getTagNameByLangAndId(localeData, Number(context.query.tag));
+      tagNameArray[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags/${Number(context.query.tag)}?lang=${localeData}`)).json();
     })(),
   ]);
   return {
