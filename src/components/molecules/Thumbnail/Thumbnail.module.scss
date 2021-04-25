@@ -1,6 +1,6 @@
 @use "src/styles/utils" as u;
 
-.root{
+.root {
   width: 100%;
   z-index: 10;
   cursor: pointer;
@@ -8,42 +8,54 @@
   border-radius: u.$six;
   overflow: hidden;
 
-  &:nth-of-type(1){
+  &:nth-of-type(1) {
     z-index: 0;
   }
-  &:nth-of-type(3){
+
+  &:nth-of-type(3) {
     z-index: 0;
   }
-  &:nth-of-type(6){
+
+  &:nth-of-type(6) {
     z-index: 0;
   }
-  &:nth-of-type(8){
+
+  &:nth-of-type(8) {
     z-index: 0;
   }
-  &:nth-of-type(9){
+
+  &:nth-of-type(9) {
     z-index: 0;
   }
-  &:nth-of-type(11){
+
+  &:nth-of-type(11) {
     z-index: 0;
   }
-  &:nth-of-type(14){
+
+  &:nth-of-type(14) {
     z-index: 0;
   }
-  &:nth-of-type(16){
+
+  &:nth-of-type(16) {
     z-index: 0;
+  }
+
+  @include u.max-mq("xs") {
+    @include u.flex-center();
   }
 }
 
 .media {
   width: 100%;
   position: relative;
+
   &::before {
     content: "";
     display: block;
     padding-top: 56.25%;
   }
 
-  .image{
+  .image {
     position: absolute;
     top: 0;
     left: 0;
@@ -54,25 +66,41 @@
     display: block;
     object-fit: cover;
   }
+
+  @include u.max-mq("xs") {
+    width: 35%;
+    height: 100%;
+  }
 }
 
-.content{
+.content {
   padding: u.$twelve;
   min-height: 80px;
+
+  @include u.max-mq("sm") {
+    padding: u.$six;
+  }
+
+  @include u.max-mq("xs") {
+    width: 65%;
+    height: 100%;
+  }
 }
-.contentDark{
+
+.contentDark {
   background-color: #f2f2f2;
 }
 
-.postThumbnail_title{
+.postThumbnail_title {
   @include u.h4normal(u.$shippori);
   min-height: 50px;
 }
 
-.tagArea{
+.tagArea {
   min-height: 40px;
   width: 100%;
-  .eachTag{
+
+  .eachTag {
     @include u.h5normal(u.$shippori);
     padding: 2px 4px;
     margin: 0 4px;
@@ -81,7 +109,8 @@
     align-items: center;
     border-bottom: 1px solid black;
     transition: .2s;
-    &:hover{
+
+    &:hover {
       transform: scale(1.5);
     }
   }

@@ -1,19 +1,22 @@
 @use "src/styles/utils" as u;
 
-.tags_wrapper{
+.tags_wrapper {
   @include u.wide_container();
-  display: flex;
-  padding-bottom: 40px;
-  justify-content: center;
+  @include u.flex-center();
+  margin-bottom: u.$thirty_six*2;
   align-items: flex-start;
   flex-wrap: wrap;
+  @include u.max-mq("xl") {
+    width: 100%;
+  }
 }
+
 .eachTag {
   @include u.h4normal(u.$shippori);
   @include u.card-hover();
   display: inline-block;
   padding: u.$six u.$twelve;
-  margin: 0 u.$twelve;
+  margin: 0 u.$twelve u.$twelve;
   border-radius: u.$six;
   cursor: pointer;
 }

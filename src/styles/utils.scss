@@ -113,6 +113,16 @@ $shippori: 'Shippori Mincho B1', serif;
   margin: 0 auto;
   padding: 0 $thirty_six;
   width: 1140px;
+
+  @include max-mq("xl") {
+    width: 86%;
+    padding: $twelve;
+  }
+
+  @include max-mq("sm") {
+    width: 98%;
+    padding: $six;
+  }
 }
 
 @mixin flex-between() {
@@ -140,4 +150,20 @@ $shippori: 'Shippori Mincho B1', serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: $thirty_six $thirty*2;
+
+
+  @include max-mq("xl") {
+    gap: $twenty_four $thirty;
+  }
+  @include max-mq("md") {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include max-mq("sm") {
+    grid-template-columns: 1fr 1fr;
+    gap: $twelve $twelve;
+  }
+  @include max-mq("xs") {
+    grid-template-columns: 1fr;
+    gap: $twelve $twelve;
+  }
 }

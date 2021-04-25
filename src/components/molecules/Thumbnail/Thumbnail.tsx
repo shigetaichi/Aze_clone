@@ -27,21 +27,19 @@ const Thumbnail = (props) => {
   return (
     <Link href={`/${String(router.query.locale)}/posts/${props.id}`}>
       <div className={styles.root}>
-        <div>
-          <div className={styles.media}>
-            <img className={styles.image} src={props.image} alt=""/>
-          </div>
-          <div className={PostThumbnailStyle}>
+        <div className={styles.media}>
+          <img className={styles.image} src={props.image} alt=""/>
+        </div>
+        <div className={PostThumbnailStyle}>
             <span className={styles.postThumbnail_title}>
               {props.title}
             </span>
-            <div className={styles.tagArea}>
-              {tagsArray && tagsArray.map((tag, i) => (
-                <Link key={i} href={`${router.query.locale}/tags/${tag.id}`}>
-                  <span className={styles.eachTag}>{tag.value}</span>
-                </Link>
-              ))}
-            </div>
+          <div className={styles.tagArea}>
+            {tagsArray && tagsArray.map((tag, i) => (
+              <Link key={i} href={`${router.query.locale}/tags/${tag.id}`}>
+                <span className={styles.eachTag}>{tag.value}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

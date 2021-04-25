@@ -14,6 +14,7 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: u.$six;
+
   &:hover {
     .image {
       transform: scale(1.1);
@@ -25,8 +26,9 @@
     width: 25%;
     height: 100%;
     overflow: hidden;
-    .image{
-    transition: .2s;
+
+    .image {
+      transition: .2s;
       display: block;
       width: 100%;
       height: 100%;
@@ -34,8 +36,9 @@
     }
   }
 
-  .title_wrapper{
+  .title_wrapper {
     width: 75%;
+
     .title {
       width: 100%;
       display: flex;

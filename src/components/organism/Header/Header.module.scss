@@ -20,6 +20,10 @@
   box-shadow: 0 10px 6px -6px #ccc;
   z-index: 10;
 
+  @include u.max-mq("xl") {
+    width: 100%;
+  }
+
   .headerContainer {
     @include u.wide_container();
 
