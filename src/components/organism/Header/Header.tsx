@@ -41,9 +41,9 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
             <li className={styles.li} onClick={() => setLocaleContext('en')}>
               <Link href={generateRoute('en', router)}>English</Link>
             </li>
-            <li className={styles.li} onClick={() => setLocaleContext('ru')}>
-              <Link href={generateRoute('ru', router)}>русский</Link>
-            </li>
+            {/*<li className={styles.li} onClick={() => setLocaleContext('ru')}>*/}
+            {/*  <Link href={generateRoute('ru', router)}>русский</Link>*/}
+            {/*</li>*/}
           </ul>
           <ul className={styles.headerIcons}>
             <li className={styles.li}>
