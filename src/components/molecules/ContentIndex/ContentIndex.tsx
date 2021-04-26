@@ -1,13 +1,21 @@
 import styles from './ContentIndex.module.scss';
-import { useThemeContext } from "context/context";
+import { ThemeContext, useThemeContext } from "context/context";
 import ClassNames from 'classnames';
+import { FC, PropsWithChildren } from "react";
 
-const ContentIndex = (props) => {
-  const themeNames = useThemeContext();
+interface ContentIndexProps {
+  indexList: Array<Element>;
+}
+
+const ContentIndex: FC<ContentIndexProps> = (props: PropsWithChildren<ContentIndexProps>) => {
+  const themeNames: ThemeContext = useThemeContext();
   
-  const indexList = props.indexList;
+  const indexList: Array<Element> = props.indexList;
   
-  function getCoords(elem) {
+  function getCoords(elem: HTMLElement): {
+    top: number,
+    left: number,
+  } {
     let box = elem.getBoundingClientRect();
     return {
       top: box.top + pageYOffset,
@@ -19,12 +27,10 @@ const ContentIndex = (props) => {
     // すでにアクティブになっている目次を選択
     const currentActiveIndex = document.querySelector("#content-index-wrapper .active");
     // すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
-    if (currentActiveIndex !== null) {
-      currentActiveIndex.classList.remove("active");
-    }
+    if (currentActiveIndex !== null) currentActiveIndex.classList.remove("active");
     // クリックした目次の箇所にactiveクラスを付与
     e.target.classList.add('active');
-    const element = document.getElementById(`${id}`);
+    const element: HTMLElement = document.getElementById(`${id}`);
     const coordinate = getCoords(element);
     scrollTo(coordinate.left, coordinate.top);
   }
@@ -38,7 +44,7 @@ const ContentIndex = (props) => {
       <aside className={contentIndexStyle}>
         <ul id="content-index-wrapper" className={styles.ul}>
           <span className={styles.content_index_span}>目次 - index -</span>
-          {indexList.map((index, i) => (
+          {indexList.map((index: Element, i: number) => (
             <li key={i} className={index.tagName === 'H2' ? styles.li : `${styles.li} ${styles.index_h3}`}>
               <a
                 href={`#${index.getAttribute('id')}`}

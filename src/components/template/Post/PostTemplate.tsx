@@ -1,10 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import { locale, LocaleType, useLocaleContext } from "context/localeContext";
-import { sha256 } from "lib/post";
 import Button from "components/atom/Button/Button";
 import Title from "components/atom/Title/Title";
-import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
 import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
@@ -13,23 +11,18 @@ import PrevAndNext from "../../molecules/PrevAndNext/PrevAndNext";
 
 interface PostPageProps {
   postData: any;
-  nextAndPrev: any;
 }
 
-const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps) => {
+const PostTemplate: FC<PostPageProps> = ({postData}: PostPageProps) => {
   const router: NextRouter = useRouter();
   const localeContext: LocaleType = useLocaleContext();
-  const [indexList, setIndexList] = useState<Array<any>>([]);
+  const [indexList, setIndexList] = useState<Array<Element>>([]);
   useEffect(() => {
     const content = document.getElementById('content');
-    const contentNodeList = content.querySelectorAll('h2, h3');
-    let indexListArray = [];
-    Array.from(contentNodeList, node => indexListArray.push(node));
-    contentNodeList.forEach(node => {
-      sha256(node.innerHTML).then(res => {
-        node.id = res.toString();
-      });
-    });
+    const contentNodeList: NodeListOf<Element> = content.querySelectorAll('h2, h3');
+    let indexListArray: Element[] = [];
+    Array.from(contentNodeList, (node: Element) => indexListArray.push(node));
+    contentNodeList.forEach((node: Element, i: number) => node.id = i.toString());
     setIndexList(indexListArray);
     
     // 今回の交差を監視する要素contentNodeList
@@ -51,9 +44,7 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
     function doWhenIntersect(entries) {
       // 交差検知をしたもののなかで、isIntersectingがtrueのDOMを色を変える関数に渡す
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          activateIndex(entry.target);
-        }
+        if (entry.isIntersecting) activateIndex(entry.target);
       });
     }
     
@@ -65,25 +56,16 @@ const PostTemplate: FC<PostPageProps> = ({postData, nextAndPrev}: PostPageProps)
       // すでにアクティブになっている目次を選択
       const currentActiveIndex = document.querySelector("#content-index-wrapper .active");
       // すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
-      if (currentActiveIndex !== null) {
-        currentActiveIndex.classList.remove("active");
-      }
+      if (currentActiveIndex !== null) currentActiveIndex.classList.remove("active");
       // 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
-      const newActiveIndex = document.querySelector(
-        `a[href="#${element.id}"]`
-      );
-      if (newActiveIndex) {
-        newActiveIndex.classList.add("active");
-      }
+      const newActiveIndex = document.querySelector(`a[href="#${element.id}"]`);
+      if (newActiveIndex) newActiveIndex.classList.add("active");
     }
-  }, []);
+  }, [router]);
   
-  const formatDate = (data) => {
+  const formatDate = (data: string): string => {
     const beforeFormatDate = new Date(data);
-    const year = beforeFormatDate.getFullYear();
-    const month = beforeFormatDate.getMonth() + 1;
-    const date = beforeFormatDate.getDate();
-    return `${year} / ${month} / ${date}`;
+    return `${beforeFormatDate.getFullYear()} / ${beforeFormatDate.getMonth() + 1} / ${beforeFormatDate.getDate()}`;
   }
   
   return (
