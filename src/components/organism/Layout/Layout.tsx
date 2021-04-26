@@ -52,6 +52,7 @@ const Layout = (props) => {
         <meta name="twitter:domain" content="https://azerbaijapan.xyz" key={"tw_domain"}/>
         <meta name="twitter:description" content={locale(localeContext).description} key={"tw_desc"}/>
         <meta name="twitter:image:src" content={props.image ? props.image : "/azerbaijapan.jpg"} key={"tw_image_src"}/>
+        <meta name="twitter:image" content={props.image ? props.image : "/azerbaijapan.jpg"} key={"tw_image"}/>
         
         <link rel="icon" href={"/azerbaijapan-favicon.png"}/>
         <link rel="apple-touch-icon-precomposed" href={"/apple-touch-icon-precomposed.png"}/>
