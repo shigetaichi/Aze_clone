@@ -1,4 +1,4 @@
-import React from 'react';
+import { Key } from 'react';
 import Link from 'next/link';
 import styles from './Thumbnail.module.scss';
 import ClassNames from 'classnames';
@@ -11,18 +11,6 @@ const Thumbnail = (props) => {
   const PostThumbnailStyle = ClassNames(styles.content, {
     [styles.contentDark]: themeNames.themeName === 'dark'
   });
-  let dummy;
-  let tagsArray;
-  if (props.tags) {
-    dummy = props.tags.map(tag => {
-      let arr = [];
-      for (const [key, value] of Object.entries(tag)) {
-        arr.push({'id': key, 'value': value});
-      }
-      return arr;
-    });
-    tagsArray = dummy[0];
-  }
   
   return (
     <Link href={`/${String(router.query.locale)}/posts/${props.id}`}>
@@ -35,9 +23,9 @@ const Thumbnail = (props) => {
               {props.title}
             </span>
           <div className={styles.tagArea}>
-            {tagsArray && tagsArray.map((tag, i) => (
-              <Link key={i} href={`/${String(router.query.locale)}/tags/${tag.id}`}>
-                <span className={styles.eachTag}>{tag.value}</span>
+            {props.tags && Object.entries(props.tags[0]).map((v: Array<any>, i: Key) => (
+              <Link key={i} href={`/${String(router.query.locale)}/tags/${v[0]}`}>
+                <span className={styles.eachTag}>{v[1]}</span>
               </Link>
             ))}
           </div>

@@ -23,7 +23,7 @@ const PostTransMenu: FC<Props> = (props: PropsWithChildren<Props>) => {
   return (
     <div className={styles.translation}>
       {translate_group['en_US'] && (
-        <div className={styles.to_translate} onClick={() => setLocaleContext('ja')}>
+        <div className={styles.to_translate} onClick={() => setLocaleContext('en')}>
           <Link href={`/en/posts/${translate_group['en_US'].ID}`}>
             <a className={translationLink}>English</a>
           </Link>
@@ -44,7 +44,7 @@ const PostTransMenu: FC<Props> = (props: PropsWithChildren<Props>) => {
         </div>
       )}
       {translate_group['az'] && (
-        <div className={styles.to_translate} onClick={() => setLocaleContext('ja')}>
+        <div className={styles.to_translate} onClick={() => setLocaleContext('az')}>
           <Link href={`/az/posts/${translate_group['az'].ID}`}>
             <a className={translationLink}>アゼルバイジャン語</a>
           </Link>
