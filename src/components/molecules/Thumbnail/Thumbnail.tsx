@@ -36,7 +36,7 @@ const Thumbnail = (props) => {
             </span>
           <div className={styles.tagArea}>
             {tagsArray && tagsArray.map((tag, i) => (
-              <Link key={i} href={`${router.query.locale}/tags/${tag.id}`}>
+              <Link key={i} href={`/${String(router.query.locale)}/tags/${tag.id}`}>
                 <span className={styles.eachTag}>{tag.value}</span>
               </Link>
             ))}
