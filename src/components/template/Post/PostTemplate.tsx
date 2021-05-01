@@ -7,7 +7,7 @@ import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
 import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";
 import PostCategoryAndTags from "components/molecules/PostCategoryAndTags/PostCategoryAndTags";
-import PrevAndNext from "../../molecules/PrevAndNext/PrevAndNext";
+import PrevAndNext from "components/molecules/PrevAndNext/PrevAndNext";
 
 interface PostPageProps {
   postData: any;

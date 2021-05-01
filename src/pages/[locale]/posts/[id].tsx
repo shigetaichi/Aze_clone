@@ -28,7 +28,7 @@ const Post = ({postData}) => (
       <meta property="og:image" content={postData.acf.eyecatch} key={"og_image"}/>
       <meta name="twitter:image:src" content={postData.acf.eyecatch} key={"tw_image_src"}/>
       <meta name="twitter:image" content={postData.acf.eyecatch} key={"tw_image"}/>
-      {/*<meta name="keywords" content={postData}/>*/}
+      <meta property="og:title" content={postData.title.rendered} key={"og_title"}/>
       <title>{postData.title.rendered}</title>
     </Head>
     <PostTemplate postData={postData}/>
