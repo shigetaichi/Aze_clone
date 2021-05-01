@@ -42,7 +42,7 @@ const necessaryDataSelect = (data: any) => ({
   title: data.title.rendered,
   eyecatch: data.acf.eyecatch,
   description: data.content,
-  tags: data.tags,
+  tags: data.tag_name,
 })
 
 export const wpGenerateNextAndPrevArray = async (lang: string, id: number) => {
