@@ -15,14 +15,14 @@
     grid-template-rows: 1fr 1fr;
   }
 
-  .prev {
+  .next {
     grid-column: 2 / 3;
     @include u.max-mq("md"){
       grid-column: unset;
     }
   }
 
-  .next {
+  .prev {
     grid-column: 3 / 4;
     @include u.max-mq("md"){
       grid-column: unset;

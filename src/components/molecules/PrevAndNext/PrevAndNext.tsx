@@ -24,18 +24,6 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
   
   return (
     <div className={styles.prev_and_next}>
-      <div className={styles.prev}>
-        <p className={styles.flag}>前の記事</p>
-        {prevAndNext[0] && (
-          <Thumbnail
-            id={prevAndNext[0].id}
-            title={prevAndNext[0].title}
-            image={prevAndNext[0].eyecatch}
-            description={prevAndNext[0].description}
-            tags={prevAndNext[0].tags}
-          />
-        )}
-      </div>
       <div className={styles.next}>
         <p className={styles.flag}>次の記事</p>
         {prevAndNext[1] && (
@@ -45,6 +33,18 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
             image={prevAndNext[1].eyecatch}
             description={prevAndNext[1].description}
             tags={prevAndNext[1].tags}
+          />
+        )}
+      </div>
+      <div className={styles.prev}>
+        <p className={styles.flag}>前の記事</p>
+        {prevAndNext[0] && (
+          <Thumbnail
+            id={prevAndNext[0].id}
+            title={prevAndNext[0].title}
+            image={prevAndNext[0].eyecatch}
+            description={prevAndNext[0].description}
+            tags={prevAndNext[0].tags}
           />
         )}
       </div>
