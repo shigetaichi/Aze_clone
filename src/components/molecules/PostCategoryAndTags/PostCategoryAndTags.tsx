@@ -22,10 +22,10 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
   const getData = async () => {
     await Promise.all([
       (async () => {
-        await Promise.all(props.categories.map(async (c: number) => fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories/${c}?lang=${localeContext}`).then(r => setCats(prevState => [...prevState, r['name']]))));
+        await Promise.all(props.categories.map(async (c: number) => fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories/${c}?lang=${localeContext}`).then(r => setCats(prevState => [...prevState, r]))));
       })(),
       (async () => {
-        await Promise.all(props.tags.map(async (t: number) => fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags/${t}?lang=${localeContext}`).then(r => setTags(prevState => [...prevState, r['name']]))));
+        await Promise.all(props.tags.map(async (t: number) => fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags/${t}?lang=${localeContext}`).then(r => setTags(prevState => [...prevState, r]))));
       })(),
     ]);
   }
@@ -43,16 +43,16 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
       <div className={styles.cat}>
         {locale(localeContext).categories.title}：
         {cats && cats.map((c: number, i: number) => (
-          <Link href={`/${String(router.query.locale)}/categories/${cats[i]}`} key={i}>
-            <span className={styles.each_cat}>{cats[i]}</span>
+          <Link href={`/${String(router.query.locale)}/categories/${cats[i]['id']}`} key={i}>
+            <span className={styles.each_cat}>{cats[i]['name']}</span>
           </Link>
         ))}
       </div>
       <div className={styles.tags}>
         {locale(localeContext).tags.title}：
         {tags && tags.map((t: number, i: number) => (
-          <Link href={`/${String(router.query.locale)}/tags/${tags[i]}`} key={i}>
-            <span className={styles.each_tag}>{tags[i]}</span>
+          <Link href={`/${String(router.query.locale)}/tags/${tags[i]['id']}`} key={i}>
+            <span className={styles.each_tag}>{tags[i]['name']}</span>
           </Link>
         ))}
       </div>
