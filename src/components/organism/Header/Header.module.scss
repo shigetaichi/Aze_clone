@@ -24,6 +24,10 @@
     width: 100%;
   }
 
+  @include u.max-mq("md") {
+    padding: 0;
+  }
+
   .headerContainer {
     @include u.wide_container();
 
@@ -63,6 +67,7 @@
         list-style: none;
         margin: 0 0 0 auto;
         @include u.h3normal();
+        padding: 0;
 
         @include u.max-mq("md") {
           margin: 0 auto 0 0;
@@ -119,12 +124,14 @@
         .li {
           width: inherit;
           @include u.h3normal();
-          margin: 0 u.$twelve 0 0;
+          margin: 0 u.$twelve*10 0 0;
           white-space: nowrap;
-          animation: loop-slide 10s infinite linear 1s both;
+          animation: loop-slide 20s infinite linear 1s both;
 
           @include u.max-mq("md") {
             display: inline;
+            margin: 0 u.$twelve*6 0 0;
+            @include u.h4normal();
           }
         }
       }

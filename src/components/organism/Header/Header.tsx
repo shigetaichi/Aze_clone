@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
+import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import ClassNames from 'classnames';

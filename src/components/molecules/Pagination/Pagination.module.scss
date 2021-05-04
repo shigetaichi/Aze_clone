@@ -2,7 +2,7 @@
 
 /*********** Pagination ***********/
 .pagination {
-  margin: 0 auto u.$thirty_six;
+  margin: 0 auto u.$thirty_six+u.$twelve;
   list-style: none;
   padding: 0;
   @include u.flex-center();

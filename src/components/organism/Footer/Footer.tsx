@@ -80,7 +80,6 @@ const Footer: FC = () => {
       />
       {tags[localeTheme] && <TagArea tags={tags[localeTheme]}/>}
       <footer className={FooterStyle}>
-        <div className="module-spacer--medium"/>
         <a className={styles.instagram_icon} href="https://www.instagram.com/azerbaijapan/" target={"_blank"}>
           <img src={"/instagram.svg"} alt="instagram icon"/>
         </a>
