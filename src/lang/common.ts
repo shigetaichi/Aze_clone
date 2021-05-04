@@ -12,8 +12,8 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "description": ["Bu sayt Azərbaycan və Yaponiyanı birləşdirən blogdur.", "Saytın yaradıcısı ( adminstratoru ) olan mən, yaponam.", "Bu saytı yaradarkən, internetdə Azərbaycanla bağlı yapon dilində demək olar ki, heç nə yox idi və məlumat toplamaqda çox çətinlik çəkdim.", "Buna görə də,AZERBAIJAPAN Yaponiya ilə Azərbaycan arasında körpü olacağını ümid edirəm.", "Dilinizi buradan seçə bilərsiniz."]
       },
       "selectedEight": {
-        "title": "Səkkiz seçildi",
-        "subtitle": "Azərbaycanda ən yaxşı 8 məqaləni yoxlayaq"
+        "title": "Altı seçildi",
+        "subtitle": "Azərbaycanda ən yaxşı 6 məqaləni yoxlayaq"
       },
       "posts": {
         "title": "Məqalələr",
@@ -73,8 +73,8 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "description": ["This website is a blog to connect Azerbaijan and Japan.", "I am the administrator of this website and I am Japanese.", "At the time of setting up this website", "there were very few articles about Azerbaijan in Japanese on the net, so it was very difficult to collect information.", "So, I hope that AZERBAIJAPAN will become a bridge between Japan and Azerbaijan.", "You can choose your language from here."]
       },
       "selectedEight": {
-        "title": "SELECTED EIGHT",
-        "subtitle": "Let's check the best 8 articles in Azerbaijapan"
+        "title": "SPECIAL 6",
+        "subtitle": "Let's check the best 6 articles in Azerbaijapan"
       },
       "posts": {
         "title": "Articles",
@@ -134,8 +134,8 @@ export const localeData: { [key: string]: {[key2: string]: any} } = {
         "description": ["このサイトはアゼルバイジャンと日本をつなぐブログです。","当サイトの管理者である私は日本人です。", "このサイトを開設した当時は、アゼルバイジャンに関する日本語の記事がネット上にほとんどなく、情報収集に苦労しました。","そこで、AZERBAIJAPANが日本とアゼルバイジャンの架け橋になればと思っています。", "下のセレクトボックスから言語を選択できます。"]
       },
       "selectedEight": {
-        "title": "厳選８記事",
-        "subtitle": "当サイトの厳選記事を確認しましょう"
+        "title": "厳選６記事",
+        "subtitle": "当サイトの厳選記事はこちら！"
       },
       "posts": {
         "title": "記事たち",
