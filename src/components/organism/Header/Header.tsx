@@ -47,7 +47,7 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           </ul>
           <ul className={styles.headerIcons}>
             <li className={styles.li}>
-              <a href="https://www.instagram.com/azerbaijapan/">
+              <a href="https://www.instagram.com/azerbaijapan/" target={"_blank"}>
                 <img src={"/instagram.svg"} alt="instagram icon"/>
               </a>
             </li>
