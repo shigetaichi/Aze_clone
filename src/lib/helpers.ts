@@ -21,3 +21,11 @@ export const generateRoute = (locale: LocaleType, router: NextRouter): string =>
   })
   return s
 }
+
+export const filterPostDataArray = (dataArray: Array<any>): Array<any> => dataArray.map(post => ({
+  id: post.id,
+  title: post.title.rendered,
+  eyecatch: post.acf.eyecatch,
+  description: post.content.rendered,
+  tags: post.tag_name,
+}));

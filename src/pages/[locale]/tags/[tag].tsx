@@ -3,6 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
 import { perPage, wpBaseUrl } from "lib/post";
+import { filterPostDataArray } from "lib/helpers";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
@@ -38,13 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const TagPage = ({postsFilteredByTag, tagNameArray}) => {
   const localeContext: LocaleType = useLocaleContext();
-  const thumbnailDataArray = postsFilteredByTag[localeContext].map(postData => ({
-    id: postData.id,
-    title: postData.title.rendered,
-    eyecatch: postData.acf.eyecatch,
-    description: postData.content.rendered,
-    tags: postData.tag_name
-  }));
+  const thumbnailDataArray = filterPostDataArray(postsFilteredByTag[localeContext]);
   const tagName = tagNameArray[localeContext];
   
   return (

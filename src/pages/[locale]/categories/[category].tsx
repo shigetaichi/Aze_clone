@@ -4,6 +4,7 @@ import Head from "next/head";
 import { langType } from "types";
 import Category from "components/template/Category/Category";
 import { perPage, wpBaseUrl } from "lib/post";
+import { filterPostDataArray } from "lib/helpers";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
@@ -39,13 +40,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 
 const CategoryPage = ({postsFilteredByCategory, catNameArray}) => {
   const localeContext: LocaleType = useLocaleContext();
-  const thumbnailDataArray = postsFilteredByCategory[localeContext].map(postData => ({
-    id: postData.id,
-    title: postData.title.rendered,
-    eyecatch: postData.acf.eyecatch,
-    description: postData.content.rendered,
-    tags: postData.tag_name,
-  }));
+  const thumbnailDataArray = filterPostDataArray(postsFilteredByCategory[localeContext]);
   const catName = catNameArray[localeContext];
   
   return (

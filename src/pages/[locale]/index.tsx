@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { perPage, wpBaseUrl } from 'lib/post';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
-import { fetchWithCache } from "lib/helpers";
+import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 import { langType } from "types";
 import Top from "components/template/Top/Top";
 
@@ -41,21 +41,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
 const Home = ({allPostData, postsFilteredByTag}) => {
   const localeContext: LocaleType = useLocaleContext();
   
-  const thumbnailDataArray = allPostData[localeContext].map(post => ({
-    id: post.id,
-    title: post.title.rendered,
-    eyecatch: post.acf.eyecatch,
-    description: post.content.rendered,
-    tags: post.tag_name,
-  }));
+  const thumbnailDataArray = filterPostDataArray(allPostData[localeContext]);
   
-  const thumbnailDataArraySelected = postsFilteredByTag[localeContext].map(postData => ({
-    id: postData.id,
-    title: postData.title.rendered,
-    eyecatch: postData.acf.eyecatch,
-    description: postData.content.rendered,
-    tags: postData.tag_name
-  }));
+  const thumbnailDataArraySelected = filterPostDataArray(postsFilteredByTag[localeContext]);
   
   return (
     <>
