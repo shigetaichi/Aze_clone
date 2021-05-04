@@ -11,7 +11,6 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   const langString: string = String(context.query.locale);
   const p: number = Number(context.query.page);
   const allPostsUrl: string = `wp-json/wp/v2/posts`;
-  // const allPostsUrl: string = `wp-json/wp/v2/posts?per_page=100&?lang=${langString}&_fields=id,acf,title,date,modified,content,meta,categories,category_name,tags,tag_name`;
   let allPostData: langType = {
     'ja': [],
     'az': [],
@@ -27,9 +26,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     (async () => {
       allPostData[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?lang=${langString}&per_page=${perPage}&page=${p ? p : 1}`)
     })(),
-    // (async () => {
-    //   postsFilteredByTag[langString] = await getPostsFilteredByTagAndLangWp(langString, 8);
-    // })(),
+    (async () => {
+      postsFilteredByTag[langString] = await fetchWithCache(`${wpBaseUrl}/${allPostsUrl}?tags=${8}&lang=${langString}`);
+    })(),
   ]);
   return {
     props: {
