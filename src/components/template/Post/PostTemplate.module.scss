@@ -134,6 +134,15 @@
         code {
           font-family: Consolas, Menlo, Monaco, -apple-system, BlinkMacSystemFont, "Segoe UI", Meiryo, monospace;
         }
+
+        blockquote {
+          width: 92%;
+          margin: 0 auto;
+
+          cite {
+            word-break: break-all;
+          }
+        }
       }
 
       .thanks {
