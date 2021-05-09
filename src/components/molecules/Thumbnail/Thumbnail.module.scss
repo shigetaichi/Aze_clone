@@ -103,7 +103,7 @@
 }
 
 .postThumbnail_title {
-  @include u.h4normal(u.$shippori);
+  @include u.h3normal(u.$shippori);
   min-height: 50px;
 }
 
