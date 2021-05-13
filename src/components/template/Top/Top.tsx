@@ -5,9 +5,9 @@ import Button from "components/atom/Button/Button";
 import LangSelect from "components/atom/LangSelect/LangSelect";
 import styles from "./Top.module.scss";
 import PostList from "components/organism/PostList/PostList";
-import Pagination from "components/molecules/Pagination/Pagination";
 import { NextRouter, useRouter } from "next/router";
 import { perPage, wpBaseUrl } from "lib/post";
+import Pagination from "components/molecules/Pagination/Pagination";
 
 interface TopProps {
   arraySelected: Array<any>;
@@ -28,7 +28,7 @@ const Top: FC<TopProps> = (props: PropsWithChildren<TopProps>) => {
     })
     return () => {
     };
-  }, []);
+  }, [router]);
   
   return (
     <>

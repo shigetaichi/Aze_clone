@@ -35,7 +35,7 @@ const Pagination: FC<PaginationProps> = ({total, perPage}: PaginationProps) => {
     } else {
       setPage(Number(current))
     }
-  }, [router.query])
+  }, [router.query]);
   
   return (
     <>
