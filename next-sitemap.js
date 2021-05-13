@@ -2,10 +2,10 @@ module.exports = {
     siteUrl: 'https://azerbaijapan.xyz',
     generateRobotsTxt: true,
     sitemapSize: 7000,
-    exclude: ['/server-sitemap.xml'], // <= exclude here
+    exclude: ['/sitemap.xml'], // <= exclude here
     robotsTxtOptions: {
         additionalSitemaps: [
-            'https://azerbaijapan.xyz/server-sitemap.xml', // <==== Add here
+            'https://azerbaijapan.xyz/sitemap.xml', // <==== Add here
         ],
     },
 }
