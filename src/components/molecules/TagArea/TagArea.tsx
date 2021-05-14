@@ -12,7 +12,7 @@ const TagArea: FC<Props> = ({tags}: Props) => {
   return (
     <div className={styles.tags_wrapper}>
       {tags.map((tag) => (
-        <Link href={`/${String(router.query.locale)}/tags/${tag.id}`} key={tag.id}>
+        <Link href={`/${router.query.locale ? String(router.query.locale) : 'ja'}/tags/${tag.id}`} key={tag.id}>
           <a className={styles.eachTag}>{tag.name}</a>
         </Link>
       ))}

@@ -14,7 +14,7 @@ const CategoryArea: FC<Props> = (props: PropsWithChildren<Props>) => {
   return (
     <div className={styles.category_wrapper}>
       {categories && categories.map((category) => (
-        <Link href={`/${String(router.query.locale)}/categories/${category.id}`} key={category.id}>
+        <Link href={`/${router.query.locale ? String(router.query.locale) : 'ja'}/categories/${category.id}`} key={category.id}>
           <a className={styles.category}>
             <div className={styles.image_wrapper}>
               <img className={styles.image} src={category.acf.category_images} alt=""/>
