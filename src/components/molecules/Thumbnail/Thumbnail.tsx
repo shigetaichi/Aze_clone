@@ -14,7 +14,7 @@ const Thumbnail = (props) => {
   
   return (
     <Link href={`/${String(router.query.locale)}/posts/${props.id}`}>
-      <div className={styles.root}>
+      <a className={styles.root}>
         <div className={styles.media}>
           <img className={styles.image} src={props.image} alt=""/>
         </div>
@@ -30,7 +30,7 @@ const Thumbnail = (props) => {
             ))}
           </div>
         </div>
-      </div>
+      </a>
     </Link>
   )
 }

@@ -84,7 +84,7 @@ const Footer: FC = () => {
           <img src={"/instagram.svg"} alt="instagram icon"/>
         </a>
         <Link href={"/"}>
-          © 2020 AZERBAIJAPAN
+          <a>© 2020 AZERBAIJAPAN</a>
         </Link>
       </footer>
     </>

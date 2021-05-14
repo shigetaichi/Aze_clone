@@ -26,20 +26,20 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           <h1 className={styles.site_title}>
             <Link href={`/${router.query.locale}`}>
               {themeNames.themeName === 'dark' ?
-                <img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme"/> :
-                <img src={"/azerbaijapan.png"} alt="azerbaijapan original logo"/>
+                <a><img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme"/></a> :
+                <a><img src={"/azerbaijapan.png"} alt="azerbaijapan original logo"/></a>
               }
             </Link>
           </h1>
           <ul className={styles.langList}>
             <li className={styles.li} onClick={() => setLocaleContext('ja')}>
-              <Link href={generateRoute('ja', router)}>日本語</Link>
+              <Link href={generateRoute('ja', router)}><a>日本語</a></Link>
             </li>
             <li className={styles.li} onClick={() => setLocaleContext('az')}>
-              <Link href={generateRoute('az', router)}>azerbaycan</Link>
+              <Link href={generateRoute('az', router)}><a>azerbaycan</a></Link>
             </li>
             <li className={styles.li} onClick={() => setLocaleContext('en')}>
-              <Link href={generateRoute('en', router)}>English</Link>
+              <Link href={generateRoute('en', router)}><a>English</a></Link>
             </li>
             {/*<li className={styles.li} onClick={() => setLocaleContext('ru')}>*/}
             {/*  <Link href={generateRoute('ru', router)}>русский</Link>*/}

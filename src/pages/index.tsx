@@ -16,17 +16,17 @@ const Index: NextPage = () => {
       <div className={styles.main}>
         <div className={styles.each} onClick={() => setLocaleContext('ja')}>
           <Link href={"/ja"}>
-            <p className={styles.text}>日本語</p>
+            <a className={styles.text}>日本語</a>
           </Link>
         </div>
         <div className={styles.each} onClick={() => setLocaleContext('az')}>
           <Link href={"/az"}>
-            <p className={styles.text}>azerbaycan</p>
+            <a className={styles.text}>azerbaycan</a>
           </Link>
         </div>
         <div className={styles.each} onClick={() => setLocaleContext('en')}>
           <Link href={"/en"}>
-            <p className={styles.text}>English</p>
+            <a className={styles.text}>English</a>
           </Link>
         </div>
         {/*<div className={styles.each} onClick={() => setLocaleContext('ru')}>*/}
