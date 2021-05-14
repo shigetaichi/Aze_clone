@@ -7,11 +7,17 @@ import { LocaleType } from "context/localeContext";
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Method to source urls from cms
   
-  let fields = [];
   const supportLocale: LocaleType[] = ['ja', 'az', 'en'];
   const domain: string = 'https://azerbaijapan.xyz';
   const apiRoute: string = 'https://azerbaijapan.taichi-sigma2.com/wp-json/wp/v2/posts';
   
+  let fields = [
+    {
+      loc: `${domain}`,
+      lastmod: new Date().toISOString(),
+      changefreq: 'daily',
+    }
+  ];
   // utility functions to generate sitemap
   const localeFormatter = (data: string): LocaleType => {
     if (data) {
