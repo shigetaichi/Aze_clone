@@ -6,4 +6,4 @@ Allow: /
 Host: https://azerbaijapan.xyz
 
 # Sitemaps
-Sitemap: https://azerbaijapan.xyz/sitemap.xml
+Sitemap: https://azerbaijapan.xyz/server-sitemap.xml
