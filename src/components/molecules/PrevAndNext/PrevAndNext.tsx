@@ -26,7 +26,7 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
     <div className={styles.prev_and_next}>
       <div className={styles.next}>
         <p className={styles.flag}>次の記事</p>
-        {prevAndNext[1] && (
+        {prevAndNext[1] ? (
           <Thumbnail
             id={prevAndNext[1].id}
             title={prevAndNext[1].title}
@@ -34,11 +34,13 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
             description={prevAndNext[1].description}
             tags={prevAndNext[1].tags}
           />
+        ) : (
+          <div className={styles.noContent}>この記事が最新の記事です</div>
         )}
       </div>
       <div className={styles.prev}>
         <p className={styles.flag}>前の記事</p>
-        {prevAndNext[0] && (
+        {prevAndNext[0] ? (
           <Thumbnail
             id={prevAndNext[0].id}
             title={prevAndNext[0].title}
@@ -46,6 +48,8 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
             description={prevAndNext[0].description}
             tags={prevAndNext[0].tags}
           />
+        ) : (
+          <div className={styles.noContent}>この記事が最初の記事です</div>
         )}
       </div>
     </div>

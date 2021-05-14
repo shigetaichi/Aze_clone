@@ -13,7 +13,7 @@ const TagArea: FC<Props> = ({tags}: Props) => {
     <div className={styles.tags_wrapper}>
       {tags.map((tag) => (
         <Link href={`/${String(router.query.locale)}/tags/${tag.id}`} key={tag.id}>
-          <p className={styles.eachTag}>{tag.name}</p>
+          <a className={styles.eachTag}>{tag.name}</a>
         </Link>
       ))}
     </div>

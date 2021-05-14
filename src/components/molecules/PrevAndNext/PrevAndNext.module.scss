@@ -34,4 +34,11 @@
     @include u.h4normal(u.$shippori);
     text-align: center;
   }
+
+  .noContent {
+    @include u.flex-center();
+    align-items: center;
+    @include u.h3normal(u.$shippori);
+    height: 100%;
+  }
 }

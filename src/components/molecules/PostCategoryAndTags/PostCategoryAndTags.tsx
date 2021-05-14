@@ -44,7 +44,7 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
         {locale(localeContext).categories.title}：
         {cats && cats.map((c: number, i: number) => (
           <Link href={`/${String(router.query.locale)}/categories/${cats[i]['id']}`} key={i}>
-            <span className={styles.each_cat}>{cats[i]['name']}</span>
+            <a className={styles.each_cat}>{cats[i]['name']}</a>
           </Link>
         ))}
       </div>
@@ -52,7 +52,7 @@ const PostCategoryAndTags: FC<Props> = (props: PropsWithChildren<Props>) => {
         {locale(localeContext).tags.title}：
         {tags && tags.map((t: number, i: number) => (
           <Link href={`/${String(router.query.locale)}/tags/${tags[i]['id']}`} key={i}>
-            <span className={styles.each_tag}>{tags[i]['name']}</span>
+            <a className={styles.each_tag}>{tags[i]['name']}</a>
           </Link>
         ))}
       </div>
