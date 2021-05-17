@@ -9,7 +9,7 @@ interface Props {
 const Button: FC<Props> = (props: PropsWithChildren<Props>) => {
   return (
     <Link href={props.path}>
-      <a href="/" className={styles.btn}>
+      <a className={styles.btn}>
         <svg width="277" height="62">
           <defs>
             <linearGradient id="grad1">
