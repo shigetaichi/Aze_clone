@@ -4,7 +4,7 @@ import Head from "next/head";
 import { langType } from "types";
 import Category from "components/template/Category/Category";
 import { perPage, wpBaseUrl } from "lib/post";
-import { filterPostDataArray } from "lib/helpers";
+import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
@@ -24,10 +24,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   };
   await Promise.all([
     (async () => {
-      postsFilteredByCategory[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${Number(context.query.category)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`)).json();
+      postsFilteredByCategory[localeData] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/posts?categories=${Number(context.query.category)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`);
     })(),
     (async () => {
-      catNameArray[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/categories/${Number(context.query.category)}?lang=${localeData}`)).json();
+      catNameArray[localeData] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/categories/${Number(context.query.category)}?lang=${localeData}`);
     })(),
   ]);
   return {

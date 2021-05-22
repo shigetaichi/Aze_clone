@@ -26,7 +26,7 @@ const Tag: FC<Props> = (props: PropsWithChildren<Props>) => {
     })
     return () => {
     };
-  }, []);
+  }, [router, localeContext]);
   
   return (
     <>

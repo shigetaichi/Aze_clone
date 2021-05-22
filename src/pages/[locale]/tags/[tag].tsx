@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import Tag from "components/template/Tag/Tag";
 import { perPage, wpBaseUrl } from "lib/post";
-import { filterPostDataArray } from "lib/helpers";
+import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
   const localeData: string = String(context.query.locale);
@@ -23,10 +23,10 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
   }
   await Promise.all([
     (async () => {
-      postsFilteredByTag[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(context.query.tag)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`)).json();
+      postsFilteredByTag[localeData] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/posts?tags=${Number(context.query.tag)}&lang=${localeData}&per_page=${perPage}&page=${p ? p : 1}`);
     })(),
     (async () => {
-      tagNameArray[localeData] = await (await fetch(`${wpBaseUrl}/wp-json/wp/v2/tags/${Number(context.query.tag)}?lang=${localeData}`)).json();
+      tagNameArray[localeData] = await fetchWithCache(`${wpBaseUrl}/wp-json/wp/v2/tags/${Number(context.query.tag)}?lang=${localeData}`);
     })(),
   ]);
   return {

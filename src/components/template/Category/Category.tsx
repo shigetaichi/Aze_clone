@@ -25,7 +25,7 @@ const Category: FC<Props> = (props: PropsWithChildren<Props>) => {
     })
     return () => {
     };
-  }, [localeContext]);
+  }, [localeContext, router]);
   
   return (
     <>
