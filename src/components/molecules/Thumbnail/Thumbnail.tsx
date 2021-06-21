@@ -19,9 +19,9 @@ const Thumbnail = (props) => {
           <img className={styles.image} src={props.image} alt=""/>
         </div>
         <div className={PostThumbnailStyle}>
-            <span className={styles.postThumbnail_title}>
-              {props.title}
-            </span>
+          <span className={styles.postThumbnail_title}>
+            {props.title}
+          </span>
           <div className={styles.tagArea}>
             {props.tags && Object.entries(props.tags[0]).map((v: Array<any>, i: Key) => (
               <Link key={i} href={`/${String(router.query.locale)}/tags/${v[0]}`}>
