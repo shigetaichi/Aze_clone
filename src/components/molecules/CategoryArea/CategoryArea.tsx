@@ -17,7 +17,7 @@ const CategoryArea: FC<Props> = (props: PropsWithChildren<Props>) => {
         <Link href={`/${router.query.locale ? String(router.query.locale) : 'ja'}/categories/${category.id}`} key={category.id}>
           <a className={styles.category}>
             <div className={styles.image_wrapper}>
-              <img className={styles.image} src={category.acf.category_images} alt=""/>
+              <img className={styles.image} src={category.acf.category_images} alt="" loading={"lazy"}/>
             </div>
             <div className={styles.title_wrapper}>
               <p className={styles.title}>{category.name}</p>

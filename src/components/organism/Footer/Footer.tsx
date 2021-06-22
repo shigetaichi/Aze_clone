@@ -81,7 +81,7 @@ const Footer: FC = () => {
       {tags[localeTheme] && <TagArea tags={tags[localeTheme]}/>}
       <footer className={FooterStyle}>
         <a className={styles.instagram_icon} href="https://www.instagram.com/azerbaijapan/" target={"_blank"}>
-          <img src={"/instagram.svg"} alt="instagram icon"/>
+          <img src={"/instagram.svg"} alt="instagram icon" loading={"lazy"}/>
         </a>
         <Link href={"/"}>
           <a>© 2020 AZERBAIJAPAN</a>

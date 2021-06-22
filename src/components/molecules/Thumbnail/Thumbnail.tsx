@@ -16,7 +16,7 @@ const Thumbnail = (props) => {
     <Link href={`/${String(router.query.locale)}/posts/${props.id}`}>
       <a className={styles.root}>
         <div className={styles.media}>
-          <img className={styles.image} src={props.image} alt=""/>
+          <img className={styles.image} src={props.image} alt="" loading={"lazy"}/>
         </div>
         <div className={PostThumbnailStyle}>
           <span className={styles.postThumbnail_title}>

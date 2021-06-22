@@ -26,8 +26,8 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           <h1 className={styles.site_title}>
             <Link href={`/${router.query.locale}`}>
               {themeNames.themeName === 'dark' ?
-                <a><img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme"/></a> :
-                <a><img src={"/azerbaijapan.png"} alt="azerbaijapan original logo"/></a>
+                <a><img src={"/azerbaijapan-logo-dark.png"} alt="logo in dark theme" loading={"lazy"}/></a> :
+                <a><img src={"/azerbaijapan.png"} alt="azerbaijapan original logo" loading={"lazy"}/></a>
               }
             </Link>
           </h1>
@@ -48,7 +48,7 @@ const Header: FC<HeaderProps> = (props: PropsWithChildren<HeaderProps>) => {
           <ul className={styles.headerIcons}>
             <li className={styles.li}>
               <a href="https://www.instagram.com/azerbaijapan/" target={"_blank"}>
-                <img src={"/instagram.svg"} alt="instagram icon"/>
+                <img src={"/instagram.svg"} alt="instagram icon" loading={"lazy"}/>
               </a>
             </li>
           </ul>

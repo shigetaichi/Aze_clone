@@ -80,7 +80,7 @@ const PostTemplate: FC<PostPageProps> = ({postData}: PostPageProps) => {
             <PostTransMenu translate_group={postData.translate_group}/>
             <PostCategoryAndTags categories={postData.categories} tags={postData.tags}/>
             <div className={styles.eyecatch}>
-              <img src={postData.acf.eyecatch} alt=""/>
+              <img src={postData.acf.eyecatch} alt="" loading={"lazy"}/>
             </div>
             <div id="content" className={styles.content} dangerouslySetInnerHTML={{__html: postData.content.rendered}}/>
             <div className={styles.thanks}>
