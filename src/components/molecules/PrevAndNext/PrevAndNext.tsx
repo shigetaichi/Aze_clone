@@ -12,12 +12,19 @@ const PrevAndNext: FC<PrevAndNext> = (props: PropsWithChildren<PrevAndNext>) => 
   const localeContext: LocaleType = useLocaleContext();
   const [prevAndNext, setPrevAndNext] = useState([]);
   
-  const setData = async () => setPrevAndNext(await wpGenerateNextAndPrevArray(localeContext, props.id));
-  
   useEffect(() => {
-    setData().then(() => {
-    });
+    let mounted = true;
+    wpGenerateNextAndPrevArray(localeContext, props.id)
+    .then((res: any[]) => {
+      if (!mounted) return;
+      setPrevAndNext(res);
+    })
+    .catch((err) => {
+      if (!mounted) return;
+      console.log(err);
+    })
     return () => {
+      mounted = false;
     };
   }, [localeContext, props.id]);
   

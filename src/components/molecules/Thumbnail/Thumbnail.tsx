@@ -1,11 +1,19 @@
-import { Key } from 'react';
+import { Key, VFC } from 'react';
 import Link from 'next/link';
 import styles from './Thumbnail.module.scss';
 import ClassNames from 'classnames';
 import { ThemeContext, useThemeContext } from 'context/context';
 import { NextRouter, useRouter } from "next/router";
 
-const Thumbnail = (props) => {
+interface ThumbnailProps {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+  tags: Array<any>;
+}
+
+const Thumbnail: VFC<ThumbnailProps> = (props: ThumbnailProps) => {
   const router: NextRouter = useRouter();
   const themeNames: ThemeContext = useThemeContext();
   const PostThumbnailStyle = ClassNames(styles.content, {

@@ -1,4 +1,4 @@
-import React from 'react'
+import { VFC } from 'react'
 import styles from './PostList.module.scss';
 import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
@@ -7,7 +7,7 @@ interface Props {
   thumbnailDataArray: Array<any>;
 }
 
-const PostList = (props: Props) => {
+const PostList: VFC<Props> = (props: Props) => {
   const localeContext: LocaleType = useLocaleContext();
   
   return (
