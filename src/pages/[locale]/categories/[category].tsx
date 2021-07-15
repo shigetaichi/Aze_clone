@@ -1,8 +1,8 @@
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { langType } from "types";
-import Category from "components/template/Category/Category";
+import Category from "components/templates/Category/Category";
 import { perPage, wpBaseUrl } from "lib/post";
 import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 

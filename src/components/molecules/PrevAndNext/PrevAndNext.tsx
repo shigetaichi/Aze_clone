@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useEffect, useState } from "react";
 import styles from "./PrevAndNext.module.scss";
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 import { wpGenerateNextAndPrevArray } from "lib/post";
-import { LocaleType, useLocaleContext } from "context/localeContext";
+import { LocaleType, useLocaleContext } from "contexts/localeContext";
 
 interface PrevAndNext {
   id: number;

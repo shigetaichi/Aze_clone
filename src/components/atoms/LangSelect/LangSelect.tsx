@@ -1,9 +1,9 @@
-import { useLocaleContext, useSetLocaleContext, locale, LocaleType } from 'context/localeContext';
+import { useLocaleContext, useSetLocaleContext, locale, LocaleType } from 'contexts/localeContext';
 import ClassNames from 'classnames';
 import styles from './LangSelect.module.scss';
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { NextRouter, useRouter } from "next/router";
-import { ThemeContext, useThemeContext } from "context/context";
+import { ThemeContext, useThemeContext } from "contexts/context";
 
 const LangSelect = () => {
   const router: NextRouter = useRouter();

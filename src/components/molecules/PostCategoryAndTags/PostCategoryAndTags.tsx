@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-import { locale, LocaleType, useLocaleContext } from "context/localeContext";
+import { locale, LocaleType, useLocaleContext } from "contexts/localeContext";
 import styles from './PostCategoryAndTags.module.scss';
 import { NextRouter, useRouter } from "next/router";
 import { wpBaseUrl } from "lib/post";

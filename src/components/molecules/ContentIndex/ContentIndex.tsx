@@ -1,5 +1,5 @@
 import styles from './ContentIndex.module.scss';
-import { ThemeContext, useThemeContext } from "context/context";
+import { ThemeContext, useThemeContext } from "contexts/context";
 import ClassNames from 'classnames';
 import { FC, PropsWithChildren } from "react";
 

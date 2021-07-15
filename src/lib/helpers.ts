@@ -1,5 +1,5 @@
 import cacheData from "memory-cache";
-import { LocaleType } from "../context/localeContext";
+import { LocaleType } from "contexts/localeContext";
 import { NextRouter } from "next/router";
 
 export const fetchWithCache = async (input: Request | string, init?: RequestInit) => {

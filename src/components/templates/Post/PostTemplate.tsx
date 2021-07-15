@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
-import { locale, LocaleType, useLocaleContext } from "context/localeContext";
-import Button from "components/atom/Button/Button";
-import Title from "components/atom/Title/Title";
+import { locale, LocaleType, useLocaleContext } from "contexts/localeContext";
+import Button from "components/atoms/Button/Button";
+import Title from "components/atoms/Title/Title";
 import ContentIndex from "components/molecules/ContentIndex/ContentIndex";
 import styles from "./PostTemplate.module.scss";
 import PostTransMenu from "components/molecules/PostTransMenu/PostTransMenu";

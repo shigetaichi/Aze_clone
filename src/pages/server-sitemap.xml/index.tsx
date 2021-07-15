@@ -2,7 +2,7 @@ import { getServerSideSitemap } from 'next-sitemap'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { fetchWithCache } from "lib/helpers";
 import { ISitemapFiled } from "next-sitemap/dist/@types/interface";
-import { LocaleType } from "context/localeContext";
+import { LocaleType } from "contexts/localeContext";
 
 export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
   // Method to source urls from cms

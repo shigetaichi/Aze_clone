@@ -1,13 +1,13 @@
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { perPage, wpBaseUrl } from 'lib/post';
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
 import { fetchWithCache } from "lib/helpers";
 import Head from "next/head";
-import PostList from "components/organism/PostList/PostList";
+import PostList from "components/organisms/PostList/PostList";
 import { langType } from "types";
-import LangSelect from "components/atom/LangSelect/LangSelect";
-import Title from "components/atom/Title/Title";
-import Button from "components/atom/Button/Button";
+import LangSelect from "components/atoms/LangSelect/LangSelect";
+import Title from "components/atoms/Title/Title";
+import Button from "components/atoms/Button/Button";
 import { NextRouter, useRouter } from "next/router";
 import Pagination from "components/molecules/Pagination/Pagination";
 import { useEffect, useState } from "react";

@@ -1,15 +1,15 @@
 import { FC, useEffect, useState } from 'react'
 import styles from './Footer.module.scss';
 import ClassNames from 'classnames';
-import { ThemeContext, useThemeContext } from 'context/context';
-import { locale, LocaleType, useLocaleContext } from "context/localeContext";
+import { ThemeContext, useThemeContext } from 'contexts/context';
+import { locale, LocaleType, useLocaleContext } from "contexts/localeContext";
 import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
 import CategoryArea from "components/molecules/CategoryArea/CategoryArea";
 import Link from "next/link";
 import { langType } from "types";
 import TagArea from "components/molecules/TagArea/TagArea";
-import Title from "components/atom/Title/Title";
+import Title from "components/atoms/Title/Title";
 
 const Footer: FC = () => {
   const localeTheme: LocaleType = useLocaleContext();

@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import styles from './PostList.module.scss';
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
 import Thumbnail from "components/molecules/Thumbnail/Thumbnail";
 
 interface Props {
