@@ -2,9 +2,9 @@ import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import ClassNames from 'classnames';
-import { ThemeContext, useThemeContext } from 'context/context';
+import { ThemeContext, useThemeContext } from 'contexts/context';
 import { NextRouter, useRouter } from "next/router";
-import { LocaleType, useSetLocaleContext } from "context/localeContext";
+import { LocaleType, useSetLocaleContext } from "contexts/localeContext";
 import { generateRoute } from "lib/helpers";
 
 interface HeaderProps {

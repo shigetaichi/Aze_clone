@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import styles from "styles/index.module.scss";
 import Link from "next/link";
-import Title from "components/atom/Title/Title";
+import Title from "components/atoms/Title/Title";
 import { Dispatch, SetStateAction } from "react";
-import { LocaleType, useSetLocaleContext } from "context/localeContext";
+import { LocaleType, useSetLocaleContext } from "contexts/localeContext";
 
 const Index: NextPage = () => {
   const setLocaleContext: Dispatch<SetStateAction<LocaleType>> = useSetLocaleContext();

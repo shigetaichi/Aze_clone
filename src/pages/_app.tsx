@@ -8,9 +8,9 @@ import { fetchWithCache } from "lib/helpers";
 import { wpBaseUrl } from "lib/post";
 import nprogress from 'nprogress' // NProgressインポート
 import 'nprogress/nprogress.css'
-import { LocaleProvider } from "context/localeContext";
-import { ColorProvider } from "context/context";
-import Layout from "components/organism/Layout/Layout";
+import { LocaleProvider } from "contexts/localeContext";
+import { ColorProvider } from "contexts/context";
+import Layout from "components/organisms/Layout/Layout";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

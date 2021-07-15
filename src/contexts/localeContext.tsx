@@ -1,5 +1,5 @@
 import { createContext, Dispatch, FC, ReactNode, SetStateAction, useContext, useEffect, useState } from "react"
-import { localeData } from "../lang/common";
+import { localeData } from "lang/common";
 import { NextRouter, useRouter } from "next/router";
 
 export type LocaleType = 'ja' | 'az' | 'en' | 'ru';

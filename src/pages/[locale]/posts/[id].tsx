@@ -1,6 +1,6 @@
 import { wpBaseUrl } from 'lib/post';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import PostTemplate from "components/template/Post/PostTemplate";
+import PostTemplate from "components/templates/Post/PostTemplate";
 import { fetchWithCache } from "lib/helpers";
 import Head from "next/head";
 

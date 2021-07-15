@@ -1,12 +1,10 @@
 import Head from "next/head"
 import styles from './Layout.module.scss';
-import ClassNames from 'classnames';
-import { ThemeContext, useThemeContext } from 'context/context';
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
-import Header from "components/organism/Header/Header";
-import Footer from "components/organism/Footer/Footer";
-import ContentLeft from "components/organism/ContentLeft/ContentLeft";
-import ContentRight from "components/organism/ContentRight/ContentRight";
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
+import Header from "components/organisms/Header/Header";
+import Footer from "components/organisms/Footer/Footer";
+import ContentLeft from "components/organisms/ContentLeft/ContentLeft";
+import ContentRight from "components/organisms/ContentRight/ContentRight";
 import { useEffect, useState } from "react";
 import { wpBaseUrl } from "lib/post";
 import { NextRouter, useRouter } from "next/router";
@@ -14,22 +12,22 @@ import { NextRouter, useRouter } from "next/router";
 const Layout = (props) => {
   const {title, children} = props;
   const siteTitle: string = "Azerbaijapan";
-  const themeNames: ThemeContext = useThemeContext();
+  // const themeNames: ThemeContext = useThemeContext();
   const localeContext: LocaleType = useLocaleContext();
   const router: NextRouter = useRouter();
-  
-  const LayoutStyle = ClassNames(styles.layout, {
-    [styles.dark]: themeNames.themeName === 'dark'
-  });
-  
+
+  // const LayoutStyle = ClassNames(styles.layout, {
+  //   [styles.dark]: themeNames.themeName === 'dark'
+  // });
+
   const [news, setNews] = useState<string>("");
-  
+
   useEffect(() => {
     fetch(`${wpBaseUrl}/wp-json/wp/v2/header-info/201?_fields=acf`).then(res => res.json()).then(v => setNews(v['acf'][localeContext]))
     return () => {
     };
   }, [localeContext]);
-  
+
   return (
     <>
       <Head>
@@ -53,7 +51,7 @@ const Layout = (props) => {
         <meta name="twitter:description" content={locale(localeContext).description} key={"tw_desc"}/>
         <meta name="twitter:image:src" content={props.image ? props.image : "/azerbaijapan.jpg"} key={"tw_image_src"}/>
         <meta name="twitter:image" content={props.image ? props.image : "/azerbaijapan.jpg"} key={"tw_image"}/>
-        
+
         <link rel="icon" href={"/azerbaijapan-favicon.png"}/>
         <link rel="apple-touch-icon-precomposed" href={"/apple-touch-icon-precomposed.png"}/>
       </Head>

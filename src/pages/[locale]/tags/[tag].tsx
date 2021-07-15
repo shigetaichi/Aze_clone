@@ -1,7 +1,7 @@
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import Tag from "components/template/Tag/Tag";
+import Tag from "components/templates/Tag/Tag";
 import { perPage, wpBaseUrl } from "lib/post";
 import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 

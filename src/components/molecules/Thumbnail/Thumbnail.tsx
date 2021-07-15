@@ -2,7 +2,7 @@ import { Key, VFC } from 'react';
 import Link from 'next/link';
 import styles from './Thumbnail.module.scss';
 import ClassNames from 'classnames';
-import { ThemeContext, useThemeContext } from 'context/context';
+import { ThemeContext, useThemeContext } from 'contexts/context';
 import { NextRouter, useRouter } from "next/router";
 
 interface ThumbnailProps {

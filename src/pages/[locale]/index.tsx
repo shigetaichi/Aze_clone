@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { perPage, wpBaseUrl } from 'lib/post';
-import { locale, LocaleType, useLocaleContext } from 'context/localeContext';
+import { locale, LocaleType, useLocaleContext } from 'contexts/localeContext';
 import { fetchWithCache, filterPostDataArray } from "lib/helpers";
 import { langType } from "types";
-import Top from "components/template/Top/Top";
+import Top from "components/templates/Top/Top";
 
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {

@@ -1,10 +1,10 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
-import { locale, LocaleType, useLocaleContext } from "context/localeContext";
-import Title from "components/atom/Title/Title";
-import Button from "components/atom/Button/Button";
-import LangSelect from "components/atom/LangSelect/LangSelect";
+import { locale, LocaleType, useLocaleContext } from "contexts/localeContext";
+import Title from "components/atoms/Title/Title";
+import Button from "components/atoms/Button/Button";
+import LangSelect from "components/atoms/LangSelect/LangSelect";
 import styles from "./Top.module.scss";
-import PostList from "components/organism/PostList/PostList";
+import PostList from "components/organisms/PostList/PostList";
 import { NextRouter, useRouter } from "next/router";
 import { perPage, wpBaseUrl } from "lib/post";
 import Pagination from "components/molecules/Pagination/Pagination";

@@ -1,9 +1,9 @@
 import { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react'
 import Link from 'next/link';
 import Classnames from 'classnames';
-import { ThemeContext, useThemeContext } from 'context/context';
+import { ThemeContext, useThemeContext } from 'contexts/context';
 import styles from "./PostTransMenu.module.scss";
-import { LocaleType, useSetLocaleContext } from "context/localeContext";
+import { LocaleType, useSetLocaleContext } from "contexts/localeContext";
 
 
 interface Props {

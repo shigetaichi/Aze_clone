@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import ReactPaginate from "react-paginate";
 import { NextRouter, useRouter } from "next/router";
 import styles from "./Pagination.module.scss";
-import { LocaleType, useLocaleContext } from "context/localeContext";
+import { LocaleType, useLocaleContext } from "contexts/localeContext";
 import { generateRoute } from "lib/helpers";
 
 interface PaginationProps {
